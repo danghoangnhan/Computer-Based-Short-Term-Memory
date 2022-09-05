@@ -3,6 +3,7 @@ package com.example.memorygame;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -18,12 +19,24 @@ import java.util.stream.IntStream;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button nextButton,replayButton,escButton;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        setSupportActionBar(toolBar);
+
+        nextButton = findViewById(R.id.nextButton);
+        replayButton = findViewById(R.id.replayButton);
+        escButton = findViewById(R.id.escButton);
+
+        escButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                changeToNextActivity();
+            }
+        });
         List<Integer> images = Arrays.asList(R.drawable.camel, R.drawable.fox, R.drawable.lion, R.drawable.coala,R.drawable.camel, R.drawable.fox, R.drawable.lion, R.drawable.coala,R.drawable.lion);
         List<Button> buttons = Arrays.asList(
                 findViewById(R.id.button1),
@@ -41,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         Integer cardBack = R.drawable.code;
         Integer lastClicked = -1;
         Map<Button,Integer> buttonIntegerMap = zipToMap(buttons,images);
-
         buttonIntegerMap.entrySet().forEach(Element -> {
             Button buttonElement = Element.getKey();
             Integer pairdImage = Element.getValue();
@@ -76,5 +88,9 @@ public class MainActivity extends AppCompatActivity {
     public static <K, V> Map<K, V> zipToMap(List<K> keys, List<V> values) {
         return IntStream.range(0, keys.size()).boxed()
                 .collect(Collectors.toMap(keys::get, values::get));
+    }
+    private void changeToNextActivity(){
+        Intent intent = new Intent(this,DragDropActivity.class);
+        startActivity(intent);
     }
 }
