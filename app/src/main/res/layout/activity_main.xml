@@ -7,16 +7,6 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/button8"
-        android:layout_width="116dp"
-        android:layout_height="106dp"
-        android:background="@drawable/code"
-        android:text="Button"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="196dp"
-        tools:layout_editor_absoluteY="278dp"
-        />
-    <Button
         android:id="@+id/button1"
         android:layout_width="116dp"
         android:layout_height="106dp"
@@ -24,47 +14,8 @@
         android:text="Button"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="26dp" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="116dp"
-        android:layout_height="106dp"
-        android:background="@drawable/code"
-        android:text="Button"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="196dp"
-        tools:layout_editor_absoluteY="152dp" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="116dp"
-        android:layout_height="106dp"
-        android:background="@drawable/code"
-        android:text="Button"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="343dp"
-        tools:layout_editor_absoluteY="26dp" />
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="116dp"
-        android:layout_height="106dp"
-        android:background="@drawable/code"
-        android:text="Button"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="343dp"
-        tools:layout_editor_absoluteY="152dp" />
-
-    <Button
-        android:id="@+id/button9"
-        android:layout_width="116dp"
-        android:layout_height="106dp"
-        android:background="@drawable/code"
-        android:text="Button"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="343dp"
-        tools:layout_editor_absoluteY="278dp" />
+        tools:layout_editor_absoluteY="26dp"
+        />
 
     <Button
         android:id="@+id/button2"
@@ -74,18 +25,21 @@
         android:text="Button"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="196dp"
-        tools:layout_editor_absoluteY="26dp" />
+        tools:layout_editor_absoluteY="26dp"
+        app:layout_constraintLeft_toRightOf="@id/button1"
+        />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/button3"
         android:layout_width="116dp"
         android:layout_height="106dp"
         android:background="@drawable/code"
         android:text="Button"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="278dp" />
-
+        tools:layout_editor_absoluteX="343dp"
+        tools:layout_editor_absoluteY="26dp"
+        app:layout_constraintLeft_toRightOf="@id/button2"
+        />
     <Button
         android:id="@+id/button4"
         android:layout_width="116dp"
@@ -94,61 +48,69 @@
         android:text="Button"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="42dp"
-        tools:layout_editor_absoluteY="152dp" />
+        tools:layout_editor_absoluteY="152dp"
+        app:layout_constraintTop_toBottomOf="@id/button1"
+        />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_black_24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="116dp"
+        android:layout_height="106dp"
+        android:background="@drawable/code"
+        android:text="Button"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="343dp"
+        tools:layout_editor_absoluteY="152dp"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintLeft_toRightOf="@id/button4"
+        />
 
-    <!-- Floating action button for add alarm -->
-    <!-- Make sure that you are constraining this
-         button to the parent button -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_alarm_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/add_fab"
-        app:layout_constraintEnd_toEndOf="@+id/add_fab"
-        app:layout_constraintStart_toStartOf="@+id/add_fab"
-        app:srcCompat="@drawable/ic_add_alarm_black_24dp" />
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="116dp"
+        android:layout_height="106dp"
+        android:background="@drawable/code"
+        android:text="Button"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="343dp"
+        tools:layout_editor_absoluteY="278dp"
+        app:layout_constraintTop_toBottomOf="@id/button3"
+        app:layout_constraintLeft_toRightOf="@id/button5"
+        />
 
-    <!-- Action name text for the add alarm button -->
-    <!-- Make sure that you are constraining this Text to
-         the add Alarm FAB button -->
-    <TextView
-        android:id="@+id/add_alarm_action_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="Add Alarm"
-        app:layout_constraintBottom_toBottomOf="@+id/add_alarm_fab"
-        app:layout_constraintEnd_toStartOf="@+id/add_alarm_fab"
-        app:layout_constraintTop_toTopOf="@+id/add_alarm_fab" />
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="116dp"
+        android:layout_height="106dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/code"
+        android:text="Button"
+        app:layout_constraintTop_toBottomOf="@id/button4"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="42dp" />
 
-    <!-- Floating action button for add person -->
-    <!-- Make sure that you are constraining this
-         button to the add Alarm FAB button -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_person_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/add_alarm_fab"
-        app:layout_constraintEnd_toEndOf="@+id/add_alarm_fab"
-        app:layout_constraintStart_toStartOf="@+id/add_alarm_fab"
-        app:srcCompat="@drawable/ic_person_add_black_24dp" />
-
-
-
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="116dp"
+        android:layout_height="106dp"
+        android:background="@drawable/code"
+        android:text="Button"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="484dp"
+        app:layout_constraintTop_toBottomOf="@id/button5"
+        app:layout_constraintLeft_toRightOf="@id/button7"
+        />
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="116dp"
+        android:layout_height="106dp"
+        android:background="@drawable/code"
+        android:text="Button"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="158dp"
+        tools:layout_editor_absoluteY="484dp"
+        app:layout_constraintTop_toBottomOf="@id/button6"
+        app:layout_constraintLeft_toRightOf="@id/button8"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
