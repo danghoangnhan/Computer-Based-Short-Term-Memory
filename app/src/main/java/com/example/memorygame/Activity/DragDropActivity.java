@@ -1,4 +1,4 @@
-package com.example.memorygame;
+package com.example.memorygame.Activity;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.View.*;
+
+import com.example.memorygame.R;
 
 import org.w3c.dom.Text;
 

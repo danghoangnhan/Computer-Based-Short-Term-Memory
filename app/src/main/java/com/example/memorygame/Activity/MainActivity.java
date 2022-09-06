@@ -1,13 +1,14 @@
-package com.example.memorygame;
-
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.memorygame.Activity;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.memorygame.R;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,12 +32,8 @@ public class MainActivity extends AppCompatActivity {
         replayButton = findViewById(R.id.replayButton);
         escButton = findViewById(R.id.escButton);
 
-        escButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                changeToNextActivity();
-            }
-        });
+        escButton.setOnClickListener(view -> changeToNextActivity());
+
         List<Integer> images = Arrays.asList(R.drawable.camel, R.drawable.fox, R.drawable.lion, R.drawable.coala,R.drawable.camel, R.drawable.fox, R.drawable.lion, R.drawable.coala,R.drawable.lion);
         List<Button> buttons = Arrays.asList(
                 findViewById(R.id.button1),

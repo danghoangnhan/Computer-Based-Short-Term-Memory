@@ -1,11 +1,12 @@
-package com.example.memorygame;
+package com.example.memorygame.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+
+import com.example.memorygame.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class LoginActivity extends AppCompatActivity {
         startButton.setOnClickListener(view -> changeActiity());
     }
     private void changeActiity(){
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,SelectObjectActivity.class);
         startActivity(intent);
     }
 }

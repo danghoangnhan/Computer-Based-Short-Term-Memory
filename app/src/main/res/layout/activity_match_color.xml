@@ -23,83 +23,93 @@
         app:layout_constraintTop_toBottomOf="@+id/recycleview"
         tools:ignore="MissingConstraints">
 
-        <Button
+        <ImageButton
             android:id="@+id/button1"
             android:layout_width="116dp"
             android:layout_height="106dp"
-            android:background="@drawable/code"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:background="@color/black"
+            android:foreground="@drawable/code"
             />
-
-        <Button
+        <ImageButton
             android:id="@+id/button2"
             android:layout_width="116dp"
             android:layout_height="106dp"
             android:layout_alignTop="@id/button1"
-            android:layout_toRightOf="@id/button1"
             android:layout_alignParentTop="true"
-            android:background="@drawable/code" />
+            android:layout_toRightOf="@id/button1"
+            android:background="@color/black"
+            android:foreground="@drawable/code"
+            />
 
-        <Button
+        <ImageButton
             android:id="@+id/button3"
             android:layout_width="116dp"
             android:layout_height="106dp"
-            android:background="@drawable/code"
             android:layout_alignTop="@id/button2"
             android:layout_toRightOf="@id/button2"
+            android:background="@color/black"
+            android:foreground="@drawable/code"
             />
 
-        <Button
+        <ImageButton
             android:id="@+id/button4"
             android:layout_width="116dp"
             android:layout_height="106dp"
             android:layout_marginTop="105dp"
-            android:background="@drawable/code" />
+            android:background="@color/black"
+            android:foreground="@drawable/code"
+            />
 
-        <Button
+        <ImageButton
             android:id="@+id/button5"
             android:layout_width="116dp"
             android:layout_height="106dp"
-            android:background="@drawable/code"
-            android:layout_toRightOf="@id/button4"
             android:layout_alignBottom="@id/button4"
+            android:layout_toRightOf="@id/button4"
+            android:background="@color/black"
+            android:foreground="@drawable/code"
             />
-
-        <Button
+        <ImageButton
             android:id="@+id/button6"
             android:layout_width="116dp"
             android:layout_height="106dp"
             android:layout_alignBottom="@id/button5"
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/button5"
-            android:background="@drawable/code"
-            tools:layout_editor_absoluteX="10dp" />
+            tools:layout_editor_absoluteX="10dp"
+            android:background="@color/black"
+            android:foreground="@drawable/code"
+            />
 
-        <Button
+        <ImageButton
             android:id="@+id/button7"
             android:layout_width="116dp"
             android:layout_height="106dp"
-            android:background="@drawable/code"
             android:layout_marginTop="210dp"
+            android:background="@color/black"
+            android:foreground="@drawable/code"
             />
 
-        <Button
+        <ImageButton
             android:id="@+id/button8"
             android:layout_width="116dp"
             android:layout_height="106dp"
-            android:background="@drawable/code"
-            android:layout_toRightOf="@id/button7"
             android:layout_alignBottom="@id/button7"
+            android:layout_toRightOf="@id/button7"
+            android:background="@color/black"
+            android:foreground="@drawable/code"
             />
 
-        <Button
+        <ImageButton
             android:id="@+id/button9"
             android:layout_width="116dp"
             android:layout_height="106dp"
-            android:background="@drawable/code"
-            android:layout_toRightOf="@id/button8"
             android:layout_alignBottom="@id/button8"
+            android:layout_toRightOf="@id/button8"
+            android:background="@color/black"
+            android:foreground="@drawable/code"
             />
     </RelativeLayout>
     <RelativeLayout
@@ -130,7 +140,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="86dp"
             android:layout_marginTop="48dp"
-            android:text="Next" />
+            android:text="Next">
+
+        </Button>
 
         <Button
             android:id="@+id/replayButton"
