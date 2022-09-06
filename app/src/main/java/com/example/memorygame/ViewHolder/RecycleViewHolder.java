@@ -10,7 +10,7 @@ import com.example.memorygame.R;
 
 
 public class RecycleViewHolder extends RecyclerView.ViewHolder {
-    TextView tvTile;
+    public TextView tvTile;
     public RecycleViewHolder(@NonNull View itemView) {
         super(itemView);
         this.tvTile = itemView.findViewById(R.id.tvTitle);

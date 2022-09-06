@@ -43,7 +43,15 @@ public class SelectObjectActivity extends AppCompatActivity {
                 findViewById(R.id.button7),
                 findViewById(R.id.button8),
                 findViewById(R.id.button9));
+
         this.selectedImage = new ArrayList<>();
+        this.dataSource = new ArrayList<>();
+        this.dataSource.add("Hello");
+        linearLayoutManager = new LinearLayoutManager(SelectObjectActivity.this,LinearLayoutManager.HORIZONTAL,false);
+        this.recyclerViewAdapter = new RecyclerViewAdapter((ArrayList<String>) dataSource);
+        this.recyclerView.setLayoutManager(linearLayoutManager);
+        this.recyclerView.setAdapter(this.recyclerViewAdapter);
+
         Map <Integer,Button> buttonIntegerMap = zipToMap(images,buttons);
         buttonIntegerMap.entrySet().forEach(buttonElement->{
                 Integer Image = buttonElement.getKey();
