@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -24,7 +26,7 @@ public class MatchColorActivity extends AppCompatActivity {
     LinearLayoutManager linearLayoutManager;
     RecyclerViewAdapter recyclerViewAdapter;
     Button nextButton,escButton,replayButton;
-    List<Button>buttons;
+    List<ImageButton>buttons;
 
 
     @Override
@@ -34,6 +36,9 @@ public class MatchColorActivity extends AppCompatActivity {
         Intent receiverIntent = getIntent();
         this.selectedImage = receiverIntent.getIntegerArrayListExtra("selectedImages");
         this.colorList = randomColor(9);
+        this.buttons = Arrays.asList(findViewById(R.id.button1), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4), findViewById(R.id.button5), findViewById(R.id.button6), findViewById(R.id.button7), findViewById(R.id.button8), findViewById(R.id.button9));
+        this.nextButton = findViewById(R.id.nextButton);
+        this.recyclerView = findViewById(R.id.recycleview);
         this.linearLayoutManager = new LinearLayoutManager(MatchColorActivity.this,LinearLayoutManager.HORIZONTAL,false);
         this.recyclerViewAdapter = new RecyclerViewAdapter(this,selectedImage);
         this.recyclerView = findViewById(R.id.recycleview);
@@ -42,7 +47,7 @@ public class MatchColorActivity extends AppCompatActivity {
         this.generatingMatchingObject(this.buttons,9);
     }
 
-    public List<MatchingObject> generatingMatchingObject(List<Button> buttonList, Integer NumberPerrow){
+    public List<MatchingObject> generatingMatchingObject(List<ImageButton> buttonList, Integer NumberPerrow){
         List<MatchingObject> matchingObjects = new ArrayList<>();
         for (int i=0;i<buttonList.size()/NumberPerrow;i++){
             for (int j =0;j<NumberPerrow;j++){
