@@ -1,10 +1,16 @@
 package com.example.memorygame.Activity;
 
+import android.content.ClipData;
+import android.content.ClipDescription;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.DragEvent;
+import android.view.View;
+import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -69,4 +75,36 @@ public class MatchColorActivity extends AppCompatActivity {
         Random random = new Random();
         return Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
     }
+    public View.OnLongClickListener longClickListener = view -> {
+        ClipData data = ClipData.newPlainText("","");
+        View.DragShadowBuilder myShadowBuilder = new View.DragShadowBuilder(view);
+        view.startDrag(data,myShadowBuilder,v,0);
+        return false;
+    };
+    public View.OnDragListener dragListener = (View.OnDragListener) (view, dragEvent) -> {
+        final View localStateView = (View) dragEvent.getLocalState();
+        switch (dragEvent.getAction()){
+            case DragEvent.ACTION_DRAG_ENDED:
+                break;
+            case DragEvent.ACTION_DRAG_EXITED:
+                break;
+            case DragEvent.ACTION_DRAG_LOCATION:
+                break;
+            case DragEvent.ACTION_DRAG_STARTED:
+                dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN);
+                break;
+            case DragEvent.ACTION_DRAG_ENTERED:
+                view.invalidate();
+                break;
+            case DragEvent.ACTION_DROP:
+                ClipData.Item item  = dragEvent.getClipData().getItemAt(0);
+                String dragData = item.getText().toString();
+                Toast.makeText(this,dragData,Toast.LENGTH_SHORT).show();
+                View localVIew = (View) dragEvent.getLocalState();
+                ViewParent owner = localVIew.getParent();
+        }
+        return false;
+    };
+
+
 }
