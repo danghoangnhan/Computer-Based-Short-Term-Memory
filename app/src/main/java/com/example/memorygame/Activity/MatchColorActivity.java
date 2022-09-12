@@ -51,6 +51,7 @@ public class MatchColorActivity extends AppCompatActivity {
         this.recyclerView.setLayoutManager(this.linearLayoutManager);
         this.recyclerView.setAdapter(this.recyclerViewAdapter);
         this.generatingMatchingObject(this.buttons,9);
+        this.nextButton.setOnClickListener(view -> handleNextButton(view));
     }
 
     public List<MatchingObject> generatingMatchingObject(List<ImageButton> buttonList, Integer NumberPerrow){
@@ -78,7 +79,7 @@ public class MatchColorActivity extends AppCompatActivity {
     public View.OnLongClickListener longClickListener = view -> {
         ClipData data = ClipData.newPlainText("","");
         View.DragShadowBuilder myShadowBuilder = new View.DragShadowBuilder(view);
-        view.startDrag(data,myShadowBuilder,v,0);
+        view.startDrag(data,myShadowBuilder,view,0);
         return false;
     };
     public View.OnDragListener dragListener = (View.OnDragListener) (view, dragEvent) -> {
@@ -105,6 +106,8 @@ public class MatchColorActivity extends AppCompatActivity {
         }
         return false;
     };
-
-
+    public void handleNextButton(View view){
+        Intent intent = new Intent(this,WaitingActivity.class);
+        startActivity(intent);
+    }
 }
