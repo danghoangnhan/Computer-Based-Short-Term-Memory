@@ -1,7 +1,10 @@
 package com.example.memorygame.Object;
 
+import android.widget.ImageButton;
+
 public class MatchingObject {
     Integer color,row,column,image;
+    ImageButton imageButton;
 
     public Integer getColor() {
         return color;
@@ -33,5 +36,13 @@ public class MatchingObject {
 
     public void setImage(Integer image) {
         this.image = image;
+    }
+
+    public ImageButton getImageButton() {
+        return imageButton;
+    }
+
+    public void setImageButton(ImageButton imageButton) {
+        this.imageButton = imageButton;
     }
 }

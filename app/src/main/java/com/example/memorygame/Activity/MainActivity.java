@@ -3,11 +3,13 @@ package com.example.memorygame.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.R;
 
 import java.util.Arrays;
@@ -18,7 +20,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HandleStageButton {
 
     Button nextButton,replayButton,escButton;
 
@@ -32,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
         replayButton = findViewById(R.id.replayButton);
         escButton = findViewById(R.id.escButton);
 
-        escButton.setOnClickListener(view -> changeToNextActivity());
+        nextButton.setOnClickListener(view -> handleNextButton(view));
+        escButton.setOnClickListener(view->handleEscButton(view));
+        replayButton.setOnClickListener(view->handleEscButton(view));
 
         List<Integer> images = Arrays.asList(R.drawable.camel, R.drawable.fox, R.drawable.lion, R.drawable.coala,R.drawable.camel, R.drawable.fox, R.drawable.lion, R.drawable.coala,R.drawable.lion);
         List<Button> buttons = Arrays.asList(
@@ -86,8 +90,20 @@ public class MainActivity extends AppCompatActivity {
         return IntStream.range(0, keys.size()).boxed()
                 .collect(Collectors.toMap(keys::get, values::get));
     }
-    private void changeToNextActivity(){
+    @Override
+    public void handleNextButton(View view) {
         Intent intent = new Intent(this,DragDropActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void handleReplayButton(View view) {
+        Intent intent = new Intent(this,TestDragActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void handleEscButton(View view) {
+
     }
 }
