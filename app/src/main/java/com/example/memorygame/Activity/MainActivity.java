@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity implements HandleStageButton
 
     @Override
     public void handleReplayButton(View view) {
-        Intent intent = new Intent(this,TestDragActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this,TestDragActivity.class);
+//        startActivity(intent);
     }
 
     @Override

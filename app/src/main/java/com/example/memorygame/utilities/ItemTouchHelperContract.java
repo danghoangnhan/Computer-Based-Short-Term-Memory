@@ -1,4 +1,4 @@
-package com.example.memorygame.CallBack;
+package com.example.memorygame.utilities;
 
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.ViewHolder.RecycleViewHolder;

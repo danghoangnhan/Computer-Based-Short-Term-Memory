@@ -1,8 +1,11 @@
-package com.example.memorygame.utilities;
+package com.example.memorygame.CallBack;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.memorygame.utilities.ItemTouchHelperAdapter;
+import com.example.memorygame.utilities.ItemTouchHelperViewHolder;
 
 public class ItemTouchHelperCallback extends ItemTouchHelper.Callback{
     private ItemTouchHelperAdapter mAdapter;

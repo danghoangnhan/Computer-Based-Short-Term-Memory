@@ -15,24 +15,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MemoryGame"
         tools:targetApi="31">
-        <activity
-            android:name=".Activity.TestDragActivity"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Activity.TestDragActivity"-->
+<!--            android:exported="false" -->
+<!--            />-->
         <activity
             android:name=".Activity.ResultActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".Activity.PredictActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".Activity.WaitingActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".Activity.MatchColorActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".Activity.SelectObjectActivity"
-            android:exported="false" />
+            android:exported="false"
+            />
         <activity
             android:name=".Activity.LoginActivity"
             android:exported="true">

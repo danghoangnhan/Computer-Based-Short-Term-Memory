@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorygame.ViewHolder.RecycleViewHolder;
+import com.example.memorygame.utilities.ItemTouchHelperContract;
 
 public class ItemMoveCallback extends ItemTouchHelper.Callback {
     private final ItemTouchHelperContract mAdapter;

@@ -1,29 +1,46 @@
 package com.example.memorygame.Adapter;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.memorygame.CallBack.ItemTouchHelperContract;
+import com.example.memorygame.Activity.SelectObjectActivity;
+import com.example.memorygame.listener.OnListChangedListener;
+import com.example.memorygame.listener.OnStartDragListener;
+import com.example.memorygame.utilities.ItemTouchHelperAdapter;
+import com.example.memorygame.utilities.ItemTouchHelperContract;
 import com.example.memorygame.R;
 import com.example.memorygame.ViewHolder.RecycleViewHolder;
 
 import java.util.Collections;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder> implements ItemTouchHelperContract {
-    Context context;
-    List<Integer> data;
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder> implements ItemTouchHelperContract, ItemTouchHelperAdapter {
+    private Context context;
+    private List<Integer> data;
+    private OnStartDragListener mDragStartListener;
+    private OnListChangedListener onListChangedListener;
 
-    public RecyclerViewAdapter(Context context,List<Integer> data){
+    public RecyclerViewAdapter(Context context,List<Integer> data,OnListChangedListener onListChangedListener,OnStartDragListener onStartDragListener){
         this.data = data;
         this.context = context;
+        this.onListChangedListener = onListChangedListener;
+        this.mDragStartListener = onStartDragListener;
+    }
+
+    public RecyclerViewAdapter(SelectObjectActivity context, List<Integer> selectedImage) {
+        this.context = context;
+        this.data = selectedImage;
     }
 
     @NonNull
@@ -35,13 +52,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
-        holder.imageView.setImageResource(data.get(position));
-        holder.imageView.setOnDragListener(new View.OnDragListener() {
-            @Override
-            public boolean onDrag(View v, DragEvent event) {
+        final Integer item = this.data.get(position);
+        holder.imageView.setImageResource(item);
+        if (this.mDragStartListener!=null){
+            holder.imageView.setOnTouchListener((v, event) -> {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        mDragStartListener.onStartDrag(holder);
+                }
                 return false;
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -71,4 +92,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>
         myViewHolder.imageView.setBackgroundColor(Color.WHITE);
     }
 
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(this.data, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(this.data, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onItemDismiss(int position) {
+
+    }
 }

@@ -13,7 +13,7 @@ import com.example.memorygame.Object.Customer;
 import com.example.memorygame.R;
 import com.example.memorygame.listener.OnCustomerListChangedListener;
 import com.example.memorygame.listener.OnStartDragListener;
-import com.example.memorygame.utilities.ItemTouchHelperCallback;
+import com.example.memorygame.CallBack.ItemTouchHelperCallback;
 import com.example.memorygame.utilities.SampleData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -73,7 +73,7 @@ public class TestDragActivity extends AppCompatActivity implements OnCustomerLis
 
         //setup the adapter with empty list
         mAdapter = new CustomerListAdapter(mCustomers, this, this, this);
-        ItemTouchHelper.Callback callback = new ItemTouchHelperCallback(mAdapter);
+        ItemTouchHelperCallback callback = new ItemTouchHelperCallback(mAdapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(mRecyclerView);
 //        mRecyclerView.addItemDecoration(new

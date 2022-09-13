@@ -31,6 +31,7 @@ import com.example.memorygame.Object.Customer;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 import com.example.memorygame.listener.OnCustomerListChangedListener;
+import com.example.memorygame.listener.OnListChangedListener;
 import com.example.memorygame.listener.OnStartDragListener;
 
 import java.util.ArrayList;
@@ -38,7 +39,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class MatchColorActivity extends AppCompatActivity implements OnCustomerListChangedListener, OnStartDragListener, HandleStageButton {
+public class MatchColorActivity extends AppCompatActivity implements
+        OnListChangedListener,
+        OnStartDragListener,
+        HandleStageButton {
+
     ArrayList<Integer> selectedImage;
     List<Integer>  colorList;
     List<MatchingObject> objectList;
@@ -55,25 +60,20 @@ public class MatchColorActivity extends AppCompatActivity implements OnCustomerL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_color);
+        initialButton();
         Intent receiverIntent = getIntent();
         this.selectedImage = receiverIntent.getIntegerArrayListExtra("selectedImages");
         this.colorList = randomColor(9);
-        this.buttons = Arrays.asList(findViewById(R.id.button1), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4), findViewById(R.id.button5), findViewById(R.id.button6), findViewById(R.id.button7), findViewById(R.id.button8), findViewById(R.id.button9));
-        this.nextButton = findViewById(R.id.nextButton);
         this.recyclerView = findViewById(R.id.recycleview);
         this.linearLayoutManager = new LinearLayoutManager(MatchColorActivity.this,LinearLayoutManager.HORIZONTAL,false);
-        this.recyclerViewAdapter = new RecyclerViewAdapter(this,selectedImage);
+        this.recyclerViewAdapter = new RecyclerViewAdapter(this,selectedImage,this,this);
         this.recyclerView = findViewById(R.id.recycleview);
         this.recyclerView.setLayoutManager(this.linearLayoutManager);
         this.recyclerView.setAdapter(this.recyclerViewAdapter);
-//        this.buttons.forEach(buttonElement->{buttonElement.setOnDragListener(dragListener);});
         this.generatingMatchingObject(this.buttons,9);
-        this.nextButton.setOnClickListener(view -> handleNextButton(view));
-
         ItemTouchHelper.Callback callback = new ItemMoveCallback(this.recyclerViewAdapter);
-        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
-        touchHelper.attachToRecyclerView(recyclerView);
-
+        this.mItemTouchHelper = new ItemTouchHelper(callback);
+        this.mItemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     public List<MatchingObject> generatingMatchingObject(List<ImageButton> buttonList, Integer NumberPerrow){
@@ -107,30 +107,30 @@ public class MatchColorActivity extends AppCompatActivity implements OnCustomerL
         return false;
     };
 
-//    public View.OnDragListener dragListener = (view, dragEvent) -> {
-//        final View localStateView = (View) dragEvent.getLocalState();
-//        switch (dragEvent.getAction()){
-//            case DragEvent.ACTION_DRAG_ENDED:
-//                break;
-//            case DragEvent.ACTION_DRAG_EXITED:
-//                break;
-//            case DragEvent.ACTION_DRAG_LOCATION:
-//                break;
-//            case DragEvent.ACTION_DRAG_STARTED:
-//                dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN);
-//                break;
-//            case DragEvent.ACTION_DRAG_ENTERED:
-//                view.invalidate();
-//                break;
-//            case DragEvent.ACTION_DROP:
-//                ClipData.Item item  = dragEvent.getClipData().getItemAt(0);
-//                String dragData = item.getText().toString();
-//                Toast.makeText(this,dragData,Toast.LENGTH_SHORT).show();
-//                View localVIew = (View) dragEvent.getLocalState();
-//                ViewParent owner = localVIew.getParent();
-//        }
-//        return false;
-//    };
+    public View.OnDragListener dragListener = (view, dragEvent) -> {
+        final View localStateView = (View) dragEvent.getLocalState();
+        switch (dragEvent.getAction()){
+            case DragEvent.ACTION_DRAG_ENDED:
+                break;
+            case DragEvent.ACTION_DRAG_EXITED:
+                break;
+            case DragEvent.ACTION_DRAG_LOCATION:
+                break;
+            case DragEvent.ACTION_DRAG_STARTED:
+                dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN);
+                break;
+            case DragEvent.ACTION_DRAG_ENTERED:
+                view.invalidate();
+                break;
+            case DragEvent.ACTION_DROP:
+                ClipData.Item item  = dragEvent.getClipData().getItemAt(0);
+                String dragData = item.getText().toString();
+                Toast.makeText(this,dragData,Toast.LENGTH_SHORT).show();
+                View localVIew = (View) dragEvent.getLocalState();
+                ViewParent owner = localVIew.getParent();
+        }
+        return false;
+    };
     public boolean onTouch(View view, MotionEvent motionEvent){
         int action = motionEvent.getAction();
         switch (action){
@@ -189,6 +189,15 @@ public class MatchColorActivity extends AppCompatActivity implements OnCustomerL
                 return true;
         }
     }
+    public void initialButton(){
+        this.nextButton = findViewById(R.id.nextButton);
+        this.escButton = findViewById(R.id.escButton);
+        this.replayButton = findViewById(R.id.replayButton);
+        this.buttons = Arrays.asList(findViewById(R.id.button1), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4), findViewById(R.id.button5), findViewById(R.id.button6), findViewById(R.id.button7), findViewById(R.id.button8), findViewById(R.id.button9));
+        this.nextButton.setOnClickListener(this::handleNextButton);
+        this.escButton.setOnClickListener(this::handleEscButton);
+        this.replayButton.setOnClickListener(this::handleReplayButton);
+    }
     @Override
     public void handleNextButton(View view){
         Intent intent = new Intent(this,WaitingActivity.class);
@@ -206,12 +215,12 @@ public class MatchColorActivity extends AppCompatActivity implements OnCustomerL
     }
 
     @Override
-    public void onNoteListChanged(List<Customer> customers) {
-
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+        mItemTouchHelper.startDrag(viewHolder);
     }
 
     @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+    public void onNoteListChanged(List<?> customers) {
 
     }
 }
