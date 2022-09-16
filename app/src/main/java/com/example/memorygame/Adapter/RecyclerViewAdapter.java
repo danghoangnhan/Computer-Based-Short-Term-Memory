@@ -1,43 +1,31 @@
 package com.example.memorygame.Adapter;
 
-import android.content.ClipData;
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorygame.Activity.SelectObjectActivity;
-import com.example.memorygame.listener.OnListChangedListener;
-import com.example.memorygame.listener.OnStartDragListener;
-import com.example.memorygame.utilities.ItemTouchHelperAdapter;
-import com.example.memorygame.utilities.ItemTouchHelperContract;
+import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.example.memorygame.R;
 import com.example.memorygame.ViewHolder.RecycleViewHolder;
 
-import java.util.Collections;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder> implements ItemTouchHelperContract, ItemTouchHelperAdapter {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>  {
     private Context context;
     private List<Integer> data;
-    private OnStartDragListener mDragStartListener;
-    private OnListChangedListener onListChangedListener;
+    private RecycleViewInterface recycleViewInterface;
 
-    public RecyclerViewAdapter(Context context,List<Integer> data,OnListChangedListener onListChangedListener,OnStartDragListener onStartDragListener){
+
+    public RecyclerViewAdapter(Context context,List<Integer> data,RecycleViewInterface recycleViewInterface){
         this.data = data;
         this.context = context;
-        this.onListChangedListener = onListChangedListener;
-        this.mDragStartListener = onStartDragListener;
+        this.recycleViewInterface = recycleViewInterface;
     }
-
     public RecyclerViewAdapter(SelectObjectActivity context, List<Integer> selectedImage) {
         this.context = context;
         this.data = selectedImage;
@@ -47,67 +35,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>
     @Override
     public RecycleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.recycleviewitem,parent,false);
-        return new RecycleViewHolder(view);
+        return new RecycleViewHolder(view,this.recycleViewInterface);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
         final Integer item = this.data.get(position);
         holder.imageView.setImageResource(item);
-        if (this.mDragStartListener!=null){
-            holder.imageView.setOnTouchListener((v, event) -> {
-                switch (event.getAction()){
-                    case MotionEvent.ACTION_DOWN:
-                        mDragStartListener.onStartDrag(holder);
-                }
-                return false;
-            });
-        }
     }
 
     @Override
     public int getItemCount() {
         return data.size();
-    }
-    @Override
-    public void onRowMoved(int fromPosition, int toPosition) {
-        if (fromPosition < toPosition) {
-            for (int i = fromPosition; i < toPosition; i++) {
-                Collections.swap(data, i, i + 1);
-            }
-        } else {
-            for (int i = fromPosition; i > toPosition; i--) {
-                Collections.swap(data, i, i - 1);
-            }
-        }
-        notifyItemMoved(fromPosition, toPosition);
-    }
-
-    @Override
-    public void onRowSelected(RecycleViewHolder myViewHolder) {
-        myViewHolder.imageView.setBackgroundColor(Color.GRAY);
-    }
-    @Override
-    public void onRowClear(RecycleViewHolder myViewHolder) {
-        myViewHolder.imageView.setBackgroundColor(Color.WHITE);
-    }
-
-    @Override
-    public void onItemMove(int fromPosition, int toPosition) {
-        if (fromPosition < toPosition) {
-            for (int i = fromPosition; i < toPosition; i++) {
-                Collections.swap(this.data, i, i + 1);
-            }
-        } else {
-            for (int i = fromPosition; i > toPosition; i--) {
-                Collections.swap(this.data, i, i - 1);
-            }
-        }
-        notifyItemMoved(fromPosition, toPosition);
-    }
-
-    @Override
-    public void onItemDismiss(int position) {
-
     }
 }

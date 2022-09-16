@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,12 +25,15 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.memorygame.Adapter.BoardButtonViewAdapter;
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.CallBack.ItemMoveCallback;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Object.Customer;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
+import com.example.memorygame.RecycleView.BoardButtonInterface;
+import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.example.memorygame.listener.OnCustomerListChangedListener;
 import com.example.memorygame.listener.OnListChangedListener;
 import com.example.memorygame.listener.OnStartDragListener;
@@ -39,20 +43,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class MatchColorActivity extends AppCompatActivity implements
-        OnListChangedListener,
-        OnStartDragListener,
-        HandleStageButton {
+public class MatchColorActivity extends AppCompatActivity implements HandleStageButton, RecycleViewInterface {
 
-    ArrayList<Integer> selectedImage;
-    List<Integer>  colorList;
-    List<MatchingObject> objectList;
-    RecyclerView recyclerView;
-    LinearLayoutManager linearLayoutManager;
-    RecyclerViewAdapter recyclerViewAdapter;
-    Button nextButton,escButton,replayButton;
-    List<ImageButton>buttons;
-    private ItemTouchHelper mItemTouchHelper;
+    private ArrayList<Integer> selectedImage;
+    private List<Integer>  colorList;
+    private List<MatchingObject> objectList;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private RecyclerViewAdapter recyclerViewAdapter;
+    private BoardButtonViewAdapter boardButtonViewAdapter;
+    private Button nextButton,escButton,replayButton;
+    private List<ImageButton>buttons;
+    private Integer tmpClickedImage,tmpClickedColor;
+    private Drawable myIcon ;
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -64,20 +68,22 @@ public class MatchColorActivity extends AppCompatActivity implements
         Intent receiverIntent = getIntent();
         this.selectedImage = receiverIntent.getIntegerArrayListExtra("selectedImages");
         this.colorList = randomColor(9);
+        this.generatingMatchingObject(this.buttons,9);
+        initialRecyleView();
+    }
+    public  void initialRecyleView(){
         this.recyclerView = findViewById(R.id.recycleview);
         this.linearLayoutManager = new LinearLayoutManager(MatchColorActivity.this,LinearLayoutManager.HORIZONTAL,false);
-        this.recyclerViewAdapter = new RecyclerViewAdapter(this,selectedImage,this,this);
-        this.recyclerView = findViewById(R.id.recycleview);
+        this.recyclerViewAdapter = new RecyclerViewAdapter(this,selectedImage,this);
+//        this.boardButtonViewAdapter = new BoardButtonViewAdapter(this,this.objectList,);
         this.recyclerView.setLayoutManager(this.linearLayoutManager);
         this.recyclerView.setAdapter(this.recyclerViewAdapter);
-        this.generatingMatchingObject(this.buttons,9);
-        ItemTouchHelper.Callback callback = new ItemMoveCallback(this.recyclerViewAdapter);
-        this.mItemTouchHelper = new ItemTouchHelper(callback);
-        this.mItemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public List<MatchingObject> generatingMatchingObject(List<ImageButton> buttonList, Integer NumberPerrow){
         List<MatchingObject> matchingObjects = new ArrayList<>();
+        buttonList.forEach(imageButton -> imageButton.setOnClickListener(view -> onBoardClick(view)));
         for (int i=0;i<buttonList.size()/NumberPerrow;i++){
             for (int j =0;j<NumberPerrow;j++){
                 MatchingObject currentObject = new MatchingObject();
@@ -85,7 +91,6 @@ public class MatchColorActivity extends AppCompatActivity implements
                 currentObject.setColumn(j);
                 currentObject.setRow(i);
                 currentObject.setImageButton(buttonList.get(i));
-//                currentObject.getImageButton().setOnDragListener((v, event) -> dragListener.onDrag(v,event));
                 matchingObjects.add(currentObject);
             }
         }
@@ -107,88 +112,6 @@ public class MatchColorActivity extends AppCompatActivity implements
         return false;
     };
 
-    public View.OnDragListener dragListener = (view, dragEvent) -> {
-        final View localStateView = (View) dragEvent.getLocalState();
-        switch (dragEvent.getAction()){
-            case DragEvent.ACTION_DRAG_ENDED:
-                break;
-            case DragEvent.ACTION_DRAG_EXITED:
-                break;
-            case DragEvent.ACTION_DRAG_LOCATION:
-                break;
-            case DragEvent.ACTION_DRAG_STARTED:
-                dragEvent.getClipDescription().hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN);
-                break;
-            case DragEvent.ACTION_DRAG_ENTERED:
-                view.invalidate();
-                break;
-            case DragEvent.ACTION_DROP:
-                ClipData.Item item  = dragEvent.getClipData().getItemAt(0);
-                String dragData = item.getText().toString();
-                Toast.makeText(this,dragData,Toast.LENGTH_SHORT).show();
-                View localVIew = (View) dragEvent.getLocalState();
-                ViewParent owner = localVIew.getParent();
-        }
-        return false;
-    };
-    public boolean onTouch(View view, MotionEvent motionEvent){
-        int action = motionEvent.getAction();
-        switch (action){
-            case (MotionEvent.ACTION_DOWN):
-                Log.d(TAG,"Action was down");
-                return true;
-            case (MotionEvent.ACTION_MOVE):
-                Log.d(TAG,"Action was move");
-                return true;
-            case (MotionEvent.ACTION_UP):
-                Log.d(TAG,"Action was up");
-                return true;
-            case (MotionEvent.ACTION_CANCEL):
-                Log.d(TAG,"Action was cancel");
-                return true;
-            case (MotionEvent.ACTION_OUTSIDE):
-                Log.d(TAG,"Action was outside");
-                return true;
-            default:
-                return super.onTouchEvent(motionEvent);
-        }
-    }
-    public boolean onDrag(View view, DragEvent dragEvent){
-        switch(dragEvent.getAction()) {
-
-            case DragEvent.ACTION_DRAG_STARTED:
-                Log.d(TAG, "onDrag: drag started.");
-
-                return true;
-
-            case DragEvent.ACTION_DRAG_ENTERED:
-                Log.d(TAG, "onDrag: drag entered.");
-                return true;
-
-            case DragEvent.ACTION_DRAG_LOCATION:
-                Log.d(TAG, "onDrag: current point: ( " + dragEvent.getX() + " , " + dragEvent.getY() + " )"  );
-
-                return true;
-
-            case DragEvent.ACTION_DRAG_EXITED:
-                Log.d(TAG, "onDrag: exited.");
-                return true;
-
-            case DragEvent.ACTION_DROP:
-
-                Log.d(TAG, "onDrag: dropped.");
-
-                return true;
-
-            case DragEvent.ACTION_DRAG_ENDED:
-                Log.d(TAG, "onDrag: ended.");
-                return true;
-            // An unknown action type was received.
-            default:
-                Log.e(TAG,"Unknown action type received by OnStartDragListener.");
-                return true;
-        }
-    }
     public void initialButton(){
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);
@@ -215,12 +138,18 @@ public class MatchColorActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        mItemTouchHelper.startDrag(viewHolder);
+    public void onItemClick(View view,int Position) {
+        Integer selected = this.selectedImage.get(Position);
+        this.tmpClickedImage = selected;
+        myIcon = getResources().getDrawable(this.tmpClickedImage);
     }
-
-    @Override
-    public void onNoteListChanged(List<?> customers) {
-
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void onBoardClick(View imageButton){
+        if (this.tmpClickedImage!=null){
+            imageButton.setForeground(myIcon);
+        }
+        if (this.tmpClickedColor!=null){
+            imageButton.setBackgroundColor(this.tmpClickedColor);
+        }
     }
 }

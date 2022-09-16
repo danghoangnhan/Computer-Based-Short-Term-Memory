@@ -16,7 +16,6 @@ import com.example.memorygame.ViewHolder.ItemViewHolder;
 import com.example.memorygame.listener.OnCustomerListChangedListener;
 import com.example.memorygame.listener.OnStartDragListener;
 import com.example.memorygame.utilities.ItemTouchHelperAdapter;
-import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
 import java.util.List;
@@ -41,8 +40,7 @@ public class CustomerListAdapter extends RecyclerView.Adapter<ItemViewHolder> im
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rowView = LayoutInflater.from
-                (parent.getContext()).inflate(R.layout.row_customer_list, parent, false);
+        View rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_customer_list, parent, false);
         ItemViewHolder viewHolder = new ItemViewHolder(rowView);
         return viewHolder;
     }
@@ -54,10 +52,7 @@ public class CustomerListAdapter extends RecyclerView.Adapter<ItemViewHolder> im
 
         holder.customerName.setText(selectedCustomer.getName());
         holder.customerEmail.setText(selectedCustomer.getEmailAddress());
-        Picasso.with(mContext)
-                .load(selectedCustomer.getImagePath())
-                .placeholder(R.drawable.code)
-                .into(holder.profileImage);
+
 
         holder.handleView.setOnTouchListener(new View.OnTouchListener() {
             @Override
