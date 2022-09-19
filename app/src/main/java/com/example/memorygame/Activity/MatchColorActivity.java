@@ -1,7 +1,9 @@
 package com.example.memorygame.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -148,7 +150,13 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.colorList = ButtonList.getInstance().getCorlorCodeList();
         this.corlorRecycleView= findViewById(R.id.button_recycleview);
         this.corlorListAdapter= new CorlorListAdapter(this,this.colorList,this);
-        this.corlorRecycleView.setLayoutManager(new LinearLayoutManager(MatchColorActivity.this,LinearLayoutManager.HORIZONTAL,false));
+        this.corlorRecycleView.setLayoutManager(new LinearLayoutManager(MatchColorActivity.this,LinearLayoutManager.VERTICAL,false));
         this.corlorRecycleView.setAdapter(this.corlorListAdapter);
+    }
+    public void setStrokeCorlor(View view,Integer colorId){
+        GradientDrawable drawable = (GradientDrawable)view.getBackground();
+        drawable.mutate(); // only change this instance of the xml, not all components using this xml
+        drawable.setStroke(3, colorId); // set stroke width and stroke color
+        drawable.setColor(colorId);
     }
 }

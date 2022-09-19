@@ -29,7 +29,7 @@ public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull CorlorViewHolder holder, int position) {
         final Integer item = this.corlorList.get(position);
-        holder.imageView.setBackgroundColor(item);
+        holder.imageView.setImageResource(item);
     }
     @Override
     public CorlorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

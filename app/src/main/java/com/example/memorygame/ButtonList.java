@@ -40,6 +40,16 @@ public class ButtonList {
             R.color.red,
             R.color.yellow
     );
+    private final List<Integer> iconTest = Arrays.asList(
+            R.drawable.fox,
+            R.drawable.lion,
+            R.drawable.camel,
+            R.drawable.code,
+            R.drawable.coala,
+            R.drawable.monkey,
+            R.drawable.wolf
+    );
+
     private static Random rand = new Random();
 
     public  List<Integer> getButtonBoard(){return buttonIdList;}
@@ -58,4 +68,7 @@ public class ButtonList {
         return Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
     }
 
+    public List<Integer> getIconTest() {
+        return iconTest;
+    }
 }
