@@ -1,6 +1,7 @@
 package com.example.memorygame.Activity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -23,6 +24,7 @@ import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.CorlorListInterface;
 import com.example.memorygame.RecycleView.RecycleViewInterface;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +77,7 @@ public class MatchColorActivity extends AppCompatActivity implements
         ArrayList<MatchingObject> matchingObjects = (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
             MatchingObject currentObject = new MatchingObject();
             Drawable defaultColor = getDrawable(R.color.black);
-            ImageButton button = findViewById(elementId);
+            ShapeableImageView button = findViewById(elementId);
             button.setBackground(defaultColor);
             currentObject.setColor(R.color.black);
             button.setOnClickListener(this::onBoardClick);
@@ -90,6 +92,8 @@ public class MatchColorActivity extends AppCompatActivity implements
         }).collect(Collectors.toList());
         return  matchingObjects;
     }
+
+
     public void initialButton(){
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);
@@ -125,25 +129,27 @@ public class MatchColorActivity extends AppCompatActivity implements
     }
     @Override
     public void onCorlorItemClick(View view,int Position) {
-        this.tmpClickedColor = this.selectedImage.get(Position);
+        this.tmpClickedColor = this.colorList.get(Position);
         corlor = getResources().getDrawable(this.tmpClickedColor);
     }
     public void onBoardClick(View imageButton){
         if (this.tmpClickedImage!=null){
-            imageButton.setForeground(myIcon);
+            imageButton.setBackground(myIcon);
             List<MatchingObject> currentImageButton = this.objectList
                     .stream()
                     .filter(selectedImage->selectedImage.getImageButton().getForeground()==myIcon)
                     .collect(Collectors.toList());
             this.selectedButtonList.addAll(currentImageButton);
+            this.tmpClickedImage =null;
         }
         if (this.tmpClickedColor!=null){
-            imageButton.setBackgroundColor(this.tmpClickedColor);
+           setStrokeCorlor(imageButton,this.tmpClickedColor);
             List<MatchingObject> currentImageButton = this.objectList
                     .stream()
                     .filter(selectedImage->selectedImage.getImageButton().getForeground()==corlor)
                     .collect(Collectors.toList());
             this.selectedButtonList.addAll(currentImageButton);
+            this.tmpClickedColor =null;
         }
     }
     private  void initCorlorViews(){
@@ -154,9 +160,9 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.corlorRecycleView.setAdapter(this.corlorListAdapter);
     }
     public void setStrokeCorlor(View view,Integer colorId){
-        GradientDrawable drawable = (GradientDrawable)view.getBackground();
-        drawable.mutate(); // only change this instance of the xml, not all components using this xml
-        drawable.setStroke(3, colorId); // set stroke width and stroke color
-        drawable.setColor(colorId);
+        ShapeableImageView targetView = (ShapeableImageView) findViewById(view.getId());
+        DrawableCompat.setTintList(drawable.mutate(), mContext.getResources().getColorStateList(R.color.my_color_state_list));
+        targetView.setStrokeColor(ColorStateList.valueOf(colorId));
+        targetView.setStrokeWidth(10);
     }
 }

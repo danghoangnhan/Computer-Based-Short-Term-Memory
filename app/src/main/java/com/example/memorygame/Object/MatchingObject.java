@@ -4,9 +4,11 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.widget.ImageButton;
 
+import com.google.android.material.imageview.ShapeableImageView;
+
 public class MatchingObject implements Parcelable {
     Integer color,row,column,image;
-    ImageButton imageButton;
+    ShapeableImageView imageButton;
 
     public boolean sameColum(MatchingObject anotherObject){
             return this.column == anotherObject.getColumn();
@@ -76,11 +78,11 @@ public class MatchingObject implements Parcelable {
         this.image = image;
     }
 
-    public ImageButton getImageButton() {
+    public ShapeableImageView getImageButton() {
         return imageButton;
     }
 
-    public void setImageButton(ImageButton imageButton) {
+    public void setImageButton(ShapeableImageView imageButton) {
         this.imageButton = imageButton;
     }
 

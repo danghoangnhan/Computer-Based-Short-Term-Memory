@@ -16,6 +16,7 @@ import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.Object.Result;
 import com.example.memorygame.R;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class PredictActivity extends AppCompatActivity implements HandleStageBut
         this.initialList = IntStream.range(0,imageButtonList.size()).mapToObj(element->{
             MatchingObject currentMatchingObject = new MatchingObject();
             Integer randomColorCode = ButtonList.getInstance().getRandomDrawable();
-            ImageButton currentImageButton = findViewById(randomColorCode);
+            ShapeableImageView currentImageButton = findViewById(randomColorCode);
             currentMatchingObject.setImageButton(currentImageButton);
             currentMatchingObject.setColor(randomColorCode);
             if (currentColum.get() ==3){

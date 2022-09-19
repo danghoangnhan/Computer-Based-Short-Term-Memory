@@ -6,17 +6,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
-import com.example.memorygame.ButtonList;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.R;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +31,7 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
     LinearLayoutManager  linearLayoutManager;
     RecyclerViewAdapter recyclerViewAdapter;
     Button nextButton,escButton,replayButton;
-    List<Button>buttons;
+    List<ShapeableImageView>buttons;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -69,21 +67,21 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
 
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public static <K, V> Map<K, V> zipToMap(List<K> keys, List<V> values) {
+    public static <K, V> Map<ShapeableImageView, Integer> zipToMap(List<ShapeableImageView> keys, List<Integer> values) {
         return IntStream.range(0, keys.size()).boxed()
                 .collect(Collectors.toMap(keys::get, values::get));
     }
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    public void selectedClick(Integer image, Button button){
+    public void selectedClick(Integer image, ShapeableImageView button){
         this.selectedImage.add(image);
         this.recyclerViewAdapter.notifyItemInserted(selectedImage.size()-1);
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     public  void initialImageTab(){
-        Map <Button, Integer> buttonIntegerMap = zipToMap(this.buttons,this.images);
+        Map <ShapeableImageView, Integer> buttonIntegerMap = zipToMap(this.buttons,this.images);
         buttonIntegerMap.entrySet().forEach(buttonElement->{
             Integer Image = buttonElement.getValue();
-            Button button = buttonElement.getKey();
+            ShapeableImageView button = buttonElement.getKey();
             button.setBackgroundResource(Image);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 button.setOnClickListener(view -> selectedClick(Image,button));
