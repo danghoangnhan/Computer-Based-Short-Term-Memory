@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity">
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleview"
@@ -14,7 +14,8 @@
         android:scrollbars="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/imageTab"
         app:layout_constraintHorizontal_bias="0.037"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        />
 
     <RelativeLayout
         android:id="@+id/imageTab"

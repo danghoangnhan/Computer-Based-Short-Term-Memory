@@ -11,7 +11,7 @@
         android:layout_width="106dp"
         android:layout_height="50dp"
         android:text="Start"
-        tools:layout_editor_absoluteX="301dp"
-        tools:layout_editor_absoluteY="243dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="322dp"
+        tools:layout_editor_absoluteY="239dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity">
-
+    tools:context=".Activity.MatchColorActivity"
+    >
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleview"
         android:layout_width="464dp"
@@ -14,8 +14,8 @@
         android:scrollbars="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/imageTab"
         app:layout_constraintHorizontal_bias="0.037"
-        tools:ignore="MissingConstraints" />
-
+        tools:ignore="MissingConstraints"
+        />
     <RelativeLayout
         android:id="@+id/imageTab"
         android:layout_width="462dp"
@@ -29,7 +29,7 @@
             android:layout_height="106dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:background="@color/black"
+            android:background="@drawable/select_border"
             android:foreground="@drawable/code"
             />
         <ImageButton
@@ -39,7 +39,7 @@
             android:layout_alignTop="@id/button1"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@id/button1"
-            android:background="@color/black"
+            android:background="@drawable/select_border"
             android:foreground="@drawable/code"
             />
 
@@ -49,7 +49,7 @@
             android:layout_height="106dp"
             android:layout_alignTop="@id/button2"
             android:layout_toRightOf="@id/button2"
-            android:background="@color/black"
+            android:background="@drawable/select_border"
             android:foreground="@drawable/code"
             />
 
@@ -58,7 +58,7 @@
             android:layout_width="116dp"
             android:layout_height="106dp"
             android:layout_marginTop="105dp"
-            android:background="@color/black"
+            android:background="@drawable/select_border"
             android:foreground="@drawable/code"
             />
 
@@ -68,7 +68,7 @@
             android:layout_height="106dp"
             android:layout_alignBottom="@id/button4"
             android:layout_toRightOf="@id/button4"
-            android:background="@color/black"
+            android:background="@drawable/select_border"
             android:foreground="@drawable/code"
             />
         <ImageButton
@@ -79,7 +79,7 @@
             android:layout_marginTop="16dp"
             android:layout_toRightOf="@id/button5"
             tools:layout_editor_absoluteX="10dp"
-            android:background="@color/black"
+            android:background="@drawable/select_border"
             android:foreground="@drawable/code"
             />
 
@@ -88,7 +88,7 @@
             android:layout_width="116dp"
             android:layout_height="106dp"
             android:layout_marginTop="210dp"
-            android:background="@color/black"
+            android:background="@drawable/select_border"
             android:foreground="@drawable/code"
             />
 
@@ -98,7 +98,7 @@
             android:layout_height="106dp"
             android:layout_alignBottom="@id/button7"
             android:layout_toRightOf="@id/button7"
-            android:background="@color/black"
+            android:background="@drawable/select_border"
             android:foreground="@drawable/code"
             />
 
@@ -108,7 +108,7 @@
             android:layout_height="106dp"
             android:layout_alignBottom="@id/button8"
             android:layout_toRightOf="@id/button8"
-            android:background="@color/black"
+            android:background="@drawable/select_border"
             android:foreground="@drawable/code"
             />
     </RelativeLayout>
@@ -121,6 +121,15 @@
         app:layout_constraintLeft_toRightOf="@+id/imageTab"
         app:layout_constraintBottom_toTopOf="@+id/actionTab"
         >
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/button_recycleview"
+            android:layout_marginBottom="352dp"
+            android:scrollbars="vertical"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="269dp"
@@ -143,7 +152,6 @@
             android:text="Next">
 
         </Button>
-
         <Button
             android:id="@+id/replayButton"
             android:layout_width="100dp"
@@ -166,5 +174,4 @@
             app:layout_constraintRight_toLeftOf="@id/replayButton"
             app:layout_constraintTop_toBottomOf="@id/nextButton" />
     </RelativeLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

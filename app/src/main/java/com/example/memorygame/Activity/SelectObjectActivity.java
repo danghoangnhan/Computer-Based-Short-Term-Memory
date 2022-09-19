@@ -89,7 +89,7 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
 
     @Override
     public void handleReplayButton(View view) {
-        Intent intent = new Intent(this,TestDragActivity.class);
+        Intent intent = new Intent(this,SelectObjectActivity.class);
         startActivity(intent);
     }
 
