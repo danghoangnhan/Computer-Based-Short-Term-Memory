@@ -30,29 +30,33 @@ public class PredictActivity extends AppCompatActivity implements HandleStageBut
 
     private Button nextButton,escButton,replayButton;
     private List<MatchingObject> matchingObjectList,initialList,selectedList;
-    private List<ImageButton> imageButtonList;
-    private ArrayList<MatchingObject> matchingObjectArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predict);
-
-        nextButton = findViewById(R.id.nextButton);
-        escButton = findViewById(R.id.escButton);
-        replayButton = findViewById(R.id.replayButton);
-
-        nextButton.setOnClickListener(this::handleNextButton);
-        escButton.setOnClickListener(this::handleEscButton);
-        replayButton.setOnClickListener(this::handleReplayButton);
+        this.selectedList = new ArrayList<>();
+        this.initialList = this.generatingMatchingObject(3);
+       initialButton();
         initBoard();
+        MatchingExpectObject();
     }
+
+    public void initialButton(){
+        this.nextButton = findViewById(R.id.nextButton);
+        this.escButton = findViewById(R.id.escButton);
+        this.replayButton = findViewById(R.id.replayButton);
+        this.nextButton.setOnClickListener(this::handleNextButton);
+        this.escButton.setOnClickListener(this::handleEscButton);
+        this.replayButton.setOnClickListener(this::handleReplayButton);
+    }
+
     @Override
     public void handleNextButton(View view){
         Intent intent = new Intent(this,ResultActivity.class);
         Bundle args = new Bundle();
-        Result result = new Result(this.matchingObjectArrayList,this.matchingObjectArrayList);
-        args.putSerializable("ObjectValidation", (Serializable) result);
+        Result result = new Result(this.matchingObjectList,this.selectedList);
+        args.putParcelable("ObjectValidation", result);
         intent.putExtra("BUNDLE",args);
         startActivity(intent);
     }
@@ -73,28 +77,74 @@ public class PredictActivity extends AppCompatActivity implements HandleStageBut
         this.matchingObjectList = (ArrayList<MatchingObject>) args.getSerializable("ARRAYLIST");
         AtomicReference<Integer> currentRow= new AtomicReference<>(0);
         AtomicReference<Integer> currentColum = new AtomicReference<>(0);
-        this.initialList = IntStream.range(0,imageButtonList.size()).mapToObj(element->{
+
+        this.initialList = ButtonList.getInstance().getButtonBoard().stream().map(element->{
             MatchingObject currentMatchingObject = new MatchingObject();
-            Integer randomColorCode = ButtonList.getInstance().getRandomDrawable();
-            ShapeableImageView currentImageButton = findViewById(randomColorCode);
-            currentMatchingObject.setImageButton(currentImageButton);
+            Integer randomColorCode = ButtonList.getInstance().randomColorResource();
+            Integer randomImage = ButtonList.getInstance().getRandomIconResource();
+
+            ShapeableImageView currentImageButton = findViewById(element);
+            currentImageButton.setStrokeColorResource(randomColorCode);
+            currentImageButton.setImageResource(randomImage);
+            currentImageButton.setOnClickListener(v -> onClickSelected(v));
+            currentMatchingObject.setViewId(currentImageButton.getId());
             currentMatchingObject.setColor(randomColorCode);
-            if (currentColum.get() ==3){
-                currentColum.set(0);
+            currentMatchingObject.setColumn(currentColum.get());
+            currentMatchingObject.setRow(currentRow.get());
+            if (currentColum.get() ==2){
                 currentRow.getAndSet(currentRow.get() + 1);
+                currentColum.set(0);
+            }
+            else {
+                currentColum.set(currentColum.get()+1);
             }
             return currentMatchingObject;
         }).collect(Collectors.toList());
+    }
+    public ArrayList<MatchingObject> generatingMatchingObject(Integer NumberPerrow){
+        AtomicReference<Integer> currentRow = new AtomicReference<>(0);
+        AtomicReference<Integer> currentColumn= new AtomicReference<>(0);
+        ArrayList<MatchingObject> matchingObjects = (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
 
-        this.matchingObjectList.forEach(matchingObject -> this.initialList
-                .stream()
-                .filter(element->element.sameColum(matchingObject))
-                .filter(element-> element.sameRow(matchingObject))
-                .forEach(filteredElement->{
-                    Drawable corlor =   matchingObject.getImageButton().getBackground();
-                    Drawable image =    matchingObject.getImageButton().getForeground();
-                    filteredElement.getImageButton().setBackground(corlor);
-                    filteredElement.getImageButton().setForeground(image);
-                }));
+            ShapeableImageView button = findViewById(elementId);
+            Integer randomColor = ButtonList.getInstance().randomColorResource();
+            Integer randomImage = ButtonList.getInstance().getRandomIconResource();
+            button.setStrokeColorResource(randomColor);
+            button.setImageResource(randomImage);
+
+            MatchingObject currentObject = new MatchingObject();
+
+            currentObject.setViewId(button.getId());
+            currentObject.setColumn(currentColumn.get());
+            currentObject.setRow(currentRow.get());
+            currentObject.setColor(randomColor);
+
+            if (currentColumn.get() ==NumberPerrow){
+                currentRow.getAndSet(currentRow.get() + 1);
+                currentColumn.set(0);
+            }
+            else {
+                currentColumn.set(currentColumn.get()+1);
+            }
+
+            return currentObject;
+        }).collect(Collectors.toList());
+        return  matchingObjects;
+    }
+    public  void MatchingExpectObject(){
+        this.matchingObjectList.stream().forEach(element->{
+            MatchingObject filterObject = this.initialList.stream()
+                    .filter(initElement->initElement.getColumn()==element.getColumn())
+                    .filter(initElement->initElement.getRow()==element.getRow())
+                    .findFirst()
+                    .orElse(null);
+            ShapeableImageView currentFIlredObject =  findViewById(filterObject.getViewId());
+            currentFIlredObject.setImageResource(element.getImage());
+            currentFIlredObject.setStrokeColorResource(element.getColor());
+        });
+    }
+    public void onClickSelected(View view){
+               MatchingObject filterdObject = this.initialList.stream().filter(element->element.getViewId()==view.getId()).findFirst().orElse(null);
+               this.selectedList.add(filterdObject);
     }
 }

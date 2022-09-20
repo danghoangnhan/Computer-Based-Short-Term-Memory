@@ -4,15 +4,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Result implements Parcelable {
-    private ArrayList<MatchingObject>selected, correct;
+    private List<MatchingObject>selected, correct;
 
     protected Result(Parcel in) {
         selected = in.createTypedArrayList(MatchingObject.CREATOR);
         correct = in.createTypedArrayList(MatchingObject.CREATOR);
     }
-    public Result(ArrayList<MatchingObject> selected, ArrayList<MatchingObject> correct) {
+    public Result(List<MatchingObject> selected, List<MatchingObject> correct) {
         this.selected = selected;
         this.correct = correct;
     }
@@ -36,7 +37,7 @@ public class Result implements Parcelable {
         return 0;
     }
 
-    public ArrayList<MatchingObject> getSelected() {
+    public List<MatchingObject> getSelected() {
         return selected;
     }
 
@@ -44,7 +45,7 @@ public class Result implements Parcelable {
         this.selected = selected;
     }
 
-    public ArrayList<MatchingObject> getCorrect() {
+    public List<MatchingObject> getCorrect() {
         return correct;
     }
 

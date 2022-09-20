@@ -7,8 +7,7 @@ import android.widget.ImageButton;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class MatchingObject implements Parcelable {
-    Integer color,row,column,image;
-    ShapeableImageView imageButton;
+    Integer color,row,column,image,viewId;
 
     public boolean sameColum(MatchingObject anotherObject){
             return this.column == anotherObject.getColumn();
@@ -38,6 +37,11 @@ public class MatchingObject implements Parcelable {
             image = null;
         } else {
             image = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            viewId = null;
+        } else {
+            viewId = in.readInt();
         }
     }
 
@@ -78,13 +82,7 @@ public class MatchingObject implements Parcelable {
         this.image = image;
     }
 
-    public ShapeableImageView getImageButton() {
-        return imageButton;
-    }
 
-    public void setImageButton(ShapeableImageView imageButton) {
-        this.imageButton = imageButton;
-    }
 
     @Override
     public int describeContents() {
@@ -117,6 +115,12 @@ public class MatchingObject implements Parcelable {
             parcel.writeByte((byte) 1);
             parcel.writeInt(image);
         }
+        if (viewId == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(viewId);
+        }
     }
     public static final Parcelable.Creator<MatchingObject> CREATOR = new Parcelable.Creator<MatchingObject>() {
         public MatchingObject createFromParcel(Parcel in) {
@@ -126,4 +130,12 @@ public class MatchingObject implements Parcelable {
             return new MatchingObject[size];
         }
     };
+
+    public Integer getViewId() {
+        return viewId;
+    }
+
+    public void setViewId(Integer viewId) {
+        this.viewId = viewId;
+    }
 }

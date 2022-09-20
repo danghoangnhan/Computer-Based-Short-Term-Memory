@@ -82,7 +82,7 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
         buttonIntegerMap.entrySet().forEach(buttonElement->{
             Integer Image = buttonElement.getValue();
             ShapeableImageView button = buttonElement.getKey();
-            button.setBackgroundResource(Image);
+            button.setImageResource(Image);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 button.setOnClickListener(view -> selectedClick(Image,button));
             }

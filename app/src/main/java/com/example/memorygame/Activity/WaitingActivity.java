@@ -2,6 +2,7 @@ package com.example.memorygame.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,7 +12,9 @@ import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 public class WaitingActivity extends AppCompatActivity implements HandleStageButton {
@@ -31,34 +34,37 @@ public class WaitingActivity extends AppCompatActivity implements HandleStageBut
                            public void run() {
                                Intent intent = new Intent(WaitingActivity.this,PredictActivity.class);
                                Bundle args = new Bundle();
-                               args.putSerializable("ARRAYLIST", objectList);
+                               args.putParcelableArrayList("ARRAYLIST",objectList);
                                intent.putExtra("BUNDLE",args);
                                startActivity(intent);
                                startActivity(intent);
                            }
                        },
-                5000);
+                1000);
         timer.schedule(new TimerTask() {
                            @Override
                            public void run() {
 
                            }
                        },
-                1000);
+                1);
     }
 
     @Override
     public void handleNextButton(View view) {
-
+        Intent intent = new Intent(this,PredictActivity.class);
+        this.startActivity(intent);
     }
 
     @Override
     public void handleReplayButton(View view) {
-
+        Intent intent = new Intent(this,WaitingActivity.class);
+        this.startActivity(intent);
     }
 
     @Override
     public void handleEscButton(View view) {
-
+        Intent intent = new Intent(this,LoginActivity.class);
+        this.startActivity(intent);
     }
 }

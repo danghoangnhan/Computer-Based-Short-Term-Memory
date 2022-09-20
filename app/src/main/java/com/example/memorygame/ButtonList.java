@@ -60,13 +60,22 @@ public class ButtonList {
         return buttonIdList.get(randomIndex);
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public List<Integer> randomColor(Integer listSize){
+    public List<Integer> randomColorList(Integer listSize){
         return IntStream.range(1,listSize).mapToObj(i->randomColor()).collect(Collectors.toList());
     }
     public Integer randomColor(){
         Random random = new Random();
         return Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
     }
+    public Integer randomColorResource(){
+        int randomIndex = this.rand.nextInt(this.CorlorList.size());
+        return this.CorlorList.get(randomIndex);
+    }
+    public Integer getRandomIconResource(){
+        int randomIndex = this.rand.nextInt(this.iconTest.size());
+        return this.iconTest.get(randomIndex);
+    }
+
 
     public List<Integer> getIconTest() {
         return iconTest;

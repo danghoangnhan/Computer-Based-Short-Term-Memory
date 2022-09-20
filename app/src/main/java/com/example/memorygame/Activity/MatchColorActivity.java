@@ -45,7 +45,6 @@ public class MatchColorActivity extends AppCompatActivity implements
     private Button nextButton,escButton,replayButton;
     private List<ImageButton>buttons;
     private Integer tmpClickedImage,tmpClickedColor;
-    private Drawable myIcon,corlor ;
     private ArrayList<MatchingObject> selectedButtonList;
 
 
@@ -57,7 +56,7 @@ public class MatchColorActivity extends AppCompatActivity implements
         initialButton();
         Intent receiverIntent = getIntent();
         this.selectedImage = receiverIntent.getIntegerArrayListExtra("selectedImages");
-        this.objectList = this.generatingMatchingObject(9);
+        this.objectList = this.generatingMatchingObject(3);
         this.selectedButtonList = new ArrayList<>();
         initialRecyleView();
         initCorlorViews();
@@ -79,18 +78,20 @@ public class MatchColorActivity extends AppCompatActivity implements
             button.setBackground(defaultColor);
             currentObject.setColor(R.color.black);
             button.setOnClickListener(this::onBoardClick);
-            currentObject.setImageButton(button);
+            currentObject.setViewId(button.getId());
             currentObject.setColumn(currentColumn.get());
             currentObject.setRow(currentRow.get());
-            if (currentColumn.get() ==NumberPerrow){
+            if (currentColumn.get() ==NumberPerrow-1){
                 currentRow.getAndSet(currentRow.get() + 1);
                 currentColumn.set(0);
+            }
+            else {
+                currentColumn.set(currentColumn.get()+1);
             }
             return currentObject;
         }).collect(Collectors.toList());
         return  matchingObjects;
     }
-
 
     public void initialButton(){
         this.nextButton = findViewById(R.id.nextButton);
@@ -117,36 +118,44 @@ public class MatchColorActivity extends AppCompatActivity implements
 
     @Override
     public void handleEscButton(View view) {
-
+        Intent intent = new Intent(this,LoginActivity.class);
+        this.startActivity(intent);
     }
 
     @Override
     public void onItemClick(View view,int Position) {
         this.tmpClickedImage = this.selectedImage.get(Position);
-        myIcon = getResources().getDrawable(this.tmpClickedImage);
     }
     @Override
     public void onCorlorItemClick(View view,int Position) {
         this.tmpClickedColor = this.colorList.get(Position);
-        corlor = getResources().getDrawable(this.tmpClickedColor);
     }
     public void onBoardClick(View imageButton){
         if (this.tmpClickedImage!=null){
-            imageButton.setBackgroundResource(R.drawable.camel);
-            List<MatchingObject> currentImageButton = this.objectList
-                    .stream()
-                    .filter(selectedImage->selectedImage.getImageButton().getForeground()==myIcon)
-                    .collect(Collectors.toList());
-            this.selectedButtonList.addAll(currentImageButton);
+            ShapeableImageView targetView = findViewById(imageButton.getId());
+            targetView.setImageResource(this.tmpClickedImage);
+            MatchingObject object = this.selectedButtonList.stream()
+                    .filter(matchingObject -> matchingObject.getViewId()==imageButton.getId())
+                    .findAny()
+                    .orElseGet(()->{
+                        MatchingObject newMatch = this.objectList.stream().filter(element->element.getViewId()==imageButton.getId()).findFirst().get();
+                        this.selectedButtonList.add(newMatch);
+                        return newMatch;
+                    });
+            object.setImage(this.tmpClickedImage);
             this.tmpClickedImage =null;
         }
         if (this.tmpClickedColor!=null){
            setStrokeCorlor(imageButton,this.tmpClickedColor);
-            List<MatchingObject> currentImageButton = this.objectList
-                    .stream()
-                    .filter(selectedImage->selectedImage.getImageButton().getForeground()==corlor)
-                    .collect(Collectors.toList());
-            this.selectedButtonList.addAll(currentImageButton);
+            MatchingObject object = this.selectedButtonList.stream()
+                    .filter(matchingObject -> matchingObject.getViewId()==imageButton.getId())
+                    .findAny()
+                    .orElseGet(()->{
+                        MatchingObject newMatch = this.objectList.stream().filter(element->element.getViewId()==imageButton.getId()).findFirst().get();
+                        this.selectedButtonList.add(newMatch);
+                        return newMatch;
+                    });
+            object.setColor(this.tmpClickedColor);
             this.tmpClickedColor =null;
         }
     }
@@ -160,6 +169,6 @@ public class MatchColorActivity extends AppCompatActivity implements
     @SuppressLint("ResourceAsColor")
     public void setStrokeCorlor(View view, Integer colorId){
         ShapeableImageView targetView = findViewById(view.getId());
-        targetView.setStrokeColorResource(R.color.red);
+        targetView.setStrokeColorResource(colorId);
     }
 }

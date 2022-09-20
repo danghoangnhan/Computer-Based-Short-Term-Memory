@@ -4,101 +4,133 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.MainActivity">
+    tools:context=".Activity.PredictActivity">
     <RelativeLayout
         android:id="@+id/imageTab"
         android:layout_width="462dp"
         android:layout_height="354dp"
-        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
-
-        <ImageButton
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/button1"
-            android:layout_width="116dp"
-            android:layout_height="106dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:background="@color/black"
-            android:foreground="@drawable/code"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp"
+            android:src="@color/orange"
             />
-        <ImageButton
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/button2"
-            android:layout_width="116dp"
-            android:layout_height="106dp"
-            android:layout_alignTop="@id/button1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="1dp"
+            android:src="@color/orange"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp"
+            android:padding="10dp"
+            android:layout_alignTop="@id/button1"
             android:layout_toRightOf="@id/button1"
-            android:background="@color/black"
-            android:foreground="@drawable/code"
             />
 
-        <ImageButton
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/button3"
-            android:layout_width="116dp"
-            android:layout_height="106dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_alignTop="@id/button2"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="1dp"
             android:layout_toRightOf="@id/button2"
-            android:background="@color/black"
-            android:foreground="@drawable/code"
-            />
+            android:padding="10dp"
+            android:src="@color/orange"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp" />
 
-        <ImageButton
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/button4"
-            android:layout_width="116dp"
-            android:layout_height="106dp"
-            android:layout_marginTop="105dp"
-            android:background="@color/black"
-            android:foreground="@drawable/code"
-            />
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/button1"
+            android:layout_alignLeft="@+id/button1"
+            android:padding="10dp"
+            android:src="@color/orange"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp" />
 
-        <ImageButton
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/button5"
-            android:layout_width="116dp"
-            android:layout_height="106dp"
-            android:layout_alignBottom="@id/button4"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/button2"
             android:layout_toRightOf="@id/button4"
-            android:background="@color/black"
-            android:foreground="@drawable/code"
+            android:padding="10dp"
+            android:src="@color/orange"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp"
             />
-        <ImageButton
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/button6"
-            android:layout_width="116dp"
-            android:layout_height="106dp"
-            android:layout_alignBottom="@id/button5"
-            android:layout_marginTop="16dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/button3"
+            android:layout_alignLeft="@id/button3"
             android:layout_toRightOf="@id/button5"
-            tools:layout_editor_absoluteX="10dp"
-            android:background="@color/black"
-            android:foreground="@drawable/code"
+            android:padding="10dp"
+            android:src="@color/orange"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp"
             />
 
-        <ImageButton
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/button7"
-            android:layout_width="116dp"
-            android:layout_height="106dp"
-            android:layout_marginTop="210dp"
-            android:background="@color/black"
-            android:foreground="@drawable/code"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/button4"
+            android:layout_alignLeft="@id/button1"
+            android:padding="10dp"
+            android:src="@color/orange"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp"
             />
 
-        <ImageButton
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/button8"
-            android:layout_width="116dp"
-            android:layout_height="106dp"
-            android:layout_alignBottom="@id/button7"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignTop="@id/button7"
             android:layout_toRightOf="@id/button7"
-            android:background="@color/black"
-            android:foreground="@drawable/code"
+            android:src="@color/orange"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp"
+            android:padding="10dp"
             />
 
-        <ImageButton
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/button9"
-            android:layout_width="116dp"
-            android:layout_height="106dp"
-            android:layout_alignBottom="@id/button8"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignTop="@id/button8"
             android:layout_toRightOf="@id/button8"
-            android:background="@color/black"
-            android:foreground="@drawable/code"
+            android:layout_below="@id/button6"
+            android:src="@color/orange"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/black"
+            app:strokeWidth="10dp"
+            android:padding="10dp"
             />
     </RelativeLayout>
     <RelativeLayout
@@ -109,8 +141,7 @@
         android:id="@+id/userGuideTab"
         app:layout_constraintLeft_toRightOf="@+id/imageTab"
         app:layout_constraintBottom_toTopOf="@+id/actionTab"
-        >
-    </RelativeLayout>
+        />
     <RelativeLayout
         android:layout_width="269dp"
         android:layout_height="208dp"
