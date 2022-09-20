@@ -31,12 +31,12 @@
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
             android:layout_marginLeft="10dp"
-            android:src="@color/orange"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
             app:strokeColor="@color/black"
             app:strokeWidth="10dp"
-            android:padding="10dp"
-            android:scaleType="centerCrop"
+            android:src="@color/orange"
             />
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/button2"

@@ -1,10 +1,8 @@
 package com.example.memorygame.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -134,7 +132,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     }
     public void onBoardClick(View imageButton){
         if (this.tmpClickedImage!=null){
-            imageButton.setBackground(myIcon);
+            imageButton.setBackgroundResource(R.drawable.camel);
             List<MatchingObject> currentImageButton = this.objectList
                     .stream()
                     .filter(selectedImage->selectedImage.getImageButton().getForeground()==myIcon)
@@ -159,10 +157,9 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.corlorRecycleView.setLayoutManager(new LinearLayoutManager(MatchColorActivity.this,LinearLayoutManager.VERTICAL,false));
         this.corlorRecycleView.setAdapter(this.corlorListAdapter);
     }
-    public void setStrokeCorlor(View view,Integer colorId){
-        ShapeableImageView targetView = (ShapeableImageView) findViewById(view.getId());
-        DrawableCompat.setTintList(drawable.mutate(), mContext.getResources().getColorStateList(R.color.my_color_state_list));
-        targetView.setStrokeColor(ColorStateList.valueOf(colorId));
-        targetView.setStrokeWidth(10);
+    @SuppressLint("ResourceAsColor")
+    public void setStrokeCorlor(View view, Integer colorId){
+        ShapeableImageView targetView = findViewById(view.getId());
+        targetView.setStrokeColorResource(R.color.red);
     }
 }
