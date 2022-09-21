@@ -9,16 +9,17 @@ public class MatchingObject implements Parcelable {
     Integer color,row,column,image,viewId;
 
     public boolean sameColum(MatchingObject anotherObject){
-            return this.column == anotherObject.getColumn();
+            return this.column.compareTo(anotherObject.getColumn())==0;
     };
     public boolean sameRow(MatchingObject anotherObject){
-            return this.row == anotherObject.getRow();
+            return this.row.compareTo(anotherObject.getRow())==0;
     }
     public boolean sameObject(MatchingObject anotherObject){
-        return this.image == anotherObject.getImage();
+        Integer RESULT = this.image.compareTo(anotherObject.getImage());
+        return RESULT==0;
     }
     public boolean sameCorlor(MatchingObject element) {
-        return this.color == element.getColor();
+        return this.color.compareTo(element.getColor())==0;
     }
 
 

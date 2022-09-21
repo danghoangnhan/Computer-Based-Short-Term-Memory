@@ -44,7 +44,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     private Button nextButton,escButton,replayButton;
     private Integer tmpClickedImage,tmpClickedColor;
     private ArrayList<MatchingObject> selectedButtonList;
-
+    private View tmpView;
 
 
     @Override
@@ -71,10 +71,10 @@ public class MatchColorActivity extends AppCompatActivity implements
         AtomicReference<Integer> currentColumn= new AtomicReference<>(0);
         ArrayList<MatchingObject> matchingObjects = (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
             MatchingObject currentObject = new MatchingObject();
-            Drawable defaultColor = getDrawable(R.color.black);
+            Drawable defaultColor = getDrawable(R.color.white);
             ShapeableImageView button = findViewById(elementId);
             button.setBackground(defaultColor);
-            currentObject.setColor(R.color.black);
+            currentObject.setColor(R.color.white);
             button.setOnClickListener(this::onBoardClick);
             currentObject.setViewId(button.getId());
             currentObject.setColumn(currentColumn.get());
@@ -123,6 +123,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     @Override
     public void onItemClick(View view,int Position) {
         this.tmpClickedImage = this.selectedImage.get(Position);
+        this.tmpView = view;
     }
     @Override
     public void onCorlorItemClick(View view,int Position) {
@@ -150,8 +151,10 @@ public class MatchColorActivity extends AppCompatActivity implements
                     .filter(i->this.selectedImage.get(i)==this.tmpClickedImage)
                     .findFirst()
                     .orElse(-1);
-            removeAt(seletedInteger);
+//            removeAt(seletedInteger);
             this.tmpClickedImage =null;
+            this.tmpView.setForeground(getDrawable(R.color.cornflower_blue));
+            this.tmpView.setOnLongClickListener(null);
         }
         if (this.tmpClickedColor!=null){
            setStrokeCorlor(imageButton,this.tmpClickedColor);
@@ -181,8 +184,11 @@ public class MatchColorActivity extends AppCompatActivity implements
     }
 
     public void removeAt(int position) {
-        this.selectedImage.remove(position);
-        recyclerViewAdapter.notifyItemRemoved(position);
-        recyclerViewAdapter.notifyItemRangeChanged(position,this.selectedImage.size());
+        View deleteView = findViewById(this.objectList.get(position).getViewId());
+        deleteView.setBackgroundResource(R.color.cornflower_blue);
+        deleteView.setOnLongClickListener(null);
+//        this.selectedImage.remove(position);
+//        recyclerViewAdapter.notifyItemRemoved(position);
+//        recyclerViewAdapter.notifyItemRangeChanged(position,this.selectedImage.size());
     }
 }

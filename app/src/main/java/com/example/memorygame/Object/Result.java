@@ -21,12 +21,6 @@ public class Result implements Parcelable {
         this.correct = correct;
     }
 
-    public static Integer ObjectValidation(ArrayList<MatchingObject>selected, ArrayList<MatchingObject> correct){
-        return 0;
-    }
-    public static Integer LocationValidation(ArrayList<MatchingObject>selected,ArrayList<MatchingObject> correct){
-        return 0;
-    }
     @RequiresApi(api = Build.VERSION_CODES.N)
     public long ObjectValidation(){
         return this.selected

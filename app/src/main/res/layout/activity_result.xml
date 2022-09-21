@@ -169,9 +169,9 @@
                     android:layout_alignParentRight="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginLeft="5dp"
-                    android:background="@color/royal_blue"
                     android:text="ESC"
                     android:textColor="@color/white"
+                    android:background="@color/royal_blue"
                     />
             </RelativeLayout>
         </RelativeLayout>

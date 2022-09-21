@@ -49,6 +49,17 @@ public class ButtonList {
             R.drawable.monkey,
             R.drawable.wolf
     );
+    private final List<Integer> imageList = Arrays.asList(
+            R.drawable.clock,
+            R.drawable.fan,
+            R.drawable.clothhanger,
+            R.drawable.glasses,
+            R.drawable.glass,
+            R.drawable.phone,
+            R.drawable.key,
+            R.drawable.toothbursh,
+             R.drawable.hat
+    );
 
     private static Random rand = new Random();
 
@@ -75,9 +86,16 @@ public class ButtonList {
         int randomIndex = this.rand.nextInt(this.iconTest.size());
         return this.iconTest.get(randomIndex);
     }
-
+    public Integer getRandomImageResource(){
+        int randomIndex = this.rand.nextInt(this.imageList.size());
+        return this.imageList.get(randomIndex);
+    }
 
     public List<Integer> getIconTest() {
         return iconTest;
+    }
+
+    public List<Integer> getImageList() {
+        return imageList;
     }
 }

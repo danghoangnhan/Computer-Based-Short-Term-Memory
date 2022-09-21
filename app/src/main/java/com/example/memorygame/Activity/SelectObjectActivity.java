@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
+import com.example.memorygame.ButtonList;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.R;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -38,17 +39,7 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_object);
-        this.images = Arrays.asList(
-                R.drawable.fox,
-                R.drawable.lion,
-                R.drawable.camel,
-                R.drawable.code,
-                R.drawable.coala,
-                R.drawable.monkey,
-                R.drawable.wolf,
-                R.drawable.wolf,
-                R.drawable.monkey
-                );
+        this.images = ButtonList.getInstance().getImageList();
         this.buttons = Arrays.asList(findViewById(R.id.button1), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4), findViewById(R.id.button5), findViewById(R.id.button6), findViewById(R.id.button7), findViewById(R.id.button8), findViewById(R.id.button9));
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);
@@ -105,6 +96,7 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
 
     @Override
     public void handleEscButton(View view) {
-
+        Intent intent = new Intent(this,LoginActivity.class);
+        this.startActivity(intent);
     }
 }

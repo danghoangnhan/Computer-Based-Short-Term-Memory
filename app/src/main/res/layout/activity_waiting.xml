@@ -63,9 +63,9 @@
                 android:layout_height="50dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="60dp"
-                android:background="@color/white"
                 android:text="@string/next"
                 android:textColor="@color/red"
+                android:background="@color/white"
                 android:textSize="20dp"
                 />
             <Button

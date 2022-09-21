@@ -64,6 +64,8 @@ public class WaitingActivity extends AppCompatActivity implements HandleStageBut
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void handleNextButton(View view) {
+        myCountDownTimer.cancel();
+
         Intent intent = new Intent(WaitingActivity.this,PredictActivity.class);
         Bundle args = new Bundle();
         args.putParcelableArrayList("ARRAYLIST",objectList);

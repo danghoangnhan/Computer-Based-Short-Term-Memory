@@ -32,7 +32,6 @@ public class PredictActivity extends AppCompatActivity implements HandleStageBut
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predict);
         this.selectedList = new ArrayList<>();
-        this.initialList = this.generatingMatchingObject(3);
        initialButton();
         initBoard();
         MatchingExpectObject();
@@ -42,6 +41,7 @@ public class PredictActivity extends AppCompatActivity implements HandleStageBut
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);
         this.replayButton = findViewById(R.id.replayButton);
+
         this.nextButton.setOnClickListener(this::handleNextButton);
         this.escButton.setOnClickListener(this::handleEscButton);
         this.replayButton.setOnClickListener(this::handleReplayButton);
@@ -77,7 +77,7 @@ public class PredictActivity extends AppCompatActivity implements HandleStageBut
         this.initialList = ButtonList.getInstance().getButtonBoard().stream().map(element->{
             MatchingObject currentMatchingObject = new MatchingObject();
             Integer randomColorCode = ButtonList.getInstance().randomColorResource();
-            Integer randomImage = ButtonList.getInstance().getRandomIconResource();
+            Integer randomImage = ButtonList.getInstance().getRandomImageResource();
             ShapeableImageView currentImageButton = findViewById(element);
             currentImageButton.setStrokeColorResource(randomColorCode);
             currentImageButton.setImageResource(randomImage);
@@ -96,36 +96,7 @@ public class PredictActivity extends AppCompatActivity implements HandleStageBut
             return currentMatchingObject;
         }).collect(Collectors.toList());
     }
-    public ArrayList<MatchingObject> generatingMatchingObject(Integer NumberPerrow){
-        AtomicReference<Integer> currentRow = new AtomicReference<>(0);
-        AtomicReference<Integer> currentColumn= new AtomicReference<>(0);
-        ArrayList<MatchingObject> matchingObjects = (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
 
-            ShapeableImageView button = findViewById(elementId);
-            Integer randomColor = ButtonList.getInstance().randomColorResource();
-            Integer randomImage = ButtonList.getInstance().getRandomIconResource();
-            button.setStrokeColorResource(randomColor);
-            button.setImageResource(randomImage);
-
-            MatchingObject currentObject = new MatchingObject();
-
-            currentObject.setViewId(button.getId());
-            currentObject.setColumn(currentColumn.get());
-            currentObject.setRow(currentRow.get());
-            currentObject.setColor(randomColor);
-
-            if (currentColumn.get() ==NumberPerrow){
-                currentRow.getAndSet(currentRow.get() + 1);
-                currentColumn.set(0);
-            }
-            else {
-                currentColumn.set(currentColumn.get()+1);
-            }
-
-            return currentObject;
-        }).collect(Collectors.toList());
-        return  matchingObjects;
-    }
     public  void MatchingExpectObject(){
         this.matchingObjectList.stream().forEach(element->{
             MatchingObject filterObject = this.initialList.stream()
