@@ -1,12 +1,10 @@
 package com.example.memorygame.Activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,12 +16,10 @@ import com.example.memorygame.Object.Result;
 import com.example.memorygame.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class PredictActivity extends AppCompatActivity implements HandleStageButton {
@@ -56,7 +52,7 @@ public class PredictActivity extends AppCompatActivity implements HandleStageBut
         Intent intent = new Intent(this,ResultActivity.class);
         Bundle args = new Bundle();
         Result result = new Result(this.matchingObjectList,this.selectedList);
-        args.putParcelable("ObjectValidation", result);
+        args.putParcelable("result", result);
         intent.putExtra("BUNDLE",args);
         startActivity(intent);
     }
@@ -82,7 +78,6 @@ public class PredictActivity extends AppCompatActivity implements HandleStageBut
             MatchingObject currentMatchingObject = new MatchingObject();
             Integer randomColorCode = ButtonList.getInstance().randomColorResource();
             Integer randomImage = ButtonList.getInstance().getRandomIconResource();
-
             ShapeableImageView currentImageButton = findViewById(element);
             currentImageButton.setStrokeColorResource(randomColorCode);
             currentImageButton.setImageResource(randomImage);
@@ -134,17 +129,22 @@ public class PredictActivity extends AppCompatActivity implements HandleStageBut
     public  void MatchingExpectObject(){
         this.matchingObjectList.stream().forEach(element->{
             MatchingObject filterObject = this.initialList.stream()
-                    .filter(initElement->initElement.getColumn()==element.getColumn())
-                    .filter(initElement->initElement.getRow()==element.getRow())
+                    .filter(initElement->initElement.sameColum(element))
+                    .filter(initElement->initElement.sameRow(element))
                     .findFirst()
                     .orElse(null);
             ShapeableImageView currentFIlredObject =  findViewById(filterObject.getViewId());
             currentFIlredObject.setImageResource(element.getImage());
             currentFIlredObject.setStrokeColorResource(element.getColor());
+            filterObject.clone(element);
         });
     }
     public void onClickSelected(View view){
-               MatchingObject filterdObject = this.initialList.stream().filter(element->element.getViewId()==view.getId()).findFirst().orElse(null);
+               MatchingObject filterdObject = this.initialList
+                       .stream()
+                       .filter(element->element.getViewId()==view.getId())
+                       .findFirst()
+                       .orElse(null);
                this.selectedList.add(filterdObject);
     }
 }

@@ -1,59 +1,75 @@
 package com.example.memorygame.Activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 public class WaitingActivity extends AppCompatActivity implements HandleStageButton {
     Timer timer;
-    TextView textView1,textView2;
+    TextView textTime;
+    CountDownTimer myCountDownTimer;
     private ArrayList<MatchingObject> objectList;
+    private Button nextButton,escButton,replayButton;
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting);
+        textTime = findViewById(R.id.time);
+
+        this.nextButton = findViewById(R.id.nextButton);
+        this.escButton = findViewById(R.id.escButton);
+        this.replayButton = findViewById(R.id.replayButton);
+
+        this.nextButton.setOnClickListener(this::handleNextButton);
+        this.escButton.setOnClickListener(this::handleEscButton);
+        this.replayButton.setOnClickListener(this::handleReplayButton);
+
         Bundle args = getIntent().getExtras();
         this.objectList = args.getParcelableArrayList("ARRAYLIST");
         timer = new Timer();
-        timer.schedule(new TimerTask() {
-                           @Override
-                           public void run() {
-                               Intent intent = new Intent(WaitingActivity.this,PredictActivity.class);
-                               Bundle args = new Bundle();
-                               args.putParcelableArrayList("ARRAYLIST",objectList);
-                               intent.putExtra("BUNDLE",args);
-                               startActivity(intent);
-                               startActivity(intent);
-                           }
-                       },
-                1000);
-        timer.schedule(new TimerTask() {
-                           @Override
-                           public void run() {
-
-                           }
-                       },
-                1);
+        myCountDownTimer =  new CountDownTimer(60000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                Long totalTime = (millisUntilFinished / 1000);
+                Long minutes = totalTime /60;
+                Long seconds = totalTime %60;
+                textTime.setText(minutes +"分" +seconds+"秒");
+            }
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onFinish() {
+                handleNextButton(null);
+            }
+        };
+        myCountDownTimer.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void handleNextButton(View view) {
-        Intent intent = new Intent(this,PredictActivity.class);
-        this.startActivity(intent);
+        Intent intent = new Intent(WaitingActivity.this,PredictActivity.class);
+        Bundle args = new Bundle();
+        args.putParcelableArrayList("ARRAYLIST",objectList);
+        intent.putExtra("BUNDLE",args);
+        startActivity(intent);
+        startActivity(intent);
     }
 
     @Override
@@ -67,4 +83,5 @@ public class WaitingActivity extends AppCompatActivity implements HandleStageBut
         Intent intent = new Intent(this,LoginActivity.class);
         this.startActivity(intent);
     }
+
 }

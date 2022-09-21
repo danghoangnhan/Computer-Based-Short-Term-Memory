@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class MatchColorActivity extends AppCompatActivity implements
@@ -39,11 +39,9 @@ public class MatchColorActivity extends AppCompatActivity implements
     private List<Integer>  colorList;
     private ArrayList<MatchingObject> objectList;
     private RecyclerView recyclerView,corlorRecycleView;
-    private LinearLayoutManager linearLayoutManager;
     private RecyclerViewAdapter recyclerViewAdapter;
     private CorlorListAdapter corlorListAdapter;
     private Button nextButton,escButton,replayButton;
-    private List<ImageButton>buttons;
     private Integer tmpClickedImage,tmpClickedColor;
     private ArrayList<MatchingObject> selectedButtonList;
 
@@ -143,6 +141,16 @@ public class MatchColorActivity extends AppCompatActivity implements
                         return newMatch;
                     });
             object.setImage(this.tmpClickedImage);
+            Integer selted = this.selectedImage
+                    .stream()
+                    .filter(elemnt->elemnt==this.tmpClickedColor)
+                    .findFirst().orElse(null);
+
+            Integer seletedInteger = IntStream.range(0,this.selectedImage.size())
+                    .filter(i->this.selectedImage.get(i)==this.tmpClickedImage)
+                    .findFirst()
+                    .orElse(-1);
+            removeAt(seletedInteger);
             this.tmpClickedImage =null;
         }
         if (this.tmpClickedColor!=null){
@@ -170,5 +178,11 @@ public class MatchColorActivity extends AppCompatActivity implements
     public void setStrokeCorlor(View view, Integer colorId){
         ShapeableImageView targetView = findViewById(view.getId());
         targetView.setStrokeColorResource(colorId);
+    }
+
+    public void removeAt(int position) {
+        this.selectedImage.remove(position);
+        recyclerViewAdapter.notifyItemRemoved(position);
+        recyclerViewAdapter.notifyItemRangeChanged(position,this.selectedImage.size());
     }
 }

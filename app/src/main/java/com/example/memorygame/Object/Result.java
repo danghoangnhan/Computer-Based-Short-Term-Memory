@@ -1,7 +1,10 @@
 package com.example.memorygame.Object;
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,17 +27,43 @@ public class Result implements Parcelable {
     public static Integer LocationValidation(ArrayList<MatchingObject>selected,ArrayList<MatchingObject> correct){
         return 0;
     }
-    public Integer ObjectValidation(){
-        return 0;
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public long ObjectValidation(){
+        return this.selected
+                .stream()
+                .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameObject(element)))
+                .count();
     }
-    public static Integer LocationValidation(){
-        return 0;
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public long LocationValidation(){
+        return  this.selected
+                .stream()
+                .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameColum(element)&&checkelement.sameRow(element)))
+                .count();
     }
-    public static Integer ObjectLocationValidation(){
-        return 0;
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public long ObjectLocationValidation(){
+        return  this.selected
+                .stream()
+                .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameColum(element)&&checkelement.sameRow(element)))
+                .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameObject(element)))
+                .count();
     }
-    public static Integer ColorValidation(){
-        return 0;
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Long ObjectCorlorLocationValidation(){
+        return  this.selected
+                .stream()
+                .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameColum(element)&&checkelement.sameRow(element)))
+                .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameObject(element)))
+                .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameCorlor(element)))
+                .count();
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public  Long ColorValidation(){
+        return this.selected
+                .stream()
+                .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameCorlor(element)))
+                .count();
     }
 
     public List<MatchingObject> getSelected() {

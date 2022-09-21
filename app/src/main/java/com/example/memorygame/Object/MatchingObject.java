@@ -2,9 +2,8 @@ package com.example.memorygame.Object;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.widget.ImageButton;
 
-import com.google.android.material.imageview.ShapeableImageView;
+import androidx.annotation.NonNull;
 
 public class MatchingObject implements Parcelable {
     Integer color,row,column,image,viewId;
@@ -14,6 +13,12 @@ public class MatchingObject implements Parcelable {
     };
     public boolean sameRow(MatchingObject anotherObject){
             return this.row == anotherObject.getRow();
+    }
+    public boolean sameObject(MatchingObject anotherObject){
+        return this.image == anotherObject.getImage();
+    }
+    public boolean sameCorlor(MatchingObject element) {
+        return this.color == element.getColor();
     }
 
 
@@ -82,6 +87,14 @@ public class MatchingObject implements Parcelable {
         this.image = image;
     }
 
+    public void clone(@NonNull MatchingObject another){
+        this.setColor(another.getColor());
+        this.setImage(another.getImage());
+        this.setViewId(another.getViewId());
+        this.setColumn(another.getColumn());
+        this.setRow(another.getRow());
+    }
+
 
 
     @Override
@@ -138,4 +151,6 @@ public class MatchingObject implements Parcelable {
     public void setViewId(Integer viewId) {
         this.viewId = viewId;
     }
+
+
 }
