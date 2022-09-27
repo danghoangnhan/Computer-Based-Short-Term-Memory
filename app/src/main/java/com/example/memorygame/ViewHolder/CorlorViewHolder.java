@@ -11,9 +11,9 @@ import com.example.memorygame.RecycleView.CorlorListInterface;
 
 public class CorlorViewHolder extends RecyclerView.ViewHolder {
     public ImageView imageView;
-    public CorlorViewHolder(@NonNull View itemView,@NonNull CorlorListInterface corlorListInterface) {
+    public CorlorViewHolder(@NonNull View itemView, @NonNull CorlorListInterface corlorListInterface) {
         super(itemView);
         this.imageView = itemView.findViewById(R.id.corlor_image_item);
-        this.imageView.setOnClickListener(view -> corlorListInterface.onCorlorItemClick(view,getAdapterPosition()));
+        this.imageView.setOnClickListener(view->corlorListInterface.onCorlorItemClick(view,getAdapterPosition()));
     }
 }

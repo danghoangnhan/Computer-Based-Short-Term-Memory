@@ -29,7 +29,7 @@
             android:layout_marginTop="50dp"
             >
             <androidx.recyclerview.widget.RecyclerView
-                android:background="@color/cornflower_blue"
+                android:background="@color/white"
                 android:orientation="vertical"
 
                 android:id="@+id/recycleview"
@@ -54,6 +54,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="25dp"
                 >
+
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/button1"
                     android:layout_width="120dp"
@@ -67,7 +68,7 @@
                     android:scaleType="centerCrop"
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                    app:strokeColor="@color/gray"
+                    app:strokeColor="@color/white"
                     app:strokeWidth="10dp" />
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -81,7 +82,7 @@
                     android:padding="10dp"
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                    app:strokeColor="@color/gray"
+                    app:strokeColor="@color/white"
                     app:strokeWidth="10dp"
 
                     />
@@ -97,7 +98,7 @@
                     android:padding="10dp"
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                    app:strokeColor="@color/gray"
+                    app:strokeColor="@color/white"
                     app:strokeWidth="10dp" />
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -109,7 +110,7 @@
                     android:padding="10dp"
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                    app:strokeColor="@color/gray"
+                    app:strokeColor="@color/white"
                     app:strokeWidth="10dp"
 
                     />
@@ -123,7 +124,7 @@
                     android:padding="10dp"
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                    app:strokeColor="@color/gray"
+                    app:strokeColor="@color/white"
                     app:strokeWidth="10dp" />
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -136,7 +137,7 @@
                     android:padding="10dp"
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                    app:strokeColor="@color/gray"
+                    app:strokeColor="@color/white"
                     app:strokeWidth="10dp"
 
                     />
@@ -150,7 +151,7 @@
                     android:padding="10dp"
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                    app:strokeColor="@color/gray"
+                    app:strokeColor="@color/white"
                     app:strokeWidth="10dp"
 
                     />
@@ -163,7 +164,7 @@
                     android:padding="10dp"
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                    app:strokeColor="@color/gray"
+                    app:strokeColor="@color/white"
                     app:strokeWidth="10dp" />
 
                 <com.google.android.material.imageview.ShapeableImageView
@@ -176,7 +177,7 @@
                     android:padding="10dp"
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                    app:strokeColor="@color/gray"
+                    app:strokeColor="@color/white"
                     app:strokeWidth="10dp" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>

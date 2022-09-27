@@ -6,7 +6,9 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class MatchingObject implements Parcelable {
-    Integer color,row,column,image,viewId;
+    private Integer color,row,column,image,viewId,width,height;
+
+
 
     public boolean sameColum(MatchingObject anotherObject){
             return this.column.compareTo(anotherObject.getColumn())==0;
@@ -87,6 +89,13 @@ public class MatchingObject implements Parcelable {
     public void setImage(Integer image) {
         this.image = image;
     }
+    public Integer getWidth() {return width;}
+
+    public void setWidth(Integer width) {this.width = width;}
+
+    public Integer getHeight() {return height;}
+
+    public void setHeight(Integer height) {this.height = height;}
 
     public void clone(@NonNull MatchingObject another){
         this.setColor(another.getColor());

@@ -1,6 +1,8 @@
 package com.example.memorygame.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.CorlorListInterface;
 import com.example.memorygame.ViewHolder.CorlorViewHolder;
+import com.example.memorygame.utilities.ItemTouchHelperContract;
 
+import java.util.Collections;
 import java.util.List;
 
-public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder> {
+public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder> implements ItemTouchHelperContract {
 
     private Context context;
     private List<Integer> corlorList;
@@ -26,6 +30,7 @@ public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder> {
         this.context =context;
         this.corlorListInterface = corlorListInterface;
     }
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull CorlorViewHolder holder, int position) {
         final Integer item = this.corlorList.get(position);
@@ -39,5 +44,29 @@ public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder> {
     @Override
     public int getItemCount() {
         return this.corlorList.size();
+    }
+
+    @Override
+    public void onRowMoved(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(this.corlorList, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(this.corlorList, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    @Override
+    public void onRowSelected(CorlorViewHolder myViewHolder) {
+        myViewHolder.imageView.setBackgroundColor(Color.GRAY);
+    }
+
+    @Override
+    public void onRowClear(CorlorViewHolder myViewHolder) {
+
     }
 }

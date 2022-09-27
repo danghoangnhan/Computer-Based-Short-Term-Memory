@@ -1,6 +1,7 @@
 package com.example.memorygame.Activity;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -8,8 +9,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class MatchColorActivity extends AppCompatActivity implements
@@ -45,7 +47,6 @@ public class MatchColorActivity extends AppCompatActivity implements
     private Integer tmpClickedImage,tmpClickedColor;
     private ArrayList<MatchingObject> selectedButtonList;
     private View tmpView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,6 @@ public class MatchColorActivity extends AppCompatActivity implements
         }).collect(Collectors.toList());
         return  matchingObjects;
     }
-
     public void initialButton(){
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);
@@ -109,26 +109,27 @@ public class MatchColorActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void handleReplayButton(View view) {
-        Intent intent = new Intent(this,MatchColorActivity.class);
-        this.startActivity(intent);
-    }
-
+    public void handleReplayButton(View view) {this.startActivity(new Intent(this,MatchColorActivity.class));}
     @Override
-    public void handleEscButton(View view) {
-        Intent intent = new Intent(this,LoginActivity.class);
-        this.startActivity(intent);
-    }
+    public void handleEscButton(View view) {this.startActivity(new Intent(this,LoginActivity.class));}
 
     @Override
     public void onItemClick(View view,int Position) {
         this.tmpClickedImage = this.selectedImage.get(Position);
         this.tmpView = view;
     }
+
+    @Override
+    public void onLongClickListener(View view) {
+        ClipData data = ClipData.newPlainText("","");
+        View.DragShadowBuilder myShadowBuilder = new View.DragShadowBuilder(view);
+        view.startDrag(data,myShadowBuilder,view,0);
+    }
     @Override
     public void onCorlorItemClick(View view,int Position) {
         this.tmpClickedColor = this.colorList.get(Position);
     }
+
     public void onBoardClick(View imageButton){
         if (this.tmpClickedImage!=null){
             ShapeableImageView targetView = findViewById(imageButton.getId());
@@ -142,16 +143,6 @@ public class MatchColorActivity extends AppCompatActivity implements
                         return newMatch;
                     });
             object.setImage(this.tmpClickedImage);
-            Integer selted = this.selectedImage
-                    .stream()
-                    .filter(elemnt->elemnt==this.tmpClickedColor)
-                    .findFirst().orElse(null);
-
-            Integer seletedInteger = IntStream.range(0,this.selectedImage.size())
-                    .filter(i->this.selectedImage.get(i)==this.tmpClickedImage)
-                    .findFirst()
-                    .orElse(-1);
-//            removeAt(seletedInteger);
             this.tmpClickedImage =null;
             this.tmpView.setForeground(getDrawable(R.color.cornflower_blue));
             this.tmpView.setOnLongClickListener(null);
@@ -181,14 +172,17 @@ public class MatchColorActivity extends AppCompatActivity implements
     public void setStrokeCorlor(View view, Integer colorId){
         ShapeableImageView targetView = findViewById(view.getId());
         targetView.setStrokeColorResource(colorId);
+
+    }
+ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP|ItemTouchHelper.DOWN|ItemTouchHelper.START|ItemTouchHelper.END,0) {
+    @Override
+    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+        return false;
     }
 
-    public void removeAt(int position) {
-        View deleteView = findViewById(this.objectList.get(position).getViewId());
-        deleteView.setBackgroundResource(R.color.cornflower_blue);
-        deleteView.setOnLongClickListener(null);
-//        this.selectedImage.remove(position);
-//        recyclerViewAdapter.notifyItemRemoved(position);
-//        recyclerViewAdapter.notifyItemRangeChanged(position,this.selectedImage.size());
+    @Override
+    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
     }
+};
 }

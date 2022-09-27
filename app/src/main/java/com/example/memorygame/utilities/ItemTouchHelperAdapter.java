@@ -7,11 +7,8 @@ public interface ItemTouchHelperAdapter {
      *
      * @param fromPosition The start position of the moved item.
      * @param toPosition   Then end position of the moved item.
-
      */
     void onItemMove(int fromPosition, int toPosition);
-
-
     /**
      * Called when an item has been dismissed by a swipe.
      *
