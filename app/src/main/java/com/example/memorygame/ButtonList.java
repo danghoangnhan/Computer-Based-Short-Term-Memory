@@ -30,12 +30,10 @@ public class ButtonList {
     R.id.button9);
     private final List<Integer> CorlorList = Arrays.asList(
             R.color.black,
-            R.color.white,
             R.color.aqua,
             R.color.fuchsia,
             R.color.dark_magenta,
             R.color._light_green,
-            R.color.azure,
             R.color.blue,
             R.color.red,
             R.color.yellow

@@ -29,7 +29,7 @@
             android:layout_marginTop="50dp"
             >
             <androidx.recyclerview.widget.RecyclerView
-                android:background="@color/white"
+                android:background="@color/ghost_white"
                 android:orientation="vertical"
 
                 android:id="@+id/recycleview"
@@ -38,6 +38,7 @@
                 android:scrollbars="horizontal"
                 app:layout_constraintHorizontal_bias="0.037"
                 tools:ignore="MissingConstraints"
+
                 />
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -47,6 +48,7 @@
             app:layout_constraintTop_toBottomOf="@+id/recycleview"
             android:layout_marginTop="210dp"
             android:layout_marginLeft="50dp"
+            android:backgroundTint="@color/ghost_white"
             >
             <RelativeLayout
                 android:id="@+id/imageTab"
@@ -69,7 +71,8 @@
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:strokeColor="@color/white"
-                    app:strokeWidth="10dp" />
+                    app:strokeWidth="20dp"
+                    />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/button2"
@@ -83,7 +86,7 @@
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:strokeColor="@color/white"
-                    app:strokeWidth="10dp"
+                    app:strokeWidth="20dp"
 
                     />
 
@@ -99,7 +102,8 @@
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:strokeColor="@color/white"
-                    app:strokeWidth="10dp" />
+                    app:strokeWidth="20dp"
+                    />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/button4"
@@ -111,7 +115,7 @@
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:strokeColor="@color/white"
-                    app:strokeWidth="10dp"
+                    app:strokeWidth="20dp"
 
                     />
 
@@ -125,7 +129,8 @@
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:strokeColor="@color/white"
-                    app:strokeWidth="10dp" />
+                    app:strokeWidth="20dp"
+                    />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/button6"
@@ -138,7 +143,7 @@
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:strokeColor="@color/white"
-                    app:strokeWidth="10dp"
+                    app:strokeWidth="20dp"
 
                     />
 
@@ -152,7 +157,7 @@
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:strokeColor="@color/white"
-                    app:strokeWidth="10dp"
+                    app:strokeWidth="20dp"
 
                     />
                 <com.google.android.material.imageview.ShapeableImageView
@@ -165,7 +170,8 @@
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:strokeColor="@color/white"
-                    app:strokeWidth="10dp" />
+                    app:strokeWidth="20dp"
+                    />
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/button9"
@@ -178,7 +184,8 @@
                     android:src="@color/white"
                     app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                     app:strokeColor="@color/white"
-                    app:strokeWidth="10dp" />
+                    app:strokeWidth="20dp"
+                    />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
@@ -188,14 +195,23 @@
             android:layout_height="208dp"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="800dp"
+            android:backgroundTint="@color/ghost_white"
             >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="請選出三個物件"
+                android:text="請選出"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="50dp"
-                android:textSize="25dp"
+                android:textSize="40dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="三個物件"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="90dp"
+                android:textSize="40dp"
                 />
         </androidx.cardview.widget.CardView>
 
@@ -219,7 +235,7 @@
                 android:layout_marginTop="48dp"
                 android:text="Next"
                 android:textColor="@color/red"
-                android:background="@color/white"
+                android:background="@drawable/custome_button2"
                 />
 
             <Button
@@ -229,7 +245,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_below="@id/nextButton"
                 android:layout_marginTop="20dp"
-                android:background="@color/royal_blue"
+                android:background="@drawable/custome_button1"
                 android:text="Replay"
                 android:textColor="@color/white"
                 />
@@ -248,7 +264,7 @@
                 app:layout_constraintRight_toLeftOf="@id/replayButton"
                 app:layout_constraintTop_toBottomOf="@id/nextButton"
                 android:textColor="@color/white"
-                android:background="@color/royal_blue"
+                android:background="@drawable/custome_button1"
                 />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

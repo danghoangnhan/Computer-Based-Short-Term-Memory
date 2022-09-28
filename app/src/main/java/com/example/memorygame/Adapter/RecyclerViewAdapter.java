@@ -9,31 +9,32 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorygame.Activity.SelectObjectActivity;
-import com.example.memorygame.Listener.MyDragListener;
-import com.example.memorygame.Object.MatchingObject;
+import com.example.memorygame.Listener.DragListener.MyDragListener;
+import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.example.memorygame.R;
 import com.example.memorygame.ViewHolder.RecycleViewHolder;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>   implements View.OnTouchListener {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>
+        implements View.OnTouchListener
+{
     private Context context;
-    private List<Integer> data;
+    private List<ImageRecycleViewObject> data;
     private RecycleViewInterface recycleViewInterface;
 
 
-    public RecyclerViewAdapter(Context context, List<Integer> data, RecycleViewInterface recycleViewInterface) {
+    public RecyclerViewAdapter(Context context, List<ImageRecycleViewObject> data, RecycleViewInterface recycleViewInterface) {
         this.data = data;
         this.context = context;
         this.recycleViewInterface = recycleViewInterface;
     }
 
-    public RecyclerViewAdapter(SelectObjectActivity context, List<Integer> selectedImage) {
+    public RecyclerViewAdapter(SelectObjectActivity context, List<ImageRecycleViewObject> selectedImage) {
         this.context = context;
         this.data = selectedImage;
     }
@@ -48,10 +49,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
-        final Integer item = this.data.get(position);
-        holder.imageView.setImageResource(item);
-        holder.imageView.setOnTouchListener(this);
-        holder.imageView.setOnDragListener(new MyDragListener(this.recycleViewInterface));
+        final ImageRecycleViewObject item = this.data.get(position);
+        if (item.isSelected()){
+            holder.imageView.setImageResource(R.drawable.delete);
+            holder.imageView.setOnTouchListener(null);
+            holder.imageView.setOnDragListener(null);
+        }else {
+            holder.imageView.setImageResource(item.getImageId());
+            holder.imageView.setOnTouchListener(this);
+            holder.imageView.setOnDragListener(new MyDragListener(this.recycleViewInterface,this.getListItem(position)));
+        }
     }
 
     @Override
@@ -59,9 +66,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>
         return data.size();
     }
 
-    private Integer getListItem(int position) {
-        return this.data.get(position);
-    }
+    private ImageRecycleViewObject getListItem(int position) {return this.data.get(position);}
+
 
     @SuppressLint("ClickableViewAccessibility")
     @Override

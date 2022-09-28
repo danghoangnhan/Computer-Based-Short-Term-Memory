@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.memorygame.Listener.MyDragListener;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.RecycleViewInterface;
 

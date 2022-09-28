@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.ButtonList;
 import com.example.memorygame.HandleStageButton;
+import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -26,7 +27,7 @@ import java.util.stream.IntStream;
 
 public class SelectObjectActivity extends AppCompatActivity implements HandleStageButton {
 
-    List<Integer> selectedImage;
+    List<ImageRecycleViewObject> selectedImage;
     RecyclerView recyclerView;
     List<Integer> images;
     LinearLayoutManager  linearLayoutManager;
@@ -64,8 +65,29 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
     }
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public void selectedClick(Integer image, ShapeableImageView button){
-        this.selectedImage.add(image);
-        this.recyclerViewAdapter.notifyItemInserted(selectedImage.size()-1);
+        if (!this.selectedImage.stream().anyMatch(element->element.getImageId()==image)){
+            button.setImageResource(R.drawable.delete);
+            ImageRecycleViewObject newObject = new ImageRecycleViewObject();
+            newObject.setImageId(image);
+            this.selectedImage.add(newObject);
+            this.recyclerViewAdapter.notifyItemInserted(selectedImage.size()-1);
+        }
+        else {
+            Integer index = IntStream.range(0,this.selectedImage.size())
+                    .filter(i->this.selectedImage.get(i).getImageId()==image)
+                    .findFirst()
+                    .orElseGet(null);
+            ImageRecycleViewObject selectObject  = this.selectedImage
+                    .stream()
+                    .filter(element->element.getImageId()==image)
+                    .findFirst()
+                    .get();
+            if (index!=null){
+                this.selectedImage.remove(selectObject);
+                this.recyclerViewAdapter.notifyItemRemoved(index);
+                button.setImageResource(image);
+            }
+        }
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     public  void initialImageTab(){
@@ -84,7 +106,7 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
     @Override
     public void handleNextButton(View view) {
         Intent intent = new Intent(this,MatchColorActivity.class);
-        intent.putIntegerArrayListExtra("selectedImages", (ArrayList<Integer>) this.selectedImage);
+        intent.putParcelableArrayListExtra("selectedImages", (ArrayList<ImageRecycleViewObject>) this.selectedImage);
         startActivity(intent);
     }
     @Override

@@ -1,13 +1,12 @@
 package com.example.memorygame.Activity;
 
-import android.annotation.SuppressLint;
-import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,8 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorygame.Adapter.CorlorListAdapter;
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.ButtonList;
+import com.example.memorygame.CallBack.BoardButtonCallBack;
+import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
+import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
+import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
-import com.example.memorygame.Listener.BoardDragListener;
+import com.example.memorygame.Listener.ClickListener.BoardClickListener;
+import com.example.memorygame.Listener.DragListener.BoardDragListener;
+import com.example.memorygame.Object.CorlorRecycleViewObject;
+import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.CorlorListInterface;
@@ -29,21 +35,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class MatchColorActivity extends AppCompatActivity implements
         HandleStageButton,
         RecycleViewInterface,
-        CorlorListInterface {
+        CorlorListInterface,
+        BoardButtonCallBack,
+        CorlorRecycleViewCallBack,
+        ImageRecycleVIewCallBack {
 
-    private ArrayList<Integer> selectedImage;
-    private List<Integer>  colorList;
+    private ArrayList<ImageRecycleViewObject> selectedImage;
+    private List<CorlorRecycleViewObject>  colorList;
     private ArrayList<MatchingObject> objectList;
     private RecyclerView recyclerView,corlorRecycleView;
     private RecyclerViewAdapter recyclerViewAdapter;
     private CorlorListAdapter corlorListAdapter;
     private Button nextButton,escButton,replayButton;
-    private Integer tmpClickedImage,tmpClickedColor;
+    private ImageRecycleViewObject tmpClickedImage;
+    private GlobalObject globalObject;
     private ArrayList<MatchingObject> selectedButtonList;
     private View tmpView;
 
@@ -53,11 +64,13 @@ public class MatchColorActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_match_color);
         initialButton();
         Intent receiverIntent = getIntent();
-        this.selectedImage = receiverIntent.getIntegerArrayListExtra("selectedImages");
-        this.objectList = this.generatingMatchingObject(3);
-        this.selectedButtonList = new ArrayList<>();
+        this.selectedImage = receiverIntent.getParcelableArrayListExtra("selectedImages");
         initialRecyleView();
         initCorlorViews();
+        this.globalObject = GlobalObject.getInstance();
+        this.selectedButtonList = this.globalObject.getSelectedButtonList();
+        this.objectList = this.generatingMatchingObject(3);
+        this.globalObject.setObjectList(this.objectList);
     }
     public  void initialRecyleView(){
         this.recyclerView = findViewById(R.id.recycleview);
@@ -75,8 +88,7 @@ public class MatchColorActivity extends AppCompatActivity implements
             ShapeableImageView button = findViewById(elementId);
             button.setBackground(defaultColor);
             currentObject.setColor(R.color.white);
-            button.setOnClickListener(this::onBoardClick);
-            button.setOnDragListener( new BoardDragListener(this));
+            button.setOnDragListener( new BoardDragListener(this,this));
             currentObject.setViewId(button.getId());
             currentObject.setColumn(currentColumn.get());
             currentObject.setRow(currentRow.get());
@@ -103,6 +115,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     public void handleNextButton(View view){
         Intent intent = new Intent(this,WaitingActivity.class);
         Bundle args = new Bundle();
+        this.selectedButtonList = this.globalObject.getSelectedButtonList();
         args.putParcelableArrayList("ARRAYLIST", this.selectedButtonList);
         intent.putExtras(args);
         this.startActivity(intent);
@@ -117,59 +130,84 @@ public class MatchColorActivity extends AppCompatActivity implements
     public void onItemClick(View view,int Position) {
         this.tmpClickedImage = this.selectedImage.get(Position);
         this.tmpView = view;
+        this.globalObject.setTmpClickedImage(this.tmpClickedImage);
     }
 
     @Override
-    public void onLongClickListener(View view) {
-        ClipData data = ClipData.newPlainText("","");
-        View.DragShadowBuilder myShadowBuilder = new View.DragShadowBuilder(view);
-        view.startDrag(data,myShadowBuilder,view,0);
+    public void onCorlorItemClick(View view,int Position) {
+        this.globalObject.setTmpCorlorObject(this.colorList.get(Position));
     }
-    @Override
-    public void onCorlorItemClick(View view,int Position) {this.tmpClickedColor = this.colorList.get(Position);}
 
-    public void onBoardClick(View imageButton){
-        if (this.tmpClickedImage!=null){
-            ShapeableImageView targetView = findViewById(imageButton.getId());
-            targetView.setImageResource(this.tmpClickedImage);
-            MatchingObject object = this.selectedButtonList.stream()
-                    .filter(matchingObject -> matchingObject.getViewId()==imageButton.getId())
-                    .findAny()
-                    .orElseGet(()->{
-                        MatchingObject newMatch = this.objectList.stream().filter(element->element.getViewId()==imageButton.getId()).findFirst().get();
-                        this.selectedButtonList.add(newMatch);
-                        return newMatch;
-                    });
-            object.setImage(this.tmpClickedImage);
-            this.tmpClickedImage =null;
-            this.tmpView.setForeground(getDrawable(R.color.cornflower_blue));
-            this.tmpView.setOnLongClickListener(null);
-        }
-        if (this.tmpClickedColor!=null){
-           setStrokeCorlor(imageButton,this.tmpClickedColor);
-            MatchingObject object = this.selectedButtonList.stream()
-                    .filter(matchingObject -> matchingObject.getViewId()==imageButton.getId())
-                    .findAny()
-                    .orElseGet(()->{
-                        MatchingObject newMatch = this.objectList.stream().filter(element->element.getViewId()==imageButton.getId()).findFirst().get();
-                        this.selectedButtonList.add(newMatch);
-                        return newMatch;
-                    });
-            object.setColor(this.tmpClickedColor);
-            this.tmpClickedColor =null;
-        }
-    }
     private  void initCorlorViews(){
-        this.colorList = ButtonList.getInstance().getCorlorCodeList();
+        this.colorList = ButtonList.getInstance().getCorlorCodeList().stream().map(colorCode->{
+            CorlorRecycleViewObject newCorlorObject = new CorlorRecycleViewObject();
+            newCorlorObject.setCorlorId(colorCode);
+            return newCorlorObject;
+        }).collect(Collectors.toList());
         this.corlorRecycleView= findViewById(R.id.button_recycleview);
         this.corlorListAdapter= new CorlorListAdapter(this,this.colorList,this);
         this.corlorRecycleView.setLayoutManager(new LinearLayoutManager(MatchColorActivity.this,LinearLayoutManager.VERTICAL,false));
         this.corlorRecycleView.setAdapter(this.corlorListAdapter);
     }
-    @SuppressLint("ResourceAsColor")
-    public void setStrokeCorlor(View view, Integer colorId){
-        ShapeableImageView targetView = findViewById(view.getId());
-        targetView.setStrokeColorResource(colorId);
 
+
+    @Override
+    public void handleImageRecycleView(Integer ViewID) {
+        ImageView view = findViewById(ViewID);
+        view.setImageResource(R.drawable.delete);
+        view.setOnDragListener(null);
+        view.setOnClickListener(null);
+    }
+
+    @Override
+    public void HandleSelected(ImageRecycleViewObject target) {
+
+        Integer filterIndex = IntStream.range(0,this.selectedImage
+                .size())
+                .filter(i->this.selectedImage.get(i).getImageId()==target.getImageId())
+                .findFirst()
+                .orElseGet(null);
+
+        target.setSelected(true);
+        this.selectedImage.set(filterIndex,target);
+        this.recyclerViewAdapter.notifyItemChanged(filterIndex);
+    }
+
+    @Override
+    public void HandleUnSelected(ImageRecycleViewObject target) {
+        Integer filterIndex = IntStream.range(0,this.selectedImage
+                        .size())
+                .filter(i->this.selectedImage.get(i).getImageId()==target.getImageId())
+                .findFirst()
+                .orElseGet(null);
+
+        target.setSelected(false);
+        this.selectedImage.set(filterIndex,target);
+        this.recyclerViewAdapter.notifyItemChanged(filterIndex);
+    }
+
+    @Override
+    public void HandleSelected(CorlorRecycleViewObject target) {
+        Integer filterIndex = IntStream.range(0,this.colorList.size())
+                .filter(i->this.colorList.get(i).getCorlorId()==target.getCorlorId())
+                .findFirst()
+                .orElseGet(null);
+
+        target.setSelected(true);
+        this.colorList.set(filterIndex,target);
+        this.corlorListAdapter.notifyItemChanged(filterIndex);
+
+    }
+
+    @Override
+    public void HandleUnSelected(CorlorRecycleViewObject target) {
+        Integer filterIndex = IntStream.range(0,this.colorList.size())
+                .filter(i->this.colorList.get(i).getCorlorId()==target.getCorlorId())
+                .findFirst()
+                .orElseGet(null);
+
+        target.setSelected(false);
+        this.colorList.set(filterIndex,target);
+        this.corlorListAdapter.notifyItemChanged(filterIndex);
     }
 }

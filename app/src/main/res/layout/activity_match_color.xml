@@ -12,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="450dp"
         android:layout_height="150dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginTop="50dp"
         app:layout_constraintLeft_toLeftOf="parent"
         >
@@ -27,6 +27,7 @@
             android:nestedScrollingEnabled="false"
             android:scrollbarAlwaysDrawHorizontalTrack="false"
             android:scrollbarAlwaysDrawVerticalTrack="false"
+            android:backgroundTint="@color/ghost_white"
             />
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
@@ -34,11 +35,13 @@
         app:layout_constraintTop_toBottomOf="@+id/recyCard"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_width="450dp"
-        android:layout_height="450dp"
+        android:layout_height="400dp"
         android:layout_marginBottom="352dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="50dp"
         tools:ignore="NotSibling"
+        android:backgroundTint="@color/ghost_white"
+
         >
         <RelativeLayout
             android:id="@+id/imageTab"
@@ -48,7 +51,9 @@
             tools:ignore="MissingConstraints"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="25dp"
+            android:backgroundTint="@color/ghost_white"
             >
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/button1"
                 android:layout_width="120dp"
@@ -57,13 +62,13 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="10dp"
-                android:background="@color/gray"
+                android:background="@color/white"
                 android:padding="10dp"
                 android:scaleType="centerCrop"
                 android:src="@color/white"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 app:strokeColor="@color/white"
-                app:strokeWidth="10dp" />
+                app:strokeWidth="20dp" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/button2"
@@ -77,7 +82,7 @@
                 android:src="@color/white"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 app:strokeColor="@color/white"
-                app:strokeWidth="10dp"
+                app:strokeWidth="20dp"
 
                 />
 
@@ -93,7 +98,8 @@
                 android:src="@color/white"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 app:strokeColor="@color/white"
-                app:strokeWidth="10dp" />
+                app:strokeWidth="20dp"
+                />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/button4"
@@ -105,7 +111,7 @@
                 android:src="@color/white"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 app:strokeColor="@color/white"
-                app:strokeWidth="10dp"
+                app:strokeWidth="20dp"
 
                 />
 
@@ -119,7 +125,8 @@
                 android:src="@color/white"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 app:strokeColor="@color/white"
-                app:strokeWidth="10dp" />
+                app:strokeWidth="20dp"
+                />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/button6"
@@ -132,7 +139,7 @@
                 android:src="@color/white"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 app:strokeColor="@color/white"
-                app:strokeWidth="10dp"
+                app:strokeWidth="20dp"
 
                 />
 
@@ -146,7 +153,7 @@
                 android:src="@color/white"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 app:strokeColor="@color/white"
-                app:strokeWidth="10dp"
+                app:strokeWidth="20dp"
 
                 />
             <com.google.android.material.imageview.ShapeableImageView
@@ -159,7 +166,8 @@
                 android:src="@color/white"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 app:strokeColor="@color/white"
-                app:strokeWidth="10dp" />
+                app:strokeWidth="20dp"
+                />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/button9"
@@ -172,7 +180,8 @@
                 android:src="@color/white"
                 app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
                 app:strokeColor="@color/white"
-                app:strokeWidth="10dp" />
+                app:strokeWidth="20dp"
+                />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
@@ -189,8 +198,9 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/button_recycleTab"
             android:layout_width="70dp"
-            android:layout_height="400dp"
+            android:layout_height="500dp"
             android:layout_marginLeft="80dp"
+            android:backgroundTint="@color/ghost_white"
             >
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/button_recycleview"
@@ -208,8 +218,8 @@
             android:layout_height="208dp"
             android:layout_marginLeft="30dp"
             android:layout_toRightOf="@+id/button_recycleTab"
+            android:backgroundTint="@color/ghost_white"
             >
-
             <TextView
                 android:layout_width="183dp"
                 android:layout_height="match_parent"

@@ -1,31 +1,34 @@
 package com.example.memorygame.Adapter;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.memorygame.Listener.DragListener.CorlorDragListener;
+import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.CorlorListInterface;
 import com.example.memorygame.ViewHolder.CorlorViewHolder;
-import com.example.memorygame.utilities.ItemTouchHelperContract;
 
-import java.util.Collections;
 import java.util.List;
 
-public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder> implements ItemTouchHelperContract {
+public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder>
+        implements View.OnTouchListener
+{
 
     private Context context;
-    private List<Integer> corlorList;
+    private List<CorlorRecycleViewObject> corlorList;
     private CorlorListInterface corlorListInterface;
 
 
-    public CorlorListAdapter(Context context,List<Integer> data,CorlorListInterface corlorListInterface){
+    public CorlorListAdapter(Context context, List<CorlorRecycleViewObject> data, CorlorListInterface corlorListInterface){
         this.corlorList = data;
         this.context =context;
         this.corlorListInterface = corlorListInterface;
@@ -33,9 +36,20 @@ public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder> im
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onBindViewHolder(@NonNull CorlorViewHolder holder, int position) {
-        final Integer item = this.corlorList.get(position);
-        holder.imageView.setImageResource(item);
+        final CorlorRecycleViewObject item = this.corlorList.get(position);
+        if (item.isSelected()){
+            holder.imageView.setImageResource(R.drawable.delete);
+            holder.imageView.setOnTouchListener(null);
+            holder.imageView.setOnDragListener(null);
+        }
+        else {
+            holder.imageView.setImageResource(item.getCorlorId());
+            holder.imageView.setOnTouchListener(this);
+            holder.imageView.setOnDragListener(new CorlorDragListener(this.corlorListInterface,item));
+        }
+
     }
+    @NonNull
     @Override
     public CorlorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(this.context).inflate(R.layout.corlor_recycleview_item,parent,false);
@@ -46,27 +60,15 @@ public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder> im
         return this.corlorList.size();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
-    public void onRowMoved(int fromPosition, int toPosition) {
-        if (fromPosition < toPosition) {
-            for (int i = fromPosition; i < toPosition; i++) {
-                Collections.swap(this.corlorList, i, i + 1);
-            }
-        } else {
-            for (int i = fromPosition; i > toPosition; i--) {
-                Collections.swap(this.corlorList, i, i - 1);
-            }
+    public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            ClipData data = ClipData.newPlainText("", "");
+            View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+            v.startDragAndDrop(data, shadowBuilder, v, 0);
+            return true;
         }
-        notifyItemMoved(fromPosition, toPosition);
-    }
-
-    @Override
-    public void onRowSelected(CorlorViewHolder myViewHolder) {
-        myViewHolder.imageView.setBackgroundColor(Color.GRAY);
-    }
-
-    @Override
-    public void onRowClear(CorlorViewHolder myViewHolder) {
-
+        return false;
     }
 }
