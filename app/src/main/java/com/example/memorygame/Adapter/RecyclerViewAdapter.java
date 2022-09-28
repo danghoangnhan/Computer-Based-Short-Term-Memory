@@ -50,7 +50,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
         final Integer item = this.data.get(position);
         holder.imageView.setImageResource(item);
-
         holder.imageView.setOnTouchListener(this);
         holder.imageView.setOnDragListener(new MyDragListener(this.recycleViewInterface));
     }

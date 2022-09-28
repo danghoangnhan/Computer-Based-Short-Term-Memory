@@ -6,7 +6,6 @@ import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Result implements Parcelable {
@@ -52,28 +51,9 @@ public class Result implements Parcelable {
                 .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameCorlor(element)))
                 .count();
     }
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public  Long ColorValidation(){
-        return this.selected
-                .stream()
-                .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameCorlor(element)))
-                .count();
-    }
-
-    public List<MatchingObject> getSelected() {
-        return selected;
-    }
-
-    public void setSelected(ArrayList<MatchingObject> selected) {
-        this.selected = selected;
-    }
 
     public List<MatchingObject> getCorrect() {
         return correct;
-    }
-
-    public void setCorrect(ArrayList<MatchingObject> correct) {
-        this.correct = correct;
     }
 
     @Override

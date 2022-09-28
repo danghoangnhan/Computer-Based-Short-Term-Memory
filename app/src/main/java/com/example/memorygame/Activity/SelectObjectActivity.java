@@ -1,15 +1,15 @@
 package com.example.memorygame.Activity;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.ButtonList;
@@ -87,7 +87,6 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
         intent.putIntegerArrayListExtra("selectedImages", (ArrayList<Integer>) this.selectedImage);
         startActivity(intent);
     }
-
     @Override
     public void handleReplayButton(View view) {
         Intent intent = new Intent(this,SelectObjectActivity.class);

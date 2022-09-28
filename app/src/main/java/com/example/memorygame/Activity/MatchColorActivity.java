@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +18,7 @@ import com.example.memorygame.Adapter.CorlorListAdapter;
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.ButtonList;
 import com.example.memorygame.HandleStageButton;
+import com.example.memorygame.Listener.BoardDragListener;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.CorlorListInterface;
@@ -77,6 +76,7 @@ public class MatchColorActivity extends AppCompatActivity implements
             button.setBackground(defaultColor);
             currentObject.setColor(R.color.white);
             button.setOnClickListener(this::onBoardClick);
+            button.setOnDragListener( new BoardDragListener(this));
             currentObject.setViewId(button.getId());
             currentObject.setColumn(currentColumn.get());
             currentObject.setRow(currentRow.get());
@@ -126,9 +126,7 @@ public class MatchColorActivity extends AppCompatActivity implements
         view.startDrag(data,myShadowBuilder,view,0);
     }
     @Override
-    public void onCorlorItemClick(View view,int Position) {
-        this.tmpClickedColor = this.colorList.get(Position);
-    }
+    public void onCorlorItemClick(View view,int Position) {this.tmpClickedColor = this.colorList.get(Position);}
 
     public void onBoardClick(View imageButton){
         if (this.tmpClickedImage!=null){
@@ -174,15 +172,4 @@ public class MatchColorActivity extends AppCompatActivity implements
         targetView.setStrokeColorResource(colorId);
 
     }
-ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP|ItemTouchHelper.DOWN|ItemTouchHelper.START|ItemTouchHelper.END,0) {
-    @Override
-    public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-        return false;
-    }
-
-    @Override
-    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-    }
-};
 }
