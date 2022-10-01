@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="450dp"
+    android:layout_height="354dp"
+    android:id="@+id/imageCard"
+    app:layout_constraintTop_toBottomOf="@+id/recycleview"
+    android:layout_marginTop="210dp"
+    android:layout_marginLeft="50dp"
+    android:backgroundTint="@color/ghost_white"
+    >
+    <RelativeLayout
+        android:id="@+id/imageTab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/button1"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/gray"
+            android:padding="10dp"
+            android:scaleType="centerCrop"
+            android:src="@color/white"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="20dp"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/button2"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignTop="@id/button1"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@id/button1"
+            android:padding="10dp"
+            android:src="@color/white"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="20dp"
+
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/button3"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignTop="@id/button2"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="1dp"
+            android:layout_toRightOf="@id/button2"
+            android:padding="10dp"
+            android:src="@color/white"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="20dp"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/button4"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/button1"
+            android:layout_alignLeft="@+id/button1"
+            android:padding="10dp"
+            android:src="@color/white"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="20dp"
+
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/button5"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/button2"
+            android:layout_toRightOf="@id/button4"
+            android:padding="10dp"
+            android:src="@color/white"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="20dp"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/button6"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/button3"
+            android:layout_alignLeft="@id/button3"
+            android:layout_toRightOf="@id/button5"
+            android:padding="10dp"
+            android:src="@color/white"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="20dp"
+
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/button7"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/button4"
+            android:layout_alignLeft="@id/button1"
+            android:padding="10dp"
+            android:src="@color/white"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="20dp"
+
+            />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/button8"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignTop="@id/button7"
+            android:layout_toRightOf="@id/button7"
+            android:padding="10dp"
+            android:src="@color/white"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="20dp"
+            />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/button9"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_below="@id/button6"
+            android:layout_alignTop="@id/button8"
+            android:layout_toRightOf="@id/button8"
+            android:padding="10dp"
+            android:src="@color/white"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:strokeColor="@color/white"
+            app:strokeWidth="20dp"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

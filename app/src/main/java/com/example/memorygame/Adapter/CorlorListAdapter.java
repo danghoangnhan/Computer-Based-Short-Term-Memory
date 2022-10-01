@@ -3,6 +3,7 @@ package com.example.memorygame.Adapter;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -38,11 +39,14 @@ public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder>
     public void onBindViewHolder(@NonNull CorlorViewHolder holder, int position) {
         final CorlorRecycleViewObject item = this.corlorList.get(position);
         if (item.isSelected()){
-            holder.imageView.setImageResource(R.drawable.delete);
+            Drawable cross = context.getResources().getDrawable(R.drawable.cross);
+            holder.imageView.setImageResource(item.getCorlorId());
+            holder.imageView.setForeground(cross);
             holder.imageView.setOnTouchListener(null);
             holder.imageView.setOnDragListener(null);
         }
         else {
+            holder.imageView.setForeground(null);
             holder.imageView.setImageResource(item.getCorlorId());
             holder.imageView.setOnTouchListener(this);
             holder.imageView.setOnDragListener(new CorlorDragListener(this.corlorListInterface,item));

@@ -182,47 +182,8 @@
         app:layout_constraintTop_toBottomOf="@+id/userGuideTab"
         android:layout_marginLeft="250dp"
         >
-
-        <Button
-            android:id="@+id/nextButton"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="85dp"
-            android:background="@color/white"
-            android:text="Next"
-            android:textColor="@color/red">
-
-        </Button>
-
-        <Button
-            android:id="@+id/replayButton"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="20dp"
-            android:layout_below="@id/nextButton"
-            android:layout_marginTop="10dp"
-            android:text="Replay"
-            android:textColor="@color/white"
-            android:background="@color/royal_blue"
-            />
-
-        <Button
-            android:id="@+id/escButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="144dp"
-            android:layout_marginRight="37dp"
-            android:layout_below="@id/nextButton"
-            android:layout_marginTop="10dp"
-            android:text="ESC"
-            app:layout_constraintRight_toLeftOf="@id/replayButton"
-            app:layout_constraintTop_toBottomOf="@id/nextButton"
-            android:textColor="@color/white"
-            android:background="@color/royal_blue"
+        <include
+            layout="@layout/action_button_group"
             />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

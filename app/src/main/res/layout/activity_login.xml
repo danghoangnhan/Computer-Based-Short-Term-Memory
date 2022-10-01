@@ -44,6 +44,8 @@
             android:text="Start"
             android:textColor="@color/red"
             android:textSize="40dp"
-            />
+            android:background="@drawable/custome_button2"
+            >
+        </Button>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.example.memorygame.Activity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -65,14 +66,18 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
     }
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public void selectedClick(Integer image, ShapeableImageView button){
+        Drawable cross = getDrawable(R.drawable.cross);
         if (!this.selectedImage.stream().anyMatch(element->element.getImageId()==image)){
-            button.setImageResource(R.drawable.delete);
+            button.setForeground(cross);
+            button.setImageResource(image);
             ImageRecycleViewObject newObject = new ImageRecycleViewObject();
             newObject.setImageId(image);
             this.selectedImage.add(newObject);
             this.recyclerViewAdapter.notifyItemInserted(selectedImage.size()-1);
         }
         else {
+            button.setForeground(null);
+            button.setImageResource(image);
             Integer index = IntStream.range(0,this.selectedImage.size())
                     .filter(i->this.selectedImage.get(i).getImageId()==image)
                     .findFirst()

@@ -3,6 +3,7 @@ package com.example.memorygame.Adapter;
 import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -51,7 +52,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>
     public void onBindViewHolder(@NonNull RecycleViewHolder holder, int position) {
         final ImageRecycleViewObject item = this.data.get(position);
         if (item.isSelected()){
-            holder.imageView.setImageResource(R.drawable.delete);
+            Drawable cross = context.getResources().getDrawable(R.drawable.cross);
+            holder.imageView.setForeground(cross);
+            holder.imageView.setImageResource(item.getImageId());
             holder.imageView.setOnTouchListener(null);
             holder.imageView.setOnDragListener(null);
         }else {

@@ -228,45 +228,14 @@
                 android:text="請先選擇物件，再搭配顏色"
                 android:textSize="25dp" />
         </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/nextButton"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_below="@+id/userGuildeTab"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="270dp"
-            android:layout_marginTop="300dp"
-            android:layout_toRightOf="@id/imageTab"
-            android:background="@color/white"
-            android:text="Next"
-            android:textColor="@color/red"
-            tools:ignore="NotSibling"/>
-        />
-
-        <Button
-            android:id="@+id/replayButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/nextButton"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="220dp"
-            android:layout_marginTop="5dp"
-            android:background="@color/royal_blue"
-            android:text="Replay"
-            android:textColor="@color/white" />
-        <Button
-            android:id="@+id/escButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:text="ESC"
-            android:layout_toRightOf="@id/replayButton"
-            android:layout_below="@id/nextButton"
-            android:textColor="@color/white"
-            android:background="@color/royal_blue"
+        <include
+            layout="@layout/action_button_group"
             />
+<!--        <include-->
+<!--            layout="@layout/content_main"-->
+<!--            android:layout_width="120dp"-->
+<!--            android:layout_height="120dp"-->
+<!--            android:id="@+id/test"-->
+<!--            />-->
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

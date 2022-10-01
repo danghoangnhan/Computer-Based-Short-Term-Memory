@@ -157,9 +157,13 @@
                     android:layout_height="50dp"
                     android:layout_alignParentBottom="true"
                     android:layout_toLeftOf="@+id/escButton"
-                    android:background="@color/royal_blue"
                     android:text="Replay"
                     android:textColor="@color/white"
+                    android:drawableEnd="@drawable/replay"
+                    android:paddingLeft="15dip"
+                    android:paddingRight="5dp"
+                    android:background="@drawable/custome_button1"
+
                     />
 
                 <Button
@@ -171,7 +175,11 @@
                     android:layout_marginLeft="5dp"
                     android:text="ESC"
                     android:textColor="@color/white"
-                    android:background="@color/royal_blue"
+                    android:paddingLeft="15dip"
+                    android:paddingRight="5dp"
+                    android:background="@drawable/custome_button1"
+                    android:drawableRight="@drawable/exit"
+                    android:drawablePadding="2dip"
                     />
             </RelativeLayout>
         </RelativeLayout>

@@ -1,7 +1,10 @@
 package com.example.memorygame.Activity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +13,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +25,6 @@ import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
-import com.example.memorygame.Listener.ClickListener.BoardClickListener;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.Object.ImageRecycleViewObject;
@@ -36,6 +39,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class MatchColorActivity extends AppCompatActivity implements
@@ -209,5 +214,21 @@ public class MatchColorActivity extends AppCompatActivity implements
         target.setSelected(false);
         this.colorList.set(filterIndex,target);
         this.corlorListAdapter.notifyItemChanged(filterIndex);
+    }
+    public  void test(CircleImageView imageView){
+        Drawable background = imageView.getBackground();
+        if (background instanceof ShapeDrawable) {
+            // cast to 'ShapeDrawable'
+            ShapeDrawable shapeDrawable = (ShapeDrawable) background;
+            shapeDrawable.getPaint().setColor(ContextCompat.getColor(this,R.color.black));
+        } else if (background instanceof GradientDrawable) {
+            // cast to 'GradientDrawable'
+            GradientDrawable gradientDrawable = (GradientDrawable) background;
+            gradientDrawable.setColor(ContextCompat.getColor(this,R.color.white));
+        } else if (background instanceof ColorDrawable) {
+            // alpha value may need to be set again after this call
+            ColorDrawable colorDrawable = (ColorDrawable) background;
+            colorDrawable.setColor(ContextCompat.getColor(this,R.color.green));
+        }
     }
 }
