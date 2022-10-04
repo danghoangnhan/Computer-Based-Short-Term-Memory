@@ -7,14 +7,12 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
-import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.Listener.ClickListener.BoardClickListener;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
-import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
@@ -23,12 +21,10 @@ import java.util.List;
 public class BoardDragListener implements View.OnDragListener {
 
     private final ImageRecycleVIewCallBack ImageListener;
-    private final CorlorRecycleViewCallBack CorlorListener;
     private  BoardClickListener boardClickListener ;
-    public BoardDragListener(ImageRecycleVIewCallBack imageListener, CorlorRecycleViewCallBack corlorListener) {
+    public BoardDragListener(ImageRecycleVIewCallBack imageListener) {
         this.ImageListener = imageListener;
-        this.CorlorListener = corlorListener;
-        boardClickListener =  new BoardClickListener(this.ImageListener,this.CorlorListener);
+        boardClickListener =  new BoardClickListener(this.ImageListener);
     }
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @SuppressLint({"NotifyDataSetChanged", "ResourceType"})
@@ -77,7 +73,6 @@ public class BoardDragListener implements View.OnDragListener {
                         object.setColor(selectCorlorObject.getCorlorId());
                         globalObject.setSelectedButtonList((ArrayList<MatchingObject>) selectedList);
                         boardClickListener.setCorlorRecycleViewObject(selectCorlorObject);
-                        this.CorlorListener.HandleSelected(selectCorlorObject);
                         globalObject.setTmpCorlorObject(null);
                     }
                     destination.setOnClickListener(boardClickListener);

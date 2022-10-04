@@ -18,34 +18,10 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/cornflower_blue"
         >
-        <androidx.cardview.widget.CardView
-            android:id="@+id/recyCard"
-            app:layout_constraintBottom_toTopOf="@+id/imageTab"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="450dp"
-            android:layout_height="150dp"
-            android:layout_marginBottom="352dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="50dp"
-            >
-            <androidx.recyclerview.widget.RecyclerView
-                android:background="@color/ghost_white"
-                android:orientation="vertical"
-
-                android:id="@+id/recycleview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="horizontal"
-                app:layout_constraintHorizontal_bias="0.037"
-                tools:ignore="MissingConstraints"
-
-                />
-        </androidx.cardview.widget.CardView>
         <include
             layout="@layout/board_button"
             android:id="@+id/imageCard"
             />
-
         <androidx.cardview.widget.CardView
             android:layout_width="269dp"
             android:layout_height="208dp"

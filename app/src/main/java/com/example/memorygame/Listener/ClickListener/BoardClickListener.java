@@ -4,12 +4,9 @@ import android.view.View;
 
 import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
-import com.example.memorygame.Listener.DragListener.CorlorDragListener;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.Object.ImageRecycleViewObject;
-import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
-import com.example.memorygame.RecycleView.CorlorListInterface;
 import com.google.android.material.imageview.ShapeableImageView;
 
 public class BoardClickListener implements View.OnClickListener{
@@ -20,9 +17,8 @@ public class BoardClickListener implements View.OnClickListener{
     private CorlorRecycleViewCallBack corlorRecycleViewCallBack;
 
 
-    public BoardClickListener(ImageRecycleVIewCallBack imageListener, CorlorRecycleViewCallBack corlorListener) {
+    public BoardClickListener(ImageRecycleVIewCallBack imageListener) {
         this.ImageListener = imageListener;
-        this.corlorRecycleViewCallBack = corlorListener;
     }
 
     @Override

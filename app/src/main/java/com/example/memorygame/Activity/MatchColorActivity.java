@@ -1,10 +1,6 @@
 package com.example.memorygame.Activity;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -13,50 +9,39 @@ import android.widget.ImageView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.memorygame.Adapter.CorlorListAdapter;
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.ButtonList;
 import com.example.memorygame.CallBack.BoardButtonCallBack;
-import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
-import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
-import com.example.memorygame.RecycleView.CorlorListInterface;
 import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class MatchColorActivity extends AppCompatActivity implements
         HandleStageButton,
         RecycleViewInterface,
-        CorlorListInterface,
         BoardButtonCallBack,
-        CorlorRecycleViewCallBack,
         ImageRecycleVIewCallBack {
 
     private ArrayList<ImageRecycleViewObject> selectedImage;
-    private List<CorlorRecycleViewObject>  colorList;
     private ArrayList<MatchingObject> objectList;
-    private RecyclerView recyclerView,corlorRecycleView;
+    private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
-    private CorlorListAdapter corlorListAdapter;
     private Button nextButton,escButton,replayButton;
     private ImageRecycleViewObject tmpClickedImage;
     private GlobalObject globalObject;
@@ -71,7 +56,6 @@ public class MatchColorActivity extends AppCompatActivity implements
         Intent receiverIntent = getIntent();
         this.selectedImage = receiverIntent.getParcelableArrayListExtra("selectedImages");
         initialRecyleView();
-        initCorlorViews();
         this.globalObject = GlobalObject.getInstance();
         this.selectedButtonList = this.globalObject.getSelectedButtonList();
         this.objectList = this.generatingMatchingObject(3);
@@ -87,13 +71,15 @@ public class MatchColorActivity extends AppCompatActivity implements
     public ArrayList<MatchingObject> generatingMatchingObject(Integer NumberPerrow){
         AtomicReference<Integer> currentRow = new AtomicReference<>(0);
         AtomicReference<Integer> currentColumn= new AtomicReference<>(0);
+        Iterator<Integer> corlorListIterator =  ButtonList.getInstance().getSuffleCorlorList().iterator();
         ArrayList<MatchingObject> matchingObjects = (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
             MatchingObject currentObject = new MatchingObject();
-            Drawable defaultColor = getDrawable(R.color.white);
+            Integer nextCorlor = corlorListIterator.next();
             ShapeableImageView button = findViewById(elementId);
-            button.setBackground(defaultColor);
-            currentObject.setColor(R.color.white);
-            button.setOnDragListener( new BoardDragListener(this,this));
+            button.setImageResource(nextCorlor);
+            button.setStrokeColorResource(nextCorlor);
+            currentObject.setColor(nextCorlor);
+            button.setOnDragListener( new BoardDragListener(this));
             currentObject.setViewId(button.getId());
             currentObject.setColumn(currentColumn.get());
             currentObject.setRow(currentRow.get());
@@ -137,25 +123,6 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.tmpView = view;
         this.globalObject.setTmpClickedImage(this.tmpClickedImage);
     }
-
-    @Override
-    public void onCorlorItemClick(View view,int Position) {
-        this.globalObject.setTmpCorlorObject(this.colorList.get(Position));
-    }
-
-    private  void initCorlorViews(){
-        this.colorList = ButtonList.getInstance().getCorlorCodeList().stream().map(colorCode->{
-            CorlorRecycleViewObject newCorlorObject = new CorlorRecycleViewObject();
-            newCorlorObject.setCorlorId(colorCode);
-            return newCorlorObject;
-        }).collect(Collectors.toList());
-        this.corlorRecycleView= findViewById(R.id.button_recycleview);
-        this.corlorListAdapter= new CorlorListAdapter(this,this.colorList,this);
-        this.corlorRecycleView.setLayoutManager(new LinearLayoutManager(MatchColorActivity.this,LinearLayoutManager.VERTICAL,false));
-        this.corlorRecycleView.setAdapter(this.corlorListAdapter);
-    }
-
-
     @Override
     public void handleImageRecycleView(Integer ViewID) {
         ImageView view = findViewById(ViewID);
@@ -191,44 +158,4 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.recyclerViewAdapter.notifyItemChanged(filterIndex);
     }
 
-    @Override
-    public void HandleSelected(CorlorRecycleViewObject target) {
-        Integer filterIndex = IntStream.range(0,this.colorList.size())
-                .filter(i->this.colorList.get(i).getCorlorId()==target.getCorlorId())
-                .findFirst()
-                .orElseGet(null);
-
-        target.setSelected(true);
-        this.colorList.set(filterIndex,target);
-        this.corlorListAdapter.notifyItemChanged(filterIndex);
-
-    }
-
-    @Override
-    public void HandleUnSelected(CorlorRecycleViewObject target) {
-        Integer filterIndex = IntStream.range(0,this.colorList.size())
-                .filter(i->this.colorList.get(i).getCorlorId()==target.getCorlorId())
-                .findFirst()
-                .orElseGet(null);
-
-        target.setSelected(false);
-        this.colorList.set(filterIndex,target);
-        this.corlorListAdapter.notifyItemChanged(filterIndex);
-    }
-    public  void test(CircleImageView imageView){
-        Drawable background = imageView.getBackground();
-        if (background instanceof ShapeDrawable) {
-            // cast to 'ShapeDrawable'
-            ShapeDrawable shapeDrawable = (ShapeDrawable) background;
-            shapeDrawable.getPaint().setColor(ContextCompat.getColor(this,R.color.black));
-        } else if (background instanceof GradientDrawable) {
-            // cast to 'GradientDrawable'
-            GradientDrawable gradientDrawable = (GradientDrawable) background;
-            gradientDrawable.setColor(ContextCompat.getColor(this,R.color.white));
-        } else if (background instanceof ColorDrawable) {
-            // alpha value may need to be set again after this call
-            ColorDrawable colorDrawable = (ColorDrawable) background;
-            colorDrawable.setColor(ContextCompat.getColor(this,R.color.green));
-        }
-    }
 }

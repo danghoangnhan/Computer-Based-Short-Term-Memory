@@ -6,6 +6,7 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -36,7 +37,8 @@ public class ButtonList {
             R.color._light_green,
             R.color.blue,
             R.color.red,
-            R.color.yellow
+            R.color.yellow,
+            R.color.dark_magenta
     );
     private final List<Integer> iconTest = Arrays.asList(
             R.drawable.fox,
@@ -69,9 +71,7 @@ public class ButtonList {
         return buttonIdList.get(randomIndex);
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public List<Integer> randomColorList(Integer listSize){
-        return IntStream.range(1,listSize).mapToObj(i->randomColor()).collect(Collectors.toList());
-    }
+    public List<Integer> randomColorList(Integer listSize){return IntStream.range(1,listSize).mapToObj(i->randomColor()).collect(Collectors.toList());}
     public Integer randomColor(){
         Random random = new Random();
         return Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
@@ -87,6 +87,10 @@ public class ButtonList {
     public Integer getRandomImageResource(){
         int randomIndex = this.rand.nextInt(this.imageList.size());
         return this.imageList.get(randomIndex);
+    }
+    public List<Integer> getSuffleCorlorList(){
+        Collections.shuffle(this.CorlorList);
+        return this.CorlorList;
     }
 
     public List<Integer> getIconTest() {
