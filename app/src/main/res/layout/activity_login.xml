@@ -32,7 +32,8 @@
             android:layout_marginTop="250dp"
             android:text="記憶力訓練小遊戲"
             android:textColor="@color/blue"
-            android:textSize="50dp" />
+            android:textSize="50dp"
+            />
 
         <Button
             android:id="@+id/button"
@@ -47,5 +48,51 @@
             android:background="@drawable/custome_button2"
             >
         </Button>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="500dp"
+            android:text="設計者："
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="500dp"
+            android:text="輔大資訊工程研究所"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="580dp"
+            android:text="輔大臨床心理研究所"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginLeft="650dp"
+            android:layout_marginTop="500dp"
+            android:text="徐嘉連，杜弘仁"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginLeft="650dp"
+            android:layout_marginTop="580dp"
+            android:text="葉在庭, XXX, XXX"
+            android:textColor="@color/black"
+            android:textSize="35dp"
+            />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,16 +1,15 @@
 package com.example.memorygame.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.memorygame.Adapter.CorlorListAdapter;
-import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.ButtonList;
 import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.GlobalObject;
@@ -23,7 +22,6 @@ import com.example.memorygame.RecycleView.CorlorListInterface;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -59,7 +57,8 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
             MatchingObject filter = this.objectList.stream()
                     .filter(currentElement->currentElement.getRow()==element.getRow())
                     .filter(currentElement->currentElement.getColumn()==element.getColumn())
-                    .findAny().orElse(null);
+                    .findFirst().orElse(null);
+
             ShapeableImageView filterImage = findViewById(filter.getViewId());
             filterImage.setImageResource(element.getImage());
         });
@@ -87,14 +86,9 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     public ArrayList<MatchingObject> generatingMatchingObject(Integer NumberPerrow){
         AtomicReference<Integer> currentRow = new AtomicReference<>(0);
         AtomicReference<Integer> currentColumn= new AtomicReference<>(0);
-        Iterator<Integer> corlorListIterator =  ButtonList.getInstance().getSuffleCorlorList().iterator();
         ArrayList<MatchingObject> matchingObjects = (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
             MatchingObject currentObject = new MatchingObject();
-            Integer nextCorlor = corlorListIterator.next();
             ShapeableImageView button = findViewById(elementId);
-            button.setImageResource(R.color.white);
-            button.setStrokeColorResource(R.color.white);
-            currentObject.setColor(R.color.white);
             button.setOnDragListener( new BoardDragListener(this));
             currentObject.setViewId(button.getId());
             currentObject.setColumn(currentColumn.get());

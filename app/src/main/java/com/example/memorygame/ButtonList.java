@@ -33,11 +33,11 @@ public class ButtonList {
             R.color.black,
             R.color.orange,
             R.color.green,
-            R.color.brown,
+            R.color.red,
+            R.color.saddle_brown,
             R.color.gray,
             R.color.blue,
-            R.color.pink,
-            R.color.black,
+            R.color.hot_pink,
             R.color.yellow
     );
     private final List<Integer> iconTest = Arrays.asList(

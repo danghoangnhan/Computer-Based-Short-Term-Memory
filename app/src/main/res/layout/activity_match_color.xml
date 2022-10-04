@@ -67,10 +67,16 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="50dp"
-                    android:text="請先選擇物件，再搭配顏色"
+                    android:text="請 把物件 放在 有 顏色 的 圓圈 內"
                     android:textSize="25dp" />
             </androidx.cardview.widget.CardView>
 
-            <include layout="@layout/action_button_group" />
+            <include
+                layout="@layout/action_button_group"
+                android:layout_marginLeft="800dp"
+                android:layout_marginTop="420dp"
+                android:layout_width="269dp"
+                android:layout_height="208dp"
+                />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,19 +1,18 @@
 package com.example.memorygame.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.ButtonList;
 import com.example.memorygame.CallBack.ButtonImageCall;
-import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
@@ -24,7 +23,6 @@ import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -110,10 +108,6 @@ public class PredictActivity2 extends AppCompatActivity implements
         target.setSelected(true);
         this.selectedImage.set(filterIndex,target);
         this.recyclerViewAdapter.notifyItemChanged(filterIndex);
-        MatchingObject newObject = new MatchingObject(target);
-        newObject.setRow(filterIndex/3);
-        newObject.setColumn(filterIndex%3);
-        this.selectedObject.add(newObject);
     }
     public ArrayList<MatchingObject> generatingMatchingObject(Integer NumberPerrow){
         AtomicReference<Integer> currentRow = new AtomicReference<>(0);
@@ -154,6 +148,7 @@ public class PredictActivity2 extends AppCompatActivity implements
     @Override
     public void HandleSelected(ImageRecycleViewObject image, MatchingObject matchingObject) {
         HandleSelected(image);
+        this.selectedObject.add(matchingObject);
     }
 
     @Override

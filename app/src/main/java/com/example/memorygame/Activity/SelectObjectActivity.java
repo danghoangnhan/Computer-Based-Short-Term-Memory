@@ -40,6 +40,7 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
         this.replayButton = findViewById(R.id.replayButton);
         this.selectedImage = new ArrayList<>();
         this.initialImageTab();
+
         this.nextButton.setOnClickListener(this::handleNextButton);
         this.escButton.setOnClickListener(this::handleEscButton);
         this.replayButton.setOnClickListener(this::handleReplayButton);
