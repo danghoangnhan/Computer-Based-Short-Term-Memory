@@ -17,6 +17,7 @@ public class MatchingObject implements Parcelable {
             return this.row.compareTo(anotherObject.getRow())==0;
     }
     public boolean sameObject(MatchingObject anotherObject){
+        if (this.image==null||anotherObject.getImage()==null)return false;
         Integer RESULT = this.image.compareTo(anotherObject.getImage());
         return RESULT==0;
     }
@@ -55,6 +56,9 @@ public class MatchingObject implements Parcelable {
 
     public MatchingObject() {
 
+    }
+    public MatchingObject(ImageRecycleViewObject another){
+        this.setImage(another.getImageId());
     }
 
 

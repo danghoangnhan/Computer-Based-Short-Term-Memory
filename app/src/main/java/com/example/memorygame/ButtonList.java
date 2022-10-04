@@ -31,14 +31,14 @@ public class ButtonList {
     R.id.button9);
     private final List<Integer> CorlorList = Arrays.asList(
             R.color.black,
-            R.color.aqua,
-            R.color.fuchsia,
-            R.color.dark_magenta,
-            R.color._light_green,
+            R.color.orange,
+            R.color.green,
+            R.color.brown,
+            R.color.gray,
             R.color.blue,
-            R.color.red,
-            R.color.yellow,
-            R.color.dark_magenta
+            R.color.pink,
+            R.color.black,
+            R.color.yellow
     );
     private final List<Integer> iconTest = Arrays.asList(
             R.drawable.fox,

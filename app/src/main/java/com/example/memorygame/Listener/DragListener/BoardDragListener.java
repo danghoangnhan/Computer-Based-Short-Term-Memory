@@ -7,6 +7,8 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.memorygame.CallBack.ButtonImageCall;
+import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.Listener.ClickListener.BoardClickListener;
@@ -20,11 +22,22 @@ import java.util.List;
 
 public class BoardDragListener implements View.OnDragListener {
 
-    private final ImageRecycleVIewCallBack ImageListener;
+    private  ImageRecycleVIewCallBack ImageListener;
+    private  CorlorRecycleViewCallBack corlorRecycleViewCallBack;
     private  BoardClickListener boardClickListener ;
+    private ButtonImageCall buttonImageCall;
+
     public BoardDragListener(ImageRecycleVIewCallBack imageListener) {
         this.ImageListener = imageListener;
         boardClickListener =  new BoardClickListener(this.ImageListener);
+    }
+    public BoardDragListener(CorlorRecycleViewCallBack corlorListener) {
+        this.corlorRecycleViewCallBack = corlorListener;
+        boardClickListener =  new BoardClickListener(this.corlorRecycleViewCallBack);
+    }
+    public BoardDragListener(ButtonImageCall buttonImageCall) {
+        this.buttonImageCall = buttonImageCall;
+        boardClickListener =  new BoardClickListener(this.buttonImageCall);
     }
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @SuppressLint({"NotifyDataSetChanged", "ResourceType"})
@@ -34,8 +47,6 @@ public class BoardDragListener implements View.OnDragListener {
             case DragEvent.ACTION_DROP:
                 View parent = (View)v.getParent();
                 if (parent != null) {
-
-
                     GlobalObject globalObject = GlobalObject.getInstance();
                     ShapeableImageView destination = parent.findViewById(v.getId());
                     List<MatchingObject> selectedList = globalObject.getSelectedButtonList();
@@ -56,7 +67,12 @@ public class BoardDragListener implements View.OnDragListener {
                         object.setImage(globalObject.getTmpClickedImage().getImageId());
                         globalObject.setSelectedButtonList((ArrayList<MatchingObject>) selectedList);
                         boardClickListener.setImageRecycleViewObject(targetObject);
-                        this.ImageListener.HandleSelected(targetObject);
+                        if (this.ImageListener!=null){
+                            this.ImageListener.HandleSelected(targetObject);
+                        }
+                        if (this.buttonImageCall!=null){
+                            this.buttonImageCall.HandleSelected(targetObject,object);
+                        }
                         globalObject.setTmpClickedImage(null);
                     }
                     if (globalObject.getTmpCorlorObject()!=null){

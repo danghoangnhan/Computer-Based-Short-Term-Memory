@@ -21,6 +21,10 @@
         <include
             layout="@layout/board_button"
             android:id="@+id/imageCard"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_width="720dp"
+            android:layout_height="410dp"
             />
         <androidx.cardview.widget.CardView
             android:layout_width="269dp"

@@ -8,35 +8,35 @@ import androidx.annotation.RequiresApi;
 
 import java.util.List;
 
-public class Result implements Parcelable {
-    private List<MatchingObject>selected, correct;
+public class Result   {
+    private List<MatchingObject>selected1,selected2,selected3, correct;
 
-    protected Result(Parcel in) {
-        selected = in.createTypedArrayList(MatchingObject.CREATOR);
-        correct = in.createTypedArrayList(MatchingObject.CREATOR);
-    }
-    public Result(List<MatchingObject> selected, List<MatchingObject> correct) {
-        this.selected = selected;
+
+    public Result(List<MatchingObject> correct) {
         this.correct = correct;
+    }
+
+    public Result() {
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public long ObjectValidation(){
-        return this.selected
+        return this.selected1
                 .stream()
                 .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameObject(element)))
                 .count();
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     public long LocationValidation(){
-        return  this.selected
+        return  this.selected2
                 .stream()
                 .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameColum(element)&&checkelement.sameRow(element)))
                 .count();
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     public long ObjectLocationValidation(){
-        return  this.selected
+        return  this.selected2
                 .stream()
                 .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameColum(element)&&checkelement.sameRow(element)))
                 .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameObject(element)))
@@ -44,7 +44,7 @@ public class Result implements Parcelable {
     }
     @RequiresApi(api = Build.VERSION_CODES.N)
     public Long ObjectCorlorLocationValidation(){
-        return  this.selected
+        return  this.selected3
                 .stream()
                 .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameColum(element)&&checkelement.sameRow(element)))
                 .filter(element-> this.correct.stream().anyMatch(checkelement->checkelement.sameObject(element)))
@@ -56,25 +56,21 @@ public class Result implements Parcelable {
         return correct;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public List<MatchingObject> getSelected1() {return selected1;}
+
+    public void setSelected1(List<MatchingObject> selected1) {this.selected1 = selected1;}
+
+    public List<MatchingObject> getSelected2() {return selected2;}
+
+    public void setSelected2(List<MatchingObject> selected2) {
+        this.selected2 = selected2;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeTypedList(selected);
-        parcel.writeTypedList(correct);
-    }
-    public static final Creator<Result> CREATOR = new Creator<Result>() {
-        @Override
-        public Result createFromParcel(Parcel in) {
-            return new Result(in);
-        }
+    public List<MatchingObject> getSelected3() {return selected3;}
 
-        @Override
-        public Result[] newArray(int size) {
-            return new Result[size];
-        }
-    };
+    public void setSelected3(List<MatchingObject> selected3) {this.selected3 = selected3;}
+
+    public void setCorrect(List<MatchingObject> correct) {
+        this.correct = correct;
+    }
 }

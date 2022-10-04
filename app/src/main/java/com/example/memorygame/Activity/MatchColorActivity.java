@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.ButtonList;
 import com.example.memorygame.CallBack.BoardButtonCallBack;
+import com.example.memorygame.CallBack.ButtonImageCall;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
+import com.example.memorygame.Object.Result;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -36,7 +38,7 @@ public class MatchColorActivity extends AppCompatActivity implements
         HandleStageButton,
         RecycleViewInterface,
         BoardButtonCallBack,
-        ImageRecycleVIewCallBack {
+        ButtonImageCall {
 
     private ArrayList<ImageRecycleViewObject> selectedImage;
     private ArrayList<MatchingObject> objectList;
@@ -53,11 +55,10 @@ public class MatchColorActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_color);
         initialButton();
-        Intent receiverIntent = getIntent();
-        this.selectedImage = receiverIntent.getParcelableArrayListExtra("selectedImages");
+        this.selectedImage = getIntent().getParcelableArrayListExtra("selectedImages");
         initialRecyleView();
         this.globalObject = GlobalObject.getInstance();
-        this.selectedButtonList = this.globalObject.getSelectedButtonList();
+        this.selectedButtonList = new ArrayList<>();
         this.objectList = this.generatingMatchingObject(3);
         this.globalObject.setObjectList(this.objectList);
     }
@@ -106,7 +107,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     public void handleNextButton(View view){
         Intent intent = new Intent(this,WaitingActivity.class);
         Bundle args = new Bundle();
-        this.selectedButtonList = this.globalObject.getSelectedButtonList();
+        this.globalObject.getResult().setCorrect(this.selectedButtonList);
         args.putParcelableArrayList("ARRAYLIST", this.selectedButtonList);
         intent.putExtras(args);
         this.startActivity(intent);
@@ -131,7 +132,6 @@ public class MatchColorActivity extends AppCompatActivity implements
         view.setOnClickListener(null);
     }
 
-    @Override
     public void HandleSelected(ImageRecycleViewObject target) {
 
         Integer filterIndex = IntStream.range(0,this.selectedImage
@@ -145,7 +145,6 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.recyclerViewAdapter.notifyItemChanged(filterIndex);
     }
 
-    @Override
     public void HandleUnSelected(ImageRecycleViewObject target) {
         Integer filterIndex = IntStream.range(0,this.selectedImage
                         .size())
@@ -158,4 +157,15 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.recyclerViewAdapter.notifyItemChanged(filterIndex);
     }
 
+    @Override
+    public void HandleSelected(ImageRecycleViewObject image, MatchingObject matchingObject) {
+        HandleSelected(image);
+        this.selectedButtonList.add(matchingObject);
+    }
+
+    @Override
+    public void HandleUnSelected(ImageRecycleViewObject image, MatchingObject matchingObject) {
+        HandleUnSelected(image);
+
+    }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Object.Result;
 import com.example.memorygame.R;
@@ -19,6 +20,7 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
     Button replayButton;
     TextView result1,result2,result3,result4;
     Result result;
+    GlobalObject globalObject;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,8 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
         this.result2 = findViewById(R.id.result2);
         this.result3 = findViewById(R.id.result3);
         this.result4 = findViewById(R.id.result4);
-        Intent intent = getIntent();
-        Bundle args = intent.getBundleExtra("BUNDLE");
-        result = args.getParcelable("result");
-
+        this.globalObject = GlobalObject.getInstance();
+        this.result = globalObject.getResult();
         this.result4.setText(result.ObjectCorlorLocationValidation()+"/"+result.getCorrect().size());
         this.result1.setText(result.ObjectValidation()+"/"+result.getCorrect().size());
         this.result2.setText(result.LocationValidation()+"/"+result.getCorrect().size());

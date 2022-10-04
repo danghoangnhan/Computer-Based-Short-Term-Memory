@@ -66,7 +66,7 @@ public class WaitingActivity extends AppCompatActivity implements HandleStageBut
     public void handleNextButton(View view) {
         myCountDownTimer.cancel();
 
-        Intent intent = new Intent(WaitingActivity.this,PredictActivity.class);
+        Intent intent = new Intent(WaitingActivity.this,PredictActivity1.class);
         Bundle args = new Bundle();
         args.putParcelableArrayList("ARRAYLIST",objectList);
         intent.putExtra("BUNDLE",args);
