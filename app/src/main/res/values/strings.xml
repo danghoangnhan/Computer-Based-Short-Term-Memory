@@ -4,7 +4,7 @@
     <string name="next">NEXT</string>
     <string name="gamename">記憶力訓練小遊戲</string>
     <string name="revision">系統設計開發：</string>
-    <string name="client">葉在庭, XXX, XXX</string>
-    <string name="devteam">杜弘仁， 徐嘉連</string>
+    <string name="client">輔仁大學臨床心理學系/葉在庭,XXX,XXX</string>
+    <string name="devteam">輔仁大學資訊工程學系/杜弘仁,徐嘉連</string>
     <string name="devteamcompany">輔仁大學資訊工程學系</string>
 </resources>

@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:layout_marginLeft="250dp"
+            android:layout_marginLeft="270dp"
             android:layout_marginTop="250dp"
             android:text="@string/gamename"
             android:textColor="@color/blue"
@@ -43,56 +43,45 @@
             android:layout_marginBottom="150dp"
             android:layout_marginTop="350dp"
             android:text="Start"
-            android:textColor="@color/red"
+            android:textColor="@color/crimson"
             android:textSize="40dp"
             android:background="@drawable/custome_button2"
             >
         </Button>
-        <TextView
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="550dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="500dp"
-            android:text="@string/revision"
-            android:textColor="@color/black"
-            android:textSize="35dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="580dp"
-            android:text="@string/devteamcompany"
-            android:textColor="@color/black"
-            android:textSize="35dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="500dp"
-            android:text="輔仁大學臨床心理學系"
-            android:textColor="@color/black"
-            android:textSize="35dp"
-            />
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:text="@string/revision"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_marginLeft="650dp"
-            android:layout_marginTop="580dp"
-            android:text="@string/devteam"
-            android:textColor="@color/black"
-            android:textSize="35dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_marginLeft="650dp"
-            android:layout_marginTop="500dp"
-            android:text="@string/client"
-            android:textColor="@color/black"
-            android:textSize="35dp"
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_marginLeft="150dp"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:text="@string/client"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:layout_marginLeft="150dp"
+                android:layout_marginTop="30dp"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:text="@string/devteam"
+
+                />
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
