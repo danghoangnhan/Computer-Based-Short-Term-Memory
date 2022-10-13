@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class MatchingObject implements Parcelable {
-    private Integer color,row,column,image,viewId,width,height;
+    private Integer initCorlor,color,row,column,image,viewId,width,height;
 
 
 
@@ -27,6 +27,12 @@ public class MatchingObject implements Parcelable {
 
 
     public MatchingObject(Parcel in) {
+        if (in.readByte() == 0) {
+            initCorlor = null;
+        }
+        else {
+            initCorlor = in.readInt();
+        }
         if (in.readByte() == 0) {
             color = null;
         } else {
@@ -118,6 +124,12 @@ public class MatchingObject implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        if (initCorlor == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(initCorlor);
+        }
         if (color == null) {
             parcel.writeByte((byte) 0);
         } else {
@@ -166,5 +178,11 @@ public class MatchingObject implements Parcelable {
         this.viewId = viewId;
     }
 
+    public Integer getInitCorlor() {
+        return initCorlor;
+    }
 
+    public void setInitCorlor(Integer initCorlor) {
+        this.initCorlor = initCorlor;
+    }
 }

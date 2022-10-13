@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.memorygame.Adapter.RecyclerViewAdapter;
 import com.example.memorygame.ButtonList;
 import com.example.memorygame.CallBack.ButtonImageCall;
+import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
@@ -117,7 +118,7 @@ public class PredictActivity2 extends AppCompatActivity implements
             ShapeableImageView button = findViewById(elementId);
             button.setImageResource(R.color.white);
             currentObject.setColor(R.color.white);
-            button.setOnDragListener( new BoardDragListener(this));
+            button.setOnDragListener( new BoardDragListener(this,currentObject));
             currentObject.setViewId(button.getId());
             currentObject.setColumn(currentColumn.get());
             currentObject.setRow(currentRow.get());
@@ -146,13 +147,20 @@ public class PredictActivity2 extends AppCompatActivity implements
     }
 
     @Override
-    public void HandleSelected(ImageRecycleViewObject image, MatchingObject matchingObject) {
+    public void HandleSelected(Integer viewId,ImageRecycleViewObject image, MatchingObject matchingObject) {
         HandleSelected(image);
         this.selectedObject.add(matchingObject);
     }
 
+
     @Override
-    public void HandleUnSelected(ImageRecycleViewObject image, MatchingObject matchingObject) {
+    public void HandleUnSelected(Integer viewId,ImageRecycleViewObject image, MatchingObject matchingObject) {
         HandleUnSelected(image);
+        this.selectedObject = (ArrayList<MatchingObject>) this.selectedObject
+                .stream()
+                .filter(element->element.getImage()!=matchingObject.getImage())
+                .collect(Collectors.toList());
+        ShapeableImageView shapeableImageView = findViewById(viewId);
+        shapeableImageView.setImageResource(matchingObject.getColor());
     }
 }

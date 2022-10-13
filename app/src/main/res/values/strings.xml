@@ -2,9 +2,17 @@
     <string name="app_name">memoryGame</string>
     <string name="replay">Replay</string>
     <string name="next">NEXT</string>
-    <string name="gamename">記憶力訓練小遊戲</string>
-    <string name="revision">系統設計開發：</string>
-    <string name="client">輔仁大學臨床心理學系/葉在庭,XXX,XXX</string>
-    <string name="devteam">輔仁大學資訊工程學系/杜弘仁,徐嘉連</string>
-    <string name="devteamcompany">輔仁大學資訊工程學系</string>
+    <string name="gamename">大腦記憶系統健康檢查</string>
+    <string name="revision">理論開發：</string>
+    <string name="revisionDepartment">輔仁大學臨床心理學系 :</string>
+    <string name="revisionName">葉在庭</string>
+    <string name="develop">系統開發：</string>
+    <string name="developDepartment">輔仁大學資訊工程學系 :</string>
+    <string name="developName">杜弘仁,徐嘉連</string>
+    <string name="researcher">臨床研究 :</string>
+    <string name="researcherDepartment">耕莘醫院神經內科：</string>
+    <string name="researcherName" >陳志豪</string>
+    <string name="deanOfColleage">輔仁大學醫學院院長 :</string>
+    <string name="deanOfColleageName">葉炳強</string>
+    <string name="fjuhospitaldean">葉炳強</string>
 </resources>

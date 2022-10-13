@@ -1,5 +1,6 @@
 package com.example.memorygame.Listener.ClickListener;
 
+import android.media.projection.MediaProjection;
 import android.view.View;
 
 import com.example.memorygame.CallBack.ButtonImageCall;
@@ -7,6 +8,7 @@ import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.Object.ImageRecycleViewObject;
+import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -17,6 +19,8 @@ public class BoardClickListener implements View.OnClickListener{
     private ImageRecycleVIewCallBack ImageListener;
     private CorlorRecycleViewCallBack corlorRecycleViewCallBack;
     private ButtonImageCall buttonImageCall;
+    private ImageRecycleViewObject targetObject;
+    private MatchingObject object;
 
     public BoardClickListener(ImageRecycleVIewCallBack imageListener) {
         this.ImageListener = imageListener;
@@ -33,7 +37,7 @@ public class BoardClickListener implements View.OnClickListener{
         View parent = (View) v.getParent();
         ShapeableImageView buttonView =parent.findViewById(v.getId());
 
-        if (this.imageRecycleViewObject!=null){
+        if (this.ImageListener!=null){
             buttonView.setImageResource(R.color.white);
             if(this.ImageListener!=null){
                 this.ImageListener.HandleUnSelected(this.imageRecycleViewObject);
@@ -42,11 +46,14 @@ public class BoardClickListener implements View.OnClickListener{
             return;
         }
 
-        if (this.corlorRecycleViewObject!=null){
+        if (this.corlorRecycleViewCallBack!=null){
             buttonView.setStrokeColorResource(R.color.white);
             this.corlorRecycleViewCallBack.HandleUnSelected(this.corlorRecycleViewObject);
             this.corlorRecycleViewObject = null;
             return;
+        }
+        if (this.buttonImageCall!=null){
+            this.buttonImageCall.HandleUnSelected(v.getId(),targetObject,object);
         }
     }
 
@@ -58,4 +65,11 @@ public class BoardClickListener implements View.OnClickListener{
         this.corlorRecycleViewObject = corlorRecycleViewObject;
     }
 
+    public void setTargetObject(ImageRecycleViewObject targetObject) {
+        this.targetObject = targetObject;
+    }
+
+    public void setObject(MatchingObject object) {
+        this.object = object;
+    }
 }

@@ -22,10 +22,11 @@ import java.util.List;
 
 public class BoardDragListener implements View.OnDragListener {
 
-    private  ImageRecycleVIewCallBack ImageListener;
-    private  CorlorRecycleViewCallBack corlorRecycleViewCallBack;
-    private  BoardClickListener boardClickListener ;
-    private ButtonImageCall buttonImageCall;
+    private     ImageRecycleVIewCallBack ImageListener;
+    private     CorlorRecycleViewCallBack corlorRecycleViewCallBack;
+    private     BoardClickListener boardClickListener ;
+    private     ButtonImageCall buttonImageCall;
+    private     MatchingObject init;
 
     public BoardDragListener(ImageRecycleVIewCallBack imageListener) {
         this.ImageListener = imageListener;
@@ -35,9 +36,10 @@ public class BoardDragListener implements View.OnDragListener {
         this.corlorRecycleViewCallBack = corlorListener;
         boardClickListener =  new BoardClickListener(this.corlorRecycleViewCallBack);
     }
-    public BoardDragListener(ButtonImageCall buttonImageCall) {
+    public BoardDragListener(ButtonImageCall buttonImageCall,MatchingObject init) {
         this.buttonImageCall = buttonImageCall;
         boardClickListener =  new BoardClickListener(this.buttonImageCall);
+        this.init = init;
     }
     @RequiresApi(api = Build.VERSION_CODES.Q)
     @SuppressLint({"NotifyDataSetChanged", "ResourceType"})
@@ -71,7 +73,9 @@ public class BoardDragListener implements View.OnDragListener {
                             this.ImageListener.HandleSelected(targetObject);
                         }
                         if (this.buttonImageCall!=null){
-                            this.buttonImageCall.HandleSelected(targetObject,object);
+                            this.buttonImageCall.HandleSelected(v.getId(),targetObject,object);
+                            this.boardClickListener.setObject(init);
+                            this.boardClickListener.setTargetObject(targetObject);
                         }
                         globalObject.setTmpClickedImage(null);
                     }

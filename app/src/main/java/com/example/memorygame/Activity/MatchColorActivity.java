@@ -22,12 +22,12 @@ import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
-import com.example.memorygame.Object.Result;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -38,7 +38,8 @@ public class MatchColorActivity extends AppCompatActivity implements
         HandleStageButton,
         RecycleViewInterface,
         BoardButtonCallBack,
-        ButtonImageCall {
+        ButtonImageCall ,
+        ImageRecycleVIewCallBack {
 
     private ArrayList<ImageRecycleViewObject> selectedImage;
     private ArrayList<MatchingObject> objectList;
@@ -49,6 +50,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     private GlobalObject globalObject;
     private ArrayList<MatchingObject> selectedButtonList;
     private View tmpView;
+    HashMap<MatchingObject,ShapeableImageView> selected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +63,7 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.selectedButtonList = new ArrayList<>();
         this.objectList = this.generatingMatchingObject(3);
         this.globalObject.setObjectList(this.objectList);
+
     }
     public  void initialRecyleView(){
         this.recyclerView = findViewById(R.id.recycleview);
@@ -80,7 +83,8 @@ public class MatchColorActivity extends AppCompatActivity implements
             button.setImageResource(nextCorlor);
             button.setStrokeColorResource(nextCorlor);
             currentObject.setColor(nextCorlor);
-            button.setOnDragListener( new BoardDragListener(this));
+            currentObject.setInitCorlor(nextCorlor);
+            button.setOnDragListener( new BoardDragListener(this,currentObject));
             currentObject.setViewId(button.getId());
             currentObject.setColumn(currentColumn.get());
             currentObject.setRow(currentRow.get());
@@ -132,40 +136,49 @@ public class MatchColorActivity extends AppCompatActivity implements
         view.setOnClickListener(null);
     }
 
+    @Override
     public void HandleSelected(ImageRecycleViewObject target) {
 
         Integer filterIndex = IntStream.range(0,this.selectedImage
                 .size())
                 .filter(i->this.selectedImage.get(i).getImageId()==target.getImageId())
+                .filter(i->this.selectedImage.get(i).isSelected()==false)
                 .findFirst()
                 .orElseGet(null);
+        if (filterIndex!=null){
+            target.setSelected(true);
+            this.selectedImage.set(filterIndex,target);
+            this.recyclerViewAdapter.notifyItemChanged(filterIndex);
+        }
 
-        target.setSelected(true);
-        this.selectedImage.set(filterIndex,target);
-        this.recyclerViewAdapter.notifyItemChanged(filterIndex);
     }
 
+    @Override
     public void HandleUnSelected(ImageRecycleViewObject target) {
         Integer filterIndex = IntStream.range(0,this.selectedImage
                         .size())
                 .filter(i->this.selectedImage.get(i).getImageId()==target.getImageId())
+                .filter(i->this.selectedImage.get(i).isSelected()==true)
                 .findFirst()
                 .orElseGet(null);
-
-        target.setSelected(false);
-        this.selectedImage.set(filterIndex,target);
-        this.recyclerViewAdapter.notifyItemChanged(filterIndex);
+        if (filterIndex!=null){
+            target.setSelected(false);
+            this.selectedImage.set(filterIndex,target);
+            this.recyclerViewAdapter.notifyItemChanged(filterIndex);
+        }
     }
 
     @Override
-    public void HandleSelected(ImageRecycleViewObject image, MatchingObject matchingObject) {
+    public void HandleSelected(Integer viewId,ImageRecycleViewObject image, MatchingObject matchingObject) {
         HandleSelected(image);
         this.selectedButtonList.add(matchingObject);
     }
 
     @Override
-    public void HandleUnSelected(ImageRecycleViewObject image, MatchingObject matchingObject) {
+    public void HandleUnSelected(Integer viewId,ImageRecycleViewObject image, MatchingObject matchingObject) {
         HandleUnSelected(image);
-
+        ShapeableImageView shapeableImageView = findViewById(viewId);
+        shapeableImageView.setImageResource(matchingObject.getColor());
+        this.selectedButtonList.remove(matchingObject);
     }
 }

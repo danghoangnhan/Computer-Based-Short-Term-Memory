@@ -59,6 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecycleViewHolder>
             holder.imageView.setOnDragListener(null);
         }else {
             holder.imageView.setImageResource(item.getImageId());
+            holder.imageView.setForeground(null);
             holder.imageView.setOnTouchListener(this);
             holder.imageView.setOnDragListener(new MyDragListener(this.recycleViewInterface,this.getListItem(position)));
         }
