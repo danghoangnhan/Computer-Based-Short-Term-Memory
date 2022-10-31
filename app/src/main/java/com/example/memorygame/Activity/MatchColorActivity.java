@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,12 +110,16 @@ public class MatchColorActivity extends AppCompatActivity implements
     }
     @Override
     public void handleNextButton(View view){
-        Intent intent = new Intent(this,WaitingActivity.class);
-        Bundle args = new Bundle();
-        this.globalObject.getResult().setCorrect(this.selectedButtonList);
-        args.putParcelableArrayList("ARRAYLIST", this.selectedButtonList);
-        intent.putExtras(args);
-        this.startActivity(intent);
+        if(this.selectedImage.stream().filter(ImageRecycleViewObject::isSelected).count()>0){
+            Intent intent = new Intent(this,WaitingActivity.class);
+            Bundle args = new Bundle();
+            this.globalObject.getResult().setCorrect(this.selectedButtonList);
+            args.putParcelableArrayList("ARRAYLIST", this.selectedButtonList);
+            intent.putExtras(args);
+            this.startActivity(intent);
+        }else{
+            Toast.makeText(getApplicationContext(),"尚未配對顏色", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

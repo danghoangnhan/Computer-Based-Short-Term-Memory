@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
+import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.CorlorListInterface;
@@ -47,7 +49,7 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predict3);
         this.globalObject = GlobalObject.getInstance();
-        this.selectedButtonList = (ArrayList<MatchingObject>) this.globalObject.getResult().getSelected2();
+        this.selectedButtonList = new ArrayList<>(this.globalObject.getResult().getSelected2());
         this.objectList = this.generatingMatchingObject(3);
         this.globalObject.setObjectList((ArrayList<MatchingObject>) this.objectList);
         initialButton();
@@ -61,6 +63,9 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
 
             ShapeableImageView filterImage = findViewById(filter.getViewId());
             filterImage.setImageResource(element.getImage());
+            filter.setInitCorlor(R.color.white);
+            filterImage.setStrokeColorResource(R.color.white);
+
         });
     }
     public void initialButton(){
@@ -110,8 +115,15 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     public void handleEscButton(View view) {this.startActivity(new Intent(this,LoginActivity.class));}
     @Override
     public void handleNextButton(View view) {
-        this.startActivity(new Intent(this,ResultActivity.class));
-        this.globalObject.getResult().setSelected3(this.objectList);
+        Long test = this.selectedButtonList.stream().filter(element->element.getInitCorlor()!=element.getColor()).count();
+        if(this.selectedButtonList.stream().filter(element->element.getInitCorlor()!=element.getColor()).count()>0){
+            this.startActivity(new Intent(this,ResultActivity.class));
+            this.globalObject.getResult().setSelected3(this.objectList);
+        }else{
+            Toast.makeText(getApplicationContext(),"尚未配對顏色", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
     @Override

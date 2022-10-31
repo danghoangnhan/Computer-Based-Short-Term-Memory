@@ -74,7 +74,7 @@ public class BoardDragListener implements View.OnDragListener {
                         }
                         if (this.buttonImageCall!=null){
                             this.buttonImageCall.HandleSelected(v.getId(),targetObject,object);
-                            this.boardClickListener.setObject(init);
+                            this.boardClickListener.setObject(object);
                             this.boardClickListener.setTargetObject(targetObject);
                         }
                         globalObject.setTmpClickedImage(null);

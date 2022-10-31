@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.memorygame.ButtonList;
 import com.example.memorygame.GlobalObject;
@@ -30,18 +31,16 @@ public class PredictActivity1 extends AppCompatActivity implements HandleStageBu
     private List<ImageRecycleViewObject> selectedImage;
     private List<Integer> images;
     private List<ShapeableImageView>buttons;
-    private GlobalObject globalObject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predict1);
         this.images = ButtonList.getInstance().getImageList();
-        this.buttons = Arrays.asList(findViewById(R.id.button1), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4), findViewById(R.id.button5), findViewById(R.id.button6), findViewById(R.id.button7), findViewById(R.id.button8), findViewById(R.id.button9));
+        this.buttons = ButtonList.getInstance().getBoardButtonList().stream().map(element->{ShapeableImageView view = findViewById(element);return view;}).collect(Collectors.toList());
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);
         this.replayButton = findViewById(R.id.replayButton);
         this.selectedImage = new ArrayList<>();
-        this.globalObject = GlobalObject.getInstance();
         this.initialImageTab();
         initialButton();
     }
@@ -73,7 +72,12 @@ public class PredictActivity1 extends AppCompatActivity implements HandleStageBu
     }
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public void selectedClick(Integer image, ShapeableImageView button){
-        if (this.selectedImage.stream().noneMatch(element->element.getImageId()==image)){
+        ImageRecycleViewObject selectObject  = this.selectedImage
+                .stream()
+                .filter(element->element.getImageId()==image)
+                .findFirst()
+                .orElse(null);
+        if (selectObject==null){
             button.setImageResource(image);
             button.setStrokeColorResource(R.color.yellow);
             ImageRecycleViewObject newObject = new ImageRecycleViewObject();
@@ -84,19 +88,7 @@ public class PredictActivity1 extends AppCompatActivity implements HandleStageBu
             button.setForeground(null);
             button.setImageResource(image);
             button.setStrokeColorResource(R.color.white);
-            Integer index = IntStream.range(0,this.selectedImage.size())
-                    .filter(i->this.selectedImage.get(i).getImageId()==image)
-                    .findFirst()
-                    .orElseGet(null);
-            ImageRecycleViewObject selectObject  = this.selectedImage
-                    .stream()
-                    .filter(element->element.getImageId()==image)
-                    .findFirst()
-                    .get();
-            if (index!=null){
-                this.selectedImage.remove(selectObject);
-                button.setImageResource(image);
-            }
+            this.selectedImage.remove(selectObject);
         }
     }
 
@@ -106,11 +98,15 @@ public class PredictActivity1 extends AppCompatActivity implements HandleStageBu
     public void handleEscButton(View view) {this.startActivity(new Intent(this,LoginActivity.class));}
     @Override
     public void handleNextButton(View view) {
-        Intent intent = new Intent(this,PredictActivity2.class);
-        intent.putParcelableArrayListExtra("selectedImages", (ArrayList<ImageRecycleViewObject>) this.selectedImage);
-        Result result = this.globalObject.getResult();
-        result.setSelected1(this.selectedImage.stream().map(MatchingObject::new).collect(Collectors.toList()));
-        this.startActivity(intent);
-        startActivity(intent);
+        if(this.selectedImage.size()>0){
+            Intent intent = new Intent(this,PredictActivity2.class);
+            intent.putParcelableArrayListExtra("selectedImages", (ArrayList<ImageRecycleViewObject>) this.selectedImage);
+            GlobalObject.getInstance().getResult().setSelected1(this.selectedImage.stream().map(MatchingObject::new).collect(Collectors.toList()));
+            this.startActivity(intent);
+            startActivity(intent);
+        }else{
+            Toast.makeText(getApplicationContext(),"尚未選擇物件", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

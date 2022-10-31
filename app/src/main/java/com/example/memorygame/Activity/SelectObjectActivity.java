@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +35,7 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_object);
         this.images = ButtonList.getInstance().getImageList();
-        this.buttons = Arrays.asList(findViewById(R.id.button1), findViewById(R.id.button2), findViewById(R.id.button3), findViewById(R.id.button4), findViewById(R.id.button5), findViewById(R.id.button6), findViewById(R.id.button7), findViewById(R.id.button8), findViewById(R.id.button9));
+        this.buttons = ButtonList.getInstance().getBoardButtonList().stream().map(element->{ShapeableImageView view = findViewById(element);return view;}).collect(Collectors.toList());
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);
         this.replayButton = findViewById(R.id.replayButton);
@@ -91,9 +92,13 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
 
     @Override
     public void handleNextButton(View view) {
-        Intent intent = new Intent(this,MatchColorActivity.class);
-        intent.putParcelableArrayListExtra("selectedImages", (ArrayList<ImageRecycleViewObject>) this.selectedImage);
-        startActivity(intent);
+        if(this.selectedImage.size()>0){
+            Intent intent = new Intent(this,MatchColorActivity.class);
+            intent.putParcelableArrayListExtra("selectedImages", (ArrayList<ImageRecycleViewObject>) this.selectedImage);
+            startActivity(intent);
+        }else{
+            Toast.makeText(getApplicationContext(),"尚未選擇物件", Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     public void handleReplayButton(View view) {startActivity(new Intent(this,SelectObjectActivity.class));}

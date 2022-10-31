@@ -5,6 +5,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -61,10 +62,26 @@ public class ButtonList {
              R.drawable.hat
     );
 
+    private final List<Integer> BoardButtonList = Arrays.asList(
+            R.id.button1,
+            R.id.button2,
+            R.id.button3,
+            R.id.button4,
+            R.id.button5,
+            R.id.button6,
+            R.id.button7,
+            R.id.button8,
+            R.id.button9
+    );
+
+
+
     private static Random rand = new Random();
 
     public  List<Integer> getButtonBoard(){return buttonIdList;}
-    public  List<Integer> getCorlorCodeList(){return CorlorList;}
+    public  List<Integer> getCorlorCodeList(){
+        return CorlorList;
+    }
 
     public Integer getRandomDrawable(){
         int randomIndex = this.rand.nextInt(buttonIdList.size());
@@ -89,15 +106,16 @@ public class ButtonList {
         return this.imageList.get(randomIndex);
     }
     public List<Integer> getSuffleCorlorList(){
-        Collections.shuffle(this.CorlorList);
+        List<Integer>randomColorList = new ArrayList<>(this.CorlorList);
+        Collections.shuffle(randomColorList);
         return this.CorlorList;
-    }
-
-    public List<Integer> getIconTest() {
-        return iconTest;
     }
 
     public List<Integer> getImageList() {
         return imageList;
+    }
+
+    public List<Integer> getBoardButtonList() {
+        return BoardButtonList;
     }
 }

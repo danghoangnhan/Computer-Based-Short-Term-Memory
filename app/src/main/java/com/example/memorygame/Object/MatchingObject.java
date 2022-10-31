@@ -10,18 +10,19 @@ public class MatchingObject implements Parcelable {
 
 
 
-    public boolean sameColum(MatchingObject anotherObject){
+    public static boolean sameColum(MatchingObject anotherObject){
             return this.column.compareTo(anotherObject.getColumn())==0;
     };
-    public boolean sameRow(MatchingObject anotherObject){
+    public static boolean sameRow(MatchingObject anotherObject){
             return this.row.compareTo(anotherObject.getRow())==0;
     }
-    public boolean sameObject(MatchingObject anotherObject){
+    public static boolean sameObject(MatchingObject anotherObject){
         if (this.image==null||anotherObject.getImage()==null)return false;
-        Integer RESULT = this.image.compareTo(anotherObject.getImage());
-        return RESULT==0;
+        int RESULT = this.image.compareTo(anotherObject.getImage());
+        boolean test = RESULT==0;
+        return RESULT == 0;
     }
-    public boolean sameCorlor(MatchingObject element) {
+    public static boolean sameCorlor(MatchingObject element) {
         return this.color.compareTo(element.getColor())==0;
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
+import com.example.memorygame.Object.Result;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -78,10 +80,14 @@ public class PredictActivity2 extends AppCompatActivity implements
     public void handleEscButton(View view) {this.startActivity(new Intent(this,LoginActivity.class));}
     @Override
     public void handleNextButton(View view) {
-        Intent intent = new Intent(this,PredictActivity3.class);
-        intent.putParcelableArrayListExtra("selectedImages", (ArrayList<MatchingObject>) this.selectedObject);
-        this.globalObject.getResult().setSelected2(this.selectedObject);
-        startActivity(intent);
+        if(this.selectedObject.size()>0){
+            Intent intent = new Intent(this,PredictActivity3.class);
+            intent.putParcelableArrayListExtra("selectedImages", (ArrayList<MatchingObject>) this.selectedObject);
+            this.globalObject.getResult().setSelected2(this.selectedObject);
+            startActivity(intent);
+        }else{
+            Toast.makeText(getApplicationContext(),"尚未選擇物件", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -89,13 +95,6 @@ public class PredictActivity2 extends AppCompatActivity implements
         this.tmpClickedImage = this.selectedImage.get(Position);
         this.tmpView = view;
         this.globalObject.setTmpClickedImage(this.tmpClickedImage);
-    }
-
-    public void handleImageRecycleView(Integer ViewID) {
-        ImageView view = findViewById(ViewID);
-        view.setImageResource(R.drawable.delete);
-        view.setOnDragListener(null);
-        view.setOnClickListener(null);
     }
 
     public void HandleSelected(ImageRecycleViewObject target) {
@@ -156,11 +155,8 @@ public class PredictActivity2 extends AppCompatActivity implements
     @Override
     public void HandleUnSelected(Integer viewId,ImageRecycleViewObject image, MatchingObject matchingObject) {
         HandleUnSelected(image);
-        this.selectedObject = (ArrayList<MatchingObject>) this.selectedObject
-                .stream()
-                .filter(element->element.getImage()!=matchingObject.getImage())
-                .collect(Collectors.toList());
+        this.selectedObject.remove(matchingObject);
         ShapeableImageView shapeableImageView = findViewById(viewId);
-        shapeableImageView.setImageResource(matchingObject.getColor());
+        shapeableImageView.setImageResource(R.color.white);
     }
 }
