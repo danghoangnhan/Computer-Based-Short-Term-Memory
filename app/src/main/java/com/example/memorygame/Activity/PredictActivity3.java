@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +18,6 @@ import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
-import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.CorlorListInterface;
@@ -25,6 +25,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -57,10 +58,11 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
 
         this.selectedButtonList.forEach(element->{
             MatchingObject filter = this.objectList.stream()
-                    .filter(currentElement->currentElement.getRow()==element.getRow())
-                    .filter(currentElement->currentElement.getColumn()==element.getColumn())
+                    .filter(currentElement-> Objects.equals(currentElement.getRow(), element.getRow()))
+                    .filter(currentElement-> Objects.equals(currentElement.getColumn(), element.getColumn()))
                     .findFirst().orElse(null);
 
+            assert filter != null;
             ShapeableImageView filterImage = findViewById(filter.getViewId());
             filterImage.setImageResource(element.getImage());
             filter.setInitCorlor(R.color.white);
@@ -91,7 +93,7 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     public ArrayList<MatchingObject> generatingMatchingObject(Integer NumberPerrow){
         AtomicReference<Integer> currentRow = new AtomicReference<>(0);
         AtomicReference<Integer> currentColumn= new AtomicReference<>(0);
-        ArrayList<MatchingObject> matchingObjects = (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
+        return (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
             MatchingObject currentObject = new MatchingObject();
             ShapeableImageView button = findViewById(elementId);
             button.setOnDragListener( new BoardDragListener(this));
@@ -107,7 +109,6 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
             }
             return currentObject;
         }).collect(Collectors.toList());
-        return  matchingObjects;
     }
     @Override
     public void handleReplayButton(View view) {this.startActivity(new Intent(this,PredictActivity1.class));}
@@ -115,8 +116,7 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     public void handleEscButton(View view) {this.startActivity(new Intent(this,LoginActivity.class));}
     @Override
     public void handleNextButton(View view) {
-        Long test = this.selectedButtonList.stream().filter(element->element.getInitCorlor()!=element.getColor()).count();
-        if(this.selectedButtonList.stream().filter(element->element.getInitCorlor()!=element.getColor()).count()>0){
+        if(this.selectedButtonList.stream().anyMatch(element -> !Objects.equals(element.getInitCorlor(), element.getColor()))){
             this.startActivity(new Intent(this,ResultActivity.class));
             this.globalObject.getResult().setSelected3(this.objectList);
         }else{
@@ -134,8 +134,8 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     }
 
     @Override
-    public void HandleSelected(CorlorRecycleViewObject target) {
-        Integer filterIndex = IntStream.range(0,this.corlorList.size())
+    public void HandleSelected(@NonNull CorlorRecycleViewObject target) {
+        int filterIndex = IntStream.range(0,this.corlorList.size())
                 .filter(i->this.corlorList.get(i).getCorlorId()==target.getCorlorId())
                 .findFirst()
                 .orElseGet(null);
@@ -146,8 +146,8 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     }
 
     @Override
-    public void HandleUnSelected(CorlorRecycleViewObject target) {
-        Integer filterIndex = IntStream.range(0,this.corlorList.size())
+    public void HandleUnSelected(@NonNull CorlorRecycleViewObject target) {
+        int filterIndex = IntStream.range(0,this.corlorList.size())
                 .filter(i->this.corlorList.get(i).getCorlorId()==target.getCorlorId())
                 .findFirst()
                 .orElseGet(null);

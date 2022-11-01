@@ -59,7 +59,12 @@ public class ButtonList {
             R.drawable.phone,
             R.drawable.key,
             R.drawable.toothbursh,
-             R.drawable.hat
+            R.drawable.hat,
+            R.drawable.pens,
+            R.drawable.umbrella,
+            R.drawable.spoon,
+            R.drawable.television,
+
     );
 
     private final List<Integer> BoardButtonList = Arrays.asList(
