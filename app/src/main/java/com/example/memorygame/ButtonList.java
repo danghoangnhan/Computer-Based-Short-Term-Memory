@@ -64,7 +64,8 @@ public class ButtonList {
             R.drawable.umbrella,
             R.drawable.spoon,
             R.drawable.television,
-
+            R.drawable.book,
+            R.drawable.wallet
     );
 
     private final List<Integer> BoardButtonList = Arrays.asList(
@@ -106,14 +107,15 @@ public class ButtonList {
         int randomIndex = this.rand.nextInt(this.iconTest.size());
         return this.iconTest.get(randomIndex);
     }
-    public Integer getRandomImageResource(){
-        int randomIndex = this.rand.nextInt(this.imageList.size());
-        return this.imageList.get(randomIndex);
+    public List<Integer> getRandomImageResource(){
+        List<Integer>randomImageList = new ArrayList<>(this.imageList);
+        Collections.shuffle(randomImageList);
+        return randomImageList.subList(0,9);
     }
     public List<Integer> getSuffleCorlorList(){
         List<Integer>randomColorList = new ArrayList<>(this.CorlorList);
         Collections.shuffle(randomColorList);
-        return this.CorlorList;
+        return randomColorList;
     }
 
     public List<Integer> getImageList() {

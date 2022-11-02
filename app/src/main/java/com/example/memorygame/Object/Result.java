@@ -8,20 +8,22 @@ import java.util.function.Predicate;
 
 public class Result   {
     private List<MatchingObject>selected1,selected2,selected3, correct;
-
+    private Integer result1,result2,result3;
 
     public Result() {
 
     }
-    Predicate<MatchingObject>   containObject       =       element-> this.correct.stream().anyMatch(MatchingObject::sameObject);
-    Predicate<MatchingObject>   containRow          =       element-> this.correct.stream().anyMatch(MatchingObject::sameRow);
-    Predicate<MatchingObject>   containColumn       =       element-> this.correct.stream().anyMatch(MatchingObject::sameColum);
-    Predicate<MatchingObject>   containColor        =       element-> this.correct.stream().anyMatch(MatchingObject::sameCorlor);
+    Predicate<MatchingObject>   containObject       =       element-> this.correct.stream().anyMatch(pattern->pattern.sameObject(element));
+    Predicate<MatchingObject>   containRow          =       element-> this.correct.stream().anyMatch(pattern->pattern.sameRow(element));
+    Predicate<MatchingObject>   containColumn       =       element-> this.correct.stream().anyMatch(pattern->pattern.sameColum(element));
+    Predicate<MatchingObject>   containColor        =       element-> this.correct.stream().anyMatch(pattern->pattern.sameCorlor(element));
 
     public long ObjectValidation(@NonNull List<MatchingObject> selected){return selected.stream().filter(containObject).count();}
     public long SpatialValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containColumn.and(containRow)).count();}
     public long ObjectSpatialValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containObject.and(containColumn).and(containRow)).count();}
-    public long CorlorValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containColor).count();}
+    public long CorlorValidation(@NonNull List<MatchingObject> selected){
+        return  selected.stream().filter(containColor).count();
+    }
     public long ObjectCorlorLocationValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containObject.and(containColor).and(containColumn).and(containRow)).count();}
 
     public List<MatchingObject> getCorrect() {
@@ -43,4 +45,30 @@ public class Result   {
     }
 
     public List<MatchingObject> getSelected1() {return selected1;}
+
+    public List<MatchingObject> getSelected3() {return selected3;}
+
+    public Integer getResult1() {
+        return result1;
+    }
+
+    public void setResult1(Integer result1) {
+        this.result1 = result1;
+    }
+
+    public Integer getResult2() {
+        return result2;
+    }
+
+    public void setResult2(Integer result2) {
+        this.result2 = result2;
+    }
+
+    public Integer getResult3() {
+        return result3;
+    }
+
+    public void setResult3(Integer result3) {
+        this.result3 = result3;
+    }
 }

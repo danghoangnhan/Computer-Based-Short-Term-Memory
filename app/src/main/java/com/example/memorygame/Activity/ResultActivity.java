@@ -16,40 +16,80 @@ import com.example.memorygame.Object.Result;
 import com.example.memorygame.R;
 
 public class ResultActivity extends AppCompatActivity implements HandleStageButton {
-    Button escButton;
-    Button replayButton;
-    TextView result1,result2,result3,result4;
-    Result result;
-    GlobalObject globalObject;
+    Button escButton,nextButton,replayButton;
+    TextView result1,result2,result3,result4,result5,total_result;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Result result = GlobalObject.getInstance().getResult();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_result);
-        this.escButton = findViewById(R.id.escButton);
-        this.replayButton = findViewById(R.id.replayButton);
-        this.replayButton.setOnClickListener(this::handleReplayButton);
-        this.escButton.setOnClickListener(this::handleEscButton);
+        if (GlobalObject.getInstance().getGameState()==1){
+            setContentView(R.layout.activity_result_1);
+            this.nextButton = findViewById(R.id.nextButton);
+            this.escButton = findViewById(R.id.escButton);
 
+            this.nextButton.setOnClickListener(this::handleNextButton);
+            this.escButton.setOnClickListener(this::handleEscButton);
+
+            result.setResult1((int) result.ObjectValidation(result.getSelected1()));
+            result.setResult2((int) result.SpatialValidation(result.getSelected2()));
+            result.setResult3((int) result.ObjectSpatialValidation(result.getSelected2()));
+
+        }
+        else {
+            setContentView(R.layout.activity_result_2);
+
+            this.result4 = findViewById(R.id.result4);
+            this.result4 = findViewById(R.id.result4);
+
+
+            this.result4.setText(result.CorlorValidation(result.getSelected3())+"/"+result.getCorrect().size());
+
+            this.result5 = findViewById(R.id.result5);
+            this.result5 = findViewById(R.id.result5);
+            this.result5.setText(result.ObjectCorlorLocationValidation(result.getSelected3())+"/"+result.getCorrect().size());
+            this.replayButton = findViewById(R.id.replayButton);
+            this.escButton = findViewById(R.id.escButton);
+
+            this.replayButton.setOnClickListener(this::handleReplayButton);
+            this.escButton.setOnClickListener(this::handleEscButton);
+
+            this.result5.setText(result.ObjectCorlorLocationValidation(result.getSelected3())+"/"+result.getCorrect().size());
+
+            this.total_result  = findViewById(R.id.result_total);
+            int score = (int) ((int)result.CorlorValidation(result.getSelected3()) +
+                                result.getResult1()+
+                                result.getResult2()+
+                                result.getResult3()+
+                                result.ObjectCorlorLocationValidation(result.getSelected3()));
+            this.total_result.setText(score+"/"+(24));
+
+        }
         this.result1 = findViewById(R.id.result1);
+        this.result1.setText(result.ObjectValidation(result.getSelected1())+"/"+result.getCorrect().size());
+
         this.result2 = findViewById(R.id.result2);
+        this.result2.setText(result.SpatialValidation(result.getSelected2())+"/"+result.getCorrect().size());
+
         this.result3 = findViewById(R.id.result3);
-        this.result4 = findViewById(R.id.result4);
-        this.globalObject = GlobalObject.getInstance();
-        this.result = globalObject.getResult();
-        this.result4.setText(result.ObjectCorlorLocationValidation()+"/"+result.getCorrect().size());
-        this.result1.setText(result.ObjectValidation()+"/"+result.getCorrect().size());
-        this.result2.setText(result.LocationValidation()+"/"+result.getCorrect().size());
-        this.result3.setText(result.ObjectLocationValidation()+"/"+result.getCorrect().size());
+        this.result3.setText(result.ObjectSpatialValidation(result.getSelected2())+"/"+result.getCorrect().size());
+
     }
     @Override
     public void handleNextButton(View view) {
-
+        if (GlobalObject.getInstance().getGameState()==1){
+            GlobalObject.getInstance().setGameState(2);
+        }
+        else {
+            GlobalObject.getInstance().setGameState(1);
+        }
+        Intent intent = new Intent(this,SelectObjectActivity.class);
+        this.startActivity(intent);
     }
 
     @Override
     public void handleReplayButton(View view) {
-        Intent intent = new Intent(this,LoginActivity.class);
+        Intent intent = new Intent(this,SelectObjectActivity.class);
         this.startActivity(intent);
     }
 

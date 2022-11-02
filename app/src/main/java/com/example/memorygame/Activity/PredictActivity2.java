@@ -81,10 +81,21 @@ public class PredictActivity2 extends AppCompatActivity implements
     @Override
     public void handleNextButton(View view) {
         if(this.selectedObject.size()>0){
-            Intent intent = new Intent(this,PredictActivity3.class);
-            intent.putParcelableArrayListExtra("selectedImages", (ArrayList<MatchingObject>) this.selectedObject);
-            this.globalObject.getResult().setSelected2(this.selectedObject);
-            startActivity(intent);
+            Intent intent;
+            switch (GlobalObject.getInstance().getGameState()){
+                case 1:
+                    intent = new Intent(this,ResultActivity.class);
+                    this.globalObject.getResult().setSelected2(this.selectedObject);
+                    startActivity(intent);
+                    break;
+                default:
+                    intent = new Intent(this,PredictActivity3.class);
+                    intent.putParcelableArrayListExtra("selectedImages", (ArrayList<MatchingObject>) this.selectedObject);
+                    this.globalObject.getResult().setSelected2(this.selectedObject);
+                    startActivity(intent);
+                    break;
+            }
+
         }else{
             Toast.makeText(getApplicationContext(),"尚未選擇物件", Toast.LENGTH_SHORT).show();
         }

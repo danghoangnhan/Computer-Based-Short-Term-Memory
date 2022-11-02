@@ -10,19 +10,17 @@ public class MatchingObject implements Parcelable {
 
 
 
-    public static boolean sameColum(MatchingObject anotherObject){
-            return this.column.compareTo(anotherObject.getColumn())==0;
-    };
-    public static boolean sameRow(MatchingObject anotherObject){
-            return this.row.compareTo(anotherObject.getRow())==0;
-    }
-    public static boolean sameObject(MatchingObject anotherObject){
+    public boolean sameColum(@NonNull MatchingObject anotherObject){return this.column.compareTo(anotherObject.getColumn())==0;};
+    public  boolean sameRow(@NonNull MatchingObject anotherObject){return this.row.compareTo(anotherObject.getRow())==0;}
+    public  boolean sameObject(MatchingObject anotherObject){
         if (this.image==null||anotherObject.getImage()==null)return false;
         int RESULT = this.image.compareTo(anotherObject.getImage());
         boolean test = RESULT==0;
         return RESULT == 0;
     }
-    public static boolean sameCorlor(MatchingObject element) {
+    public  boolean sameCorlor(MatchingObject element) {
+        if (element==null)return false;
+        if (element.getColor()==null) return false;
         return this.color.compareTo(element.getColor())==0;
     }
 
@@ -64,7 +62,7 @@ public class MatchingObject implements Parcelable {
     public MatchingObject() {
 
     }
-    public MatchingObject(ImageRecycleViewObject another){
+    public MatchingObject(@NonNull ImageRecycleViewObject another){
         this.setImage(another.getImageId());
     }
 

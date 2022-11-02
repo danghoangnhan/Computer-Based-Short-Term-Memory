@@ -34,7 +34,7 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_object);
-        this.images = ButtonList.getInstance().getImageList();
+        this.images = ButtonList.getInstance().getRandomImageResource();
         this.buttons = ButtonList.getInstance().getBoardButtonList().stream().map(element->{ShapeableImageView view = findViewById(element);return view;}).collect(Collectors.toList());
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);

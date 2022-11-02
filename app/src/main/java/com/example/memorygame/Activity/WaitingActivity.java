@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
@@ -65,7 +66,6 @@ public class WaitingActivity extends AppCompatActivity implements HandleStageBut
     @Override
     public void handleNextButton(View view) {
         myCountDownTimer.cancel();
-
         Intent intent = new Intent(WaitingActivity.this,PredictActivity1.class);
         Bundle args = new Bundle();
         args.putParcelableArrayList("ARRAYLIST",objectList);

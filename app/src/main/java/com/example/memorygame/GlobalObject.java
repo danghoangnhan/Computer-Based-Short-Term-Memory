@@ -14,7 +14,7 @@ public class GlobalObject {
     private ImageRecycleViewObject tmpSelectRecycle;
     private CorlorRecycleViewObject tmpCorlorObject;
     private Result result;
-
+    private int gameState;
     // Getter-Setters
     public static GlobalObject getInstance() {
         if(instance == null){
@@ -25,6 +25,7 @@ public class GlobalObject {
     public GlobalObject(){
         this.selectedButtonList = new ArrayList<>();
         this.result = new Result();
+        this.gameState = 1;
     }
 
     public ArrayList<MatchingObject> getObjectList() {return objectList;}
@@ -68,5 +69,13 @@ public class GlobalObject {
     public Result getResult() {return result;}
 
     public void setResult(Result result) {this.result = result;}
+
+    public int getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
+    }
 }
 

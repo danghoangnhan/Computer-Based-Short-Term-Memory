@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.ResultActivity"
+    android:background="@color/royal_blue"
+    >
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/main_card"
+        android:layout_width="801dp"
+        android:layout_height="600dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/cornflower_blue"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:cardElevation="11dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/grid_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cornflower_blue">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/grid_1"
+                android:layout_width="660dp"
+                android:layout_height="120dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:text="選擇物件正確率"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="505dp"
+                    android:layout_marginTop="25dp"
+                    android:textSize="40dp"
+                    android:id="@+id/result1"
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/grid_2"
+                android:layout_width="660dp"
+                android:layout_height="120dp"
+                android:layout_below="@id/grid_1"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:text="選擇位置正確率"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="505dp"
+                    android:layout_marginTop="25dp"
+                    android:textSize="40dp"
+                    android:id="@+id/result2"
+                    />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/grid_3"
+                android:layout_width="660dp"
+                android:layout_height="120dp"
+                android:layout_below="@id/grid_2"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="5dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="25dp"
+                    android:text="物件方對位置正確率"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="505dp"
+                    android:layout_marginTop="25dp"
+                    android:textSize="40dp"
+                    android:id="@+id/result3"
+                    />
+            </androidx.cardview.widget.CardView>
+            <RelativeLayout
+                android:id="@+id/button_actionlist"
+                android:layout_width="300dp"
+                android:layout_height="100dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="81dp"
+                android:layout_marginBottom="11dp"
+                >
+                <Button
+                    android:id="@+id/escButton"
+
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/nextButton"
+                    android:textColor="@color/white"
+                    android:paddingLeft="15dip"
+                    android:paddingRight="5dp"
+                    android:background="@drawable/custome_button1"
+                    android:drawableRight="@drawable/exit"
+                    android:text="ESC"
+
+                    />
+
+                <Button
+                    android:id="@+id/nextButton"
+                    android:text="Next"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/white"
+                    android:paddingLeft="15dip"
+                    android:paddingRight="5dp"
+                    android:background="@drawable/custome_button1"
+                    android:drawablePadding="2dip"
+
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

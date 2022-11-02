@@ -51,6 +51,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     private GlobalObject globalObject;
     private ArrayList<MatchingObject> selectedButtonList;
     private View tmpView;
+    private int gameState;
     HashMap<MatchingObject,ShapeableImageView> selected;
 
     @Override
@@ -64,7 +65,6 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.selectedButtonList = new ArrayList<>();
         this.objectList = this.generatingMatchingObject(3);
         this.globalObject.setObjectList(this.objectList);
-
     }
     public  void initialRecyleView(){
         this.recyclerView = findViewById(R.id.recycleview);
@@ -79,7 +79,7 @@ public class MatchColorActivity extends AppCompatActivity implements
         Iterator<Integer> corlorListIterator =  ButtonList.getInstance().getSuffleCorlorList().iterator();
         ArrayList<MatchingObject> matchingObjects = (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
             MatchingObject currentObject = new MatchingObject();
-            Integer nextCorlor = corlorListIterator.next();
+            Integer nextCorlor = GlobalObject.getInstance().getGameState()==1?R.color.white:corlorListIterator.next();
             ShapeableImageView button = findViewById(elementId);
             button.setImageResource(nextCorlor);
             button.setStrokeColorResource(nextCorlor);
@@ -150,6 +150,7 @@ public class MatchColorActivity extends AppCompatActivity implements
                 .filter(i->this.selectedImage.get(i).isSelected()==false)
                 .findFirst()
                 .orElseGet(null);
+
         if (filterIndex!=null){
             target.setSelected(true);
             this.selectedImage.set(filterIndex,target);
