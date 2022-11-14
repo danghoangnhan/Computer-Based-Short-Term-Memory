@@ -25,11 +25,9 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
         super.onCreate(savedInstanceState);
         if (GlobalObject.getInstance().getGameState()==1){
             setContentView(R.layout.activity_result_1);
-            this.nextButton = findViewById(R.id.nextButton);
-            this.escButton = findViewById(R.id.escButton);
 
+            this.nextButton = findViewById(R.id.nextButton);
             this.nextButton.setOnClickListener(this::handleNextButton);
-            this.escButton.setOnClickListener(this::handleEscButton);
 
             result.setResult1((int) result.ObjectValidation(result.getSelected1()));
             result.setResult2((int) result.SpatialValidation(result.getSelected2()));
@@ -41,24 +39,21 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
 
             this.result4 = findViewById(R.id.result4);
             this.result4 = findViewById(R.id.result4);
-
-
             this.result4.setText(result.CorlorValidation(result.getSelected3())+"/"+result.getCorrect().size());
 
             this.result5 = findViewById(R.id.result5);
             this.result5 = findViewById(R.id.result5);
             this.result5.setText(result.ObjectCorlorLocationValidation(result.getSelected3())+"/"+result.getCorrect().size());
-            this.replayButton = findViewById(R.id.replayButton);
-            this.escButton = findViewById(R.id.escButton);
 
+            this.replayButton = findViewById(R.id.replayButton);
             this.replayButton.setOnClickListener(this::handleReplayButton);
-            this.escButton.setOnClickListener(this::handleEscButton);
 
             this.result5.setText(result.ObjectCorlorLocationValidation(result.getSelected3())+"/"+result.getCorrect().size());
 
             this.total_result  = findViewById(R.id.result_total);
             this.result_1  = findViewById(R.id.result_1);
             this.result_2  = findViewById(R.id.result_2);
+
             int score1 =  result.getResult1()+
                     result.getResult2()+
                     result.getResult3();
@@ -74,6 +69,10 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             this.total_result.setText(score+"/"+(24));
 
         }
+        this.escButton = findViewById(R.id.escButton);
+        this.escButton.setOnClickListener(this::handleEscButton);
+
+
         this.result1 = findViewById(R.id.result1);
         this.result1.setText(result.ObjectValidation(result.getSelected1())+"/"+result.getCorrect().size());
 
