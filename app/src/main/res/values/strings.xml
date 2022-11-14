@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">memoryGame</string>
+    <string name="app_name">大腦記憶檢查</string>
     <string name="replay">Replay</string>
     <string name="next">NEXT</string>
     <string name="gamename">大腦記憶系統健康檢查</string>
