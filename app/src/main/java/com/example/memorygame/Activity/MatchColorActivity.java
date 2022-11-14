@@ -1,14 +1,13 @@
 package com.example.memorygame.Activity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +19,7 @@ import com.example.memorygame.CallBack.ButtonImageCall;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
+import com.example.memorygame.Language;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
@@ -28,13 +28,11 @@ import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@RequiresApi(api = Build.VERSION_CODES.N)
 public class MatchColorActivity extends AppCompatActivity implements
         HandleStageButton,
         RecycleViewInterface,
@@ -50,9 +48,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     private ImageRecycleViewObject tmpClickedImage;
     private GlobalObject globalObject;
     private ArrayList<MatchingObject> selectedButtonList;
-    private View tmpView;
-    private int gameState;
-    HashMap<MatchingObject,ShapeableImageView> selected;
+    private TextView userGuildText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +61,11 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.selectedButtonList = new ArrayList<>();
         this.objectList = this.generatingMatchingObject(3);
         this.globalObject.setObjectList(this.objectList);
+        this.userGuildText = findViewById(R.id.userGuideText);
+        String userGuildText = Language.Chinese.get(GlobalObject.getInstance().getGameState()==1?Language.Key.PleaseSelectObjectToRing:Language.Key.PleaseSelectObjectToColorRing);
+        this.userGuildText.setText(userGuildText);
     }
+
     public  void initialRecyleView(){
         this.recyclerView = findViewById(R.id.recycleview);
         this.recyclerViewAdapter = new RecyclerViewAdapter(this,selectedImage,this);
@@ -130,9 +130,9 @@ public class MatchColorActivity extends AppCompatActivity implements
     @Override
     public void onItemClick(View view,int Position) {
         this.tmpClickedImage = this.selectedImage.get(Position);
-        this.tmpView = view;
         this.globalObject.setTmpClickedImage(this.tmpClickedImage);
     }
+
     @Override
     public void handleImageRecycleView(Integer ViewID) {
         ImageView view = findViewById(ViewID);

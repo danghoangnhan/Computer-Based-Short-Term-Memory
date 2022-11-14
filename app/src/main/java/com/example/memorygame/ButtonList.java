@@ -3,6 +3,7 @@ package com.example.memorygame;
 import android.graphics.Color;
 import android.os.Build;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import java.util.ArrayList;
@@ -87,6 +88,12 @@ public class ButtonList {
     public  List<Integer> getButtonBoard(){return buttonIdList;}
     public  List<Integer> getCorlorCodeList(){
         return CorlorList;
+    }
+    @NonNull
+    public static List<Integer> suffledImage(List<Integer>originalList){
+        List<Integer> result = new ArrayList<>(originalList);
+        Collections.shuffle(result);
+        return result;
     }
 
     public Integer getRandomDrawable(){

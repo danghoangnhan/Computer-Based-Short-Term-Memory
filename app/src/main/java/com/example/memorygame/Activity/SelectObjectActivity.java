@@ -7,11 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.memorygame.ButtonList;
+import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
+import com.example.memorygame.Language;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.R;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -23,7 +26,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class SelectObjectActivity extends AppCompatActivity implements HandleStageButton {
+public class SelectObjectActivity extends AppCompatActivity implements
+        HandleStageButton, Language {
 
     private List<ImageRecycleViewObject> selectedImage;
     private List<Integer> images;
@@ -47,11 +51,12 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
         this.replayButton.setOnClickListener(this::handleReplayButton);
 
     }
-    public static <K, V> Map<ShapeableImageView, Integer> zipToMap(List<ShapeableImageView> keys, List<Integer> values) {
+    public static Map<ShapeableImageView, Integer> zipToMap(@NonNull List<ShapeableImageView> keys, @NonNull List<Integer> values) {
         return IntStream.range(0, keys.size())
                 .boxed()
                 .collect(Collectors.toMap(keys::get, values::get));
     }
+
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public void selectedClick(Integer image, ShapeableImageView button){
         if (this.selectedImage.stream().noneMatch(element->element.getImageId()==image)){
@@ -93,11 +98,12 @@ public class SelectObjectActivity extends AppCompatActivity implements HandleSta
     @Override
     public void handleNextButton(View view) {
         if(this.selectedImage.size()>0){
+            GlobalObject.getInstance().setRanImg(this.images);
             Intent intent = new Intent(this,MatchColorActivity.class);
             intent.putParcelableArrayListExtra("selectedImages", (ArrayList<ImageRecycleViewObject>) this.selectedImage);
             startActivity(intent);
         }else{
-            Toast.makeText(getApplicationContext(),"尚未選擇物件", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),Language.Chinese.get(Key.Objectionable), Toast.LENGTH_SHORT).show();
         }
     }
     @Override

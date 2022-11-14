@@ -17,7 +17,7 @@ import com.example.memorygame.R;
 
 public class ResultActivity extends AppCompatActivity implements HandleStageButton {
     Button escButton,nextButton,replayButton;
-    TextView result1,result2,result3,result4,result5,total_result;
+    TextView result1,result2,result3,result4,result5,result_1,result_2,total_result;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +57,20 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             this.result5.setText(result.ObjectCorlorLocationValidation(result.getSelected3())+"/"+result.getCorrect().size());
 
             this.total_result  = findViewById(R.id.result_total);
-            int score = (int) ((int)result.CorlorValidation(result.getSelected3()) +
-                                result.getResult1()+
-                                result.getResult2()+
-                                result.getResult3()+
-                                result.ObjectCorlorLocationValidation(result.getSelected3()));
+            this.result_1  = findViewById(R.id.result_1);
+            this.result_2  = findViewById(R.id.result_2);
+            int score1 =  result.getResult1()+
+                    result.getResult2()+
+                    result.getResult3();
+            int score2 = (int) ((int) result.ObjectValidation (result.getSelected1())
+                                +result.SpatialValidation(result.getSelected2())
+                                +result.ObjectSpatialValidation(result.getSelected2())
+                                +result.CorlorValidation(result.getSelected3())
+                                + result.ObjectCorlorLocationValidation(result.getSelected3()));
+
+            int score = score1+score2 ;
+            this.result_1.setText(score1+"/"+9);
+            this.result_2.setText(score2+"/"+15);
             this.total_result.setText(score+"/"+(24));
 
         }

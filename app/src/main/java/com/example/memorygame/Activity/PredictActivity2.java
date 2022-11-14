@@ -17,6 +17,7 @@ import com.example.memorygame.CallBack.ButtonImageCall;
 import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
+import com.example.memorygame.Language;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
@@ -97,7 +98,7 @@ public class PredictActivity2 extends AppCompatActivity implements
             }
 
         }else{
-            Toast.makeText(getApplicationContext(),"尚未選擇物件", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), Language.Chinese.get(Language.Key.Objectionable), Toast.LENGTH_SHORT).show();
         }
     }
 

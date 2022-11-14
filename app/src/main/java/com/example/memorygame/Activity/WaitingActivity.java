@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
+import com.example.memorygame.Language;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 public class WaitingActivity extends AppCompatActivity implements HandleStageButton {
     Timer timer;
-    TextView textTime;
+    TextView textTime,notifyText;
     CountDownTimer myCountDownTimer;
     private ArrayList<MatchingObject> objectList;
     private Button nextButton,escButton,replayButton;
@@ -32,16 +33,17 @@ public class WaitingActivity extends AppCompatActivity implements HandleStageBut
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_waiting);
-        textTime = findViewById(R.id.time);
-
+        this.textTime = findViewById(R.id.time);
+        this.notifyText = findViewById(R.id.notifytext);
+        this.notifyText.setText(Language.Chinese.get(GlobalObject.getInstance().getGameState()==1?Language.Key.PleaseRememberObject:Language.Key.PleaseRememberObjectLocationColor));
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);
         this.replayButton = findViewById(R.id.replayButton);
-
         this.nextButton.setOnClickListener(this::handleNextButton);
         this.escButton.setOnClickListener(this::handleEscButton);
-        this.replayButton.setOnClickListener(this::handleReplayButton);
 
+
+        this.replayButton.setOnClickListener(this::handleReplayButton);
         Bundle args = getIntent().getExtras();
         this.objectList = args.getParcelableArrayList("ARRAYLIST");
         timer = new Timer();
@@ -61,6 +63,9 @@ public class WaitingActivity extends AppCompatActivity implements HandleStageBut
         };
         myCountDownTimer.start();
     }
+
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override

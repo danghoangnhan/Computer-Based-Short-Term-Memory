@@ -103,8 +103,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="25dp"
                     android:layout_marginTop="25dp"
-                    android:text="物件方對位置正確率"
-                    android:textSize="40dp" />
+                    android:text="物件放對位置正確率"
+                    android:textSize="40dp"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"

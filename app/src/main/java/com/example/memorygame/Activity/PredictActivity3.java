@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.example.memorygame.ButtonList;
 import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
+import com.example.memorygame.Language;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
@@ -35,14 +37,12 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     private CorlorRecycleViewObject tmpCorlor;
     private List<MatchingObject> objectList;
     private Button nextButton,escButton,replayButton;
-    private CorlorRecycleViewCallBack corlorRecycleViewCallBack;
-    private CorlorRecycleViewObject corlorRecycleViewObject;
     private RecyclerView recyclerView;
     private CorlorListAdapter corlorListAdapter;
     private View tmpView;
     private GlobalObject globalObject;
     private ArrayList<MatchingObject> selectedButtonList;
-
+    private TextView userGuildText;
 
 
     @Override
@@ -53,6 +53,9 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
         this.selectedButtonList = new ArrayList<>(this.globalObject.getResult().getSelected2());
         this.objectList = this.generatingMatchingObject(3);
         this.globalObject.setObjectList((ArrayList<MatchingObject>) this.objectList);
+        this.userGuildText = findViewById(R.id.userGuideText);
+        this.userGuildText.setText(Language.Chinese.get(Language.Key.PleaseSelectCorlor));
+
         initialButton();
         initialRecyleView();
 

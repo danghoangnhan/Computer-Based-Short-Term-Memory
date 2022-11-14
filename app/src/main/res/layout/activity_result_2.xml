@@ -172,7 +172,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/grid_total"
-                android:layout_width="300dp"
+                android:layout_width="350dp"
                 android:layout_height="300dp"
                 android:layout_marginLeft="550dp"
                 android:layout_marginTop="5dp"
@@ -185,15 +185,47 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="65dp"
                     android:layout_marginTop="25dp"
-                    android:text="總分數"
+                    android:text="第一輪"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:id="@+id/result_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="220dp"
+                    android:layout_marginTop="25dp"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginTop="85dp"
+                    android:text="第二輪"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:id="@+id/result_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="220dp"
+                    android:layout_marginTop="85dp"
+                    android:textSize="40dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="65dp"
+                    android:layout_marginTop="145dp"
+                    android:text="總分"
                     android:textSize="40dp" />
 
                 <TextView
                     android:id="@+id/result_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginLeft="220dp"
+                    android:layout_marginTop="145dp"
                     android:textSize="40dp" />
             </androidx.cardview.widget.CardView>
             <RelativeLayout

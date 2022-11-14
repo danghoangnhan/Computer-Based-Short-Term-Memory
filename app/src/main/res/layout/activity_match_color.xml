@@ -63,12 +63,13 @@
                 android:layout_marginLeft="800dp"
                 >
                 <TextView
+                    android:id="@+id/userGuideText"
                     android:layout_width="183dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="50dp"
-                    android:text="請 把物件 放在 有 顏色 的 圓圈 內"
-                    android:textSize="25dp" />
+                    android:textSize="25dp"
+                    />
             </androidx.cardview.widget.CardView>
 
             <include

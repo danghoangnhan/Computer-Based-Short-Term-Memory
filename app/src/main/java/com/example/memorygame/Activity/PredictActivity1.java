@@ -8,11 +8,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.memorygame.ButtonList;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
+import com.example.memorygame.Language;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.Object.Result;
@@ -26,16 +28,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class PredictActivity1 extends AppCompatActivity implements HandleStageButton {
+public class PredictActivity1 extends AppCompatActivity
+        implements
+        HandleStageButton, Language {
     private Button nextButton,escButton,replayButton;
     private List<ImageRecycleViewObject> selectedImage;
     private List<Integer> images;
     private List<ShapeableImageView>buttons;
+    private TextView UserGuild;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predict1);
-        this.images = ButtonList.getInstance().getImageList();
+        this.images = ButtonList.suffledImage(GlobalObject.getInstance().getRanImg());
         this.buttons = ButtonList.getInstance().getBoardButtonList().stream().map(element->{ShapeableImageView view = findViewById(element);return view;}).collect(Collectors.toList());
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);
@@ -43,6 +48,8 @@ public class PredictActivity1 extends AppCompatActivity implements HandleStageBu
         this.selectedImage = new ArrayList<>();
         this.initialImageTab();
         initialButton();
+        this.UserGuild = findViewById(R.id.userGuideText);
+        this.UserGuild.setText(Language.Chinese.get(Key.PleaseSelectThePreviousObject));
     }
 
     public void initialButton(){

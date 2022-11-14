@@ -6,6 +6,7 @@ import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.Object.Result;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class GlobalObject {
     private static GlobalObject instance = new GlobalObject();
@@ -15,6 +16,7 @@ public class GlobalObject {
     private CorlorRecycleViewObject tmpCorlorObject;
     private Result result;
     private int gameState;
+    private List<Integer> ranImg;
     // Getter-Setters
     public static GlobalObject getInstance() {
         if(instance == null){
@@ -28,6 +30,14 @@ public class GlobalObject {
         this.gameState = 1;
     }
 
+    public List<Integer> getRanImg() {
+        return ranImg;
+    }
+
+    public void setRanImg(List<Integer> ranImg) {
+        this.ranImg = ranImg;
+    }
+
     public ArrayList<MatchingObject> getObjectList() {return objectList;}
 
     public void setObjectList(ArrayList<MatchingObject> objectList) {this.objectList = objectList;}
@@ -35,9 +45,6 @@ public class GlobalObject {
     public ImageRecycleViewObject getTmpClickedImage() {return this.tmpSelectRecycle;}
 
     public void setTmpClickedImage(ImageRecycleViewObject tmpClickedImage) {this.tmpSelectRecycle = tmpClickedImage;}
-
-
-
 
 
     public ArrayList<MatchingObject> getSelectedButtonList() {

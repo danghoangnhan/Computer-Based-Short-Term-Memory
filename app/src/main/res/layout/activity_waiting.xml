@@ -29,11 +29,10 @@
         >
         <TextView
             android:id="@+id/notifytext"
-            android:layout_width="495dp"
+            android:layout_width="600dp"
             android:layout_height="200dp"
             android:layout_marginLeft="120dp"
-            android:layout_marginTop="50dp"
-            android:text="請照剛剛所選的物件，位置，顏色，選擇到正確位置"
+            android:layout_marginTop="100dp"
             android:textSize="40dp"
             />
         <TextView

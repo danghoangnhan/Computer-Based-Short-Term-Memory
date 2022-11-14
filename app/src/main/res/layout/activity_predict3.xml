@@ -55,9 +55,9 @@
             android:backgroundTint="@color/ghost_white"
             >
             <TextView
+                android:id="@+id/userGuideText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="請把顏色放到有物件的"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="40dp"
                 android:textSize="30dp"

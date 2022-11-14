@@ -36,18 +36,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="請選出"
-                android:layout_marginLeft="50dp"
+                android:text="請選出三個物件"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="50dp"
-                android:textSize="40dp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="三個物件"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="90dp"
-                android:textSize="40dp"
+                android:textSize="35dp"
                 />
         </androidx.cardview.widget.CardView>
         <include
