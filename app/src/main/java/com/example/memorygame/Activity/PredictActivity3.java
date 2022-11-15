@@ -125,8 +125,6 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
         }else{
             Toast.makeText(getApplicationContext(),"尚未配對顏色", Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
     @Override

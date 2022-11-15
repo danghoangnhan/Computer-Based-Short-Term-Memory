@@ -1,5 +1,6 @@
 package com.example.memorygame.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -72,7 +73,7 @@ public class PredictActivity1 extends AppCompatActivity
             }
         });
     }
-    public static <K, V> Map<ShapeableImageView, Integer> zipToMap(List<ShapeableImageView> keys, List<Integer> values) {
+    public static <K, V> Map<ShapeableImageView, Integer> zipToMap(@NonNull List<ShapeableImageView> keys, @NonNull List<Integer> values) {
         return IntStream.range(0, keys.size())
                 .boxed()
                 .collect(Collectors.toMap(keys::get, values::get));

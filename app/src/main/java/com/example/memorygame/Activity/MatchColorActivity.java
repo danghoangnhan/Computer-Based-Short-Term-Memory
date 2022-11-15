@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -144,8 +145,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     @Override
     public void HandleSelected(ImageRecycleViewObject target) {
 
-        Integer filterIndex = IntStream.range(0,this.selectedImage
-                .size())
+        Integer filterIndex = IntStream.range(0,this.selectedImage.size())
                 .filter(i->this.selectedImage.get(i).getImageId()==target.getImageId())
                 .filter(i->this.selectedImage.get(i).isSelected()==false)
                 .findFirst()
@@ -156,7 +156,6 @@ public class MatchColorActivity extends AppCompatActivity implements
             this.selectedImage.set(filterIndex,target);
             this.recyclerViewAdapter.notifyItemChanged(filterIndex);
         }
-
     }
 
     @Override
@@ -167,6 +166,7 @@ public class MatchColorActivity extends AppCompatActivity implements
                 .filter(i->this.selectedImage.get(i).isSelected()==true)
                 .findFirst()
                 .orElseGet(null);
+
         if (filterIndex!=null){
             target.setSelected(false);
             this.selectedImage.set(filterIndex,target);
@@ -181,7 +181,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void HandleUnSelected(Integer viewId,ImageRecycleViewObject image, MatchingObject matchingObject) {
+    public void HandleUnSelected(Integer viewId, ImageRecycleViewObject image, @NonNull MatchingObject matchingObject) {
         HandleUnSelected(image);
         ShapeableImageView shapeableImageView = findViewById(viewId);
         shapeableImageView.setImageResource(matchingObject.getColor());
