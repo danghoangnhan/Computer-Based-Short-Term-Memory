@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,7 +56,7 @@ public class MatchColorActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_match_color);
+        setContentView(GlobalObject.getInstance().getGameState()==1?R.layout.activity_match_color_1:R.layout.activity_match_color_2);
         initialButton();
         this.selectedImage = getIntent().getParcelableArrayListExtra("selectedImages");
         initialRecyleView();
@@ -62,9 +64,7 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.selectedButtonList = new ArrayList<>();
         this.objectList = this.generatingMatchingObject(3);
         this.globalObject.setObjectList(this.objectList);
-        this.userGuildText = findViewById(R.id.userGuideText);
-        String userGuildText = Language.Chinese.get(GlobalObject.getInstance().getGameState()==1?Language.Key.PleaseSelectObjectToRing:Language.Key.PleaseSelectObjectToColorRing);
-        this.userGuildText.setText(userGuildText);
+        this.userGuildText = findViewById(R.id.userGuideText2);
     }
 
     public  void initialRecyleView(){

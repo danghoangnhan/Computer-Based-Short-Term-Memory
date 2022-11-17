@@ -53,8 +53,6 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
         this.selectedButtonList = new ArrayList<>(this.globalObject.getResult().getSelected2());
         this.objectList = this.generatingMatchingObject(3);
         this.globalObject.setObjectList((ArrayList<MatchingObject>) this.objectList);
-        this.userGuildText = findViewById(R.id.userGuideText);
-        this.userGuildText.setText(Language.Chinese.get(Language.Key.PleaseSelectCorlor));
 
         initialButton();
         initialRecyleView();

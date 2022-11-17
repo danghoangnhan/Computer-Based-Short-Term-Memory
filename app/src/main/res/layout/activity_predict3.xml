@@ -55,12 +55,22 @@
             android:backgroundTint="@color/ghost_white"
             >
             <TextView
-                android:id="@+id/userGuideText"
+                android:id="@+id/userGuideText1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="75dp"
                 android:layout_marginTop="40dp"
                 android:textSize="30dp"
+                android:text="請把顏色"
+                />
+            <TextView
+                android:id="@+id/userGuideText2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="90dp"
+                android:textSize="30dp"
+                android:text="放到有物件的圓圈"
                 />
 
         </androidx.cardview.widget.CardView>

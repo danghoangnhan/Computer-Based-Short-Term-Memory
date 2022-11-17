@@ -49,8 +49,6 @@ public class PredictActivity1 extends AppCompatActivity
         this.selectedImage = new ArrayList<>();
         this.initialImageTab();
         initialButton();
-        this.UserGuild = findViewById(R.id.userGuideText);
-        this.UserGuild.setText(Language.Chinese.get(Key.PleaseSelectThePreviousObject));
     }
 
     public void initialButton(){
