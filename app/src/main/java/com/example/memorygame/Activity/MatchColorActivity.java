@@ -78,9 +78,9 @@ public class MatchColorActivity extends AppCompatActivity implements
         AtomicReference<Integer> currentRow = new AtomicReference<>(0);
         AtomicReference<Integer> currentColumn= new AtomicReference<>(0);
         Iterator<Integer> corlorListIterator =  ButtonList.getInstance().getSuffleCorlorList().iterator();
-        ArrayList<MatchingObject> matchingObjects = (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
+        return (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
             MatchingObject currentObject = new MatchingObject();
-            Integer nextCorlor = GlobalObject.getInstance().getGameState()==1?R.color.white:corlorListIterator.next();
+            int nextCorlor = GlobalObject.getInstance().getGameState()==1?R.color.white:corlorListIterator.next();
             ShapeableImageView button = findViewById(elementId);
             button.setImageResource(nextCorlor);
             button.setStrokeColorResource(nextCorlor);
@@ -99,7 +99,6 @@ public class MatchColorActivity extends AppCompatActivity implements
             }
             return currentObject;
         }).collect(Collectors.toList());
-        return  matchingObjects;
     }
     public void initialButton(){
         this.nextButton = findViewById(R.id.nextButton);

@@ -63,12 +63,20 @@
                 android:layout_marginLeft="800dp"
                 >
                 <TextView
-                    android:id="@+id/userGuideText"
+                    android:id="@+id/userGuideText1"
                     android:layout_width="183dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="30dp"
                     android:layout_marginTop="50dp"
-                    android:textSize="25dp"
+                    android:textSize="35dp"
+                    />
+                <TextView
+                    android:id="@+id/userGuideText2"
+                    android:layout_width="183dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="50dp"
+                    android:textSize="35dp"
                     />
             </androidx.cardview.widget.CardView>
 
