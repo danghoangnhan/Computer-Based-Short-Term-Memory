@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.example.memorygame.CallBack.ButtonCorlorCall;
 import com.example.memorygame.CallBack.ButtonImageCall;
 import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
@@ -18,23 +19,22 @@ import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
 import com.google.android.material.imageview.ShapeableImageView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BoardDragListener implements View.OnDragListener {
 
     private     ImageRecycleVIewCallBack ImageListener;
     private     CorlorRecycleViewCallBack corlorRecycleViewCallBack;
     private     BoardClickListener boardClickListener ;
     private     ButtonImageCall buttonImageCall;
+    private     ButtonCorlorCall buttonCorlorCall;
     private     MatchingObject currentObject;
 
-    public BoardDragListener(CorlorRecycleViewCallBack corlorListener) {
-        this.corlorRecycleViewCallBack = corlorListener;
-        boardClickListener =  new BoardClickListener(this.corlorRecycleViewCallBack);
-    }
     public BoardDragListener(ButtonImageCall buttonImageCall,MatchingObject init) {
         this.buttonImageCall = buttonImageCall;
+        boardClickListener =  new BoardClickListener(this.buttonImageCall);
+        this.currentObject = init;
+    }
+    public BoardDragListener(ButtonCorlorCall buttonCorlorCall,MatchingObject init) {
+        this.buttonCorlorCall = buttonCorlorCall;
         boardClickListener =  new BoardClickListener(this.buttonImageCall);
         this.currentObject = init;
     }
@@ -48,39 +48,22 @@ public class BoardDragListener implements View.OnDragListener {
                 if (parent != null) {
                     GlobalObject globalObject = GlobalObject.getInstance();
                     ShapeableImageView destination = parent.findViewById(v.getId());
-
-                    ArrayList<MatchingObject> selectedList = globalObject.getSelectedButtonList();
-                    List<MatchingObject> objectList = globalObject.getObjectList();
-
-                    if (globalObject.getTmpClickedImage()!=null){
-
-                        ImageRecycleViewObject targetObject = globalObject.getTmpClickedImage();
-                        globalObject.setSelectedButtonList(selectedList);
-                        boardClickListener.setImageRecycleViewObject(targetObject);
-
-                        if (this.buttonImageCall!=null){
+                    if (globalObject.getTmpClickedImage()!=null&&this.buttonImageCall!=null){
+                            ImageRecycleViewObject targetObject = globalObject.getTmpClickedImage();
+                            boardClickListener.setImageRecycleViewObject(targetObject);
                             this.buttonImageCall.HandleSelected(v.getId(),targetObject,currentObject);
                             currentObject.setImage(targetObject);
                             this.boardClickListener.setObject(currentObject);
                             this.boardClickListener.setTargetObject(targetObject);
-                        }
-                        globalObject.setTmpClickedImage(null);
+                            globalObject.setTmpClickedImage(null);
                     }
-                    if (globalObject.getTmpCorlorObject()!=null){
-                        CorlorRecycleViewObject selectCorlorObject =  globalObject.getTmpCorlorObject();
-                        destination.setStrokeColorResource(selectCorlorObject.getCorlorId());
-                        MatchingObject object = selectedList.stream()
-                                .filter(matchingObject -> matchingObject.getViewId()==v.getId())
-                                .findAny()
-                                .orElseGet(()->{
-                                    MatchingObject newMatch = objectList.stream().filter(element->element.getViewId()==v.getId()).findFirst().get();
-                                    selectedList.add(newMatch);
-                                    return newMatch;
-                                });
-                        object.setColor(selectCorlorObject.getCorlorId());
-                        globalObject.setSelectedButtonList(selectedList);
-                        boardClickListener.setCorlorRecycleViewObject(selectCorlorObject);
-                        globalObject.setTmpCorlorObject(null);
+                    if (globalObject.getTmpCorlorObject()!=null&&this.buttonCorlorCall!=null){
+                            CorlorRecycleViewObject selectCorlorObject =  globalObject.getTmpCorlorObject();
+                            boardClickListener.setCorlorRecycleViewObject(selectCorlorObject);
+                            this.buttonCorlorCall.HandleSelected(v.getId(),selectCorlorObject,currentObject);
+                            this.boardClickListener.setObject(currentObject);
+                            this.boardClickListener.setCorlorRecycleViewObject(selectCorlorObject);
+                            globalObject.setTmpCorlorObject(null);
                     }
                     destination.setOnClickListener(boardClickListener);
                 }

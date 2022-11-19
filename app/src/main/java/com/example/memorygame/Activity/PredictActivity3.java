@@ -14,24 +14,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorygame.Adapter.CorlorListAdapter;
 import com.example.memorygame.ButtonList;
+import com.example.memorygame.CallBack.ButtonCorlorCall;
+import com.example.memorygame.CallBack.ButtonImageCall;
 import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
+import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 import com.example.memorygame.RecycleView.CorlorListInterface;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class PredictActivity3 extends AppCompatActivity implements HandleStageButton, CorlorListInterface,CorlorRecycleViewCallBack {
+public class PredictActivity3 extends AppCompatActivity implements HandleStageButton,
+        CorlorListInterface,
+        CorlorRecycleViewCallBack,
+        ButtonCorlorCall {
+
     private List<CorlorRecycleViewObject> corlorList;
     private CorlorRecycleViewObject tmpCorlor;
     private List<MatchingObject> objectList;
@@ -41,9 +50,6 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     private View tmpView;
     private GlobalObject globalObject;
     private ArrayList<MatchingObject> selectedButtonList;
-    private TextView userGuildText;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,17 +64,18 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
         initialRecyleView();
 
         this.selectedButtonList.forEach(element->{
+
             MatchingObject filter = this.objectList.stream()
                     .filter(currentElement-> Objects.equals(currentElement.getRow(), element.getRow()))
                     .filter(currentElement-> Objects.equals(currentElement.getColumn(), element.getColumn()))
                     .findFirst().orElse(null);
 
-            assert filter != null;
-            ShapeableImageView filterImage = findViewById(filter.getViewId());
-            filterImage.setImageResource(element.getImage().getImageId());
-            filter.setInitCorlor(R.color.white);
-            filterImage.setStrokeColorResource(R.color.white);
-
+            element.setInitCorlor(filter.getInitCorlor());
+            element.setCorlor(filter.getCorlor());
+            element.setViewId(filter.getViewId());
+            ShapeableImageView filterImage = findViewById(element.getViewId());
+            filterImage.setOnDragListener( new BoardDragListener((ButtonCorlorCall) this,element));
+            filterImage.setImageResource(element.getImageId());
         });
     }
     public void initialButton(){
@@ -81,12 +88,12 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     }
     public  void initialRecyleView(){
         this.recyclerView = findViewById(R.id.color_recycle);
-        this.corlorList = ButtonList.getInstance().getSuffleCorlorList().stream().map(element->{
-            CorlorRecycleViewObject newObject = new CorlorRecycleViewObject();
-            newObject.setSelected(false);
-            newObject.setCorlorId(element);
-            return newObject;
-        }).collect(Collectors.toList());
+        this.corlorList = ButtonList
+                .getInstance()
+                .getSuffleCorlorList()
+                .stream()
+                .map(element->new CorlorRecycleViewObject(false,element))
+                .collect(Collectors.toList());
         this.corlorListAdapter = new CorlorListAdapter(this,this.corlorList,this);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(PredictActivity3.this,LinearLayoutManager.VERTICAL,false));
         this.recyclerView.setAdapter(this.corlorListAdapter);
@@ -94,13 +101,22 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     public ArrayList<MatchingObject> generatingMatchingObject(Integer NumberPerrow){
         AtomicReference<Integer> currentRow = new AtomicReference<>(0);
         AtomicReference<Integer> currentColumn= new AtomicReference<>(0);
+        Iterator<CorlorRecycleViewObject> corlorListIterator = Collections.nCopies(ButtonList.getInstance().getButtonBoard().size(),new CorlorRecycleViewObject(false,R.color.white)).stream().iterator();
         return (ArrayList<MatchingObject>) ButtonList.getInstance().getButtonBoard().stream().map(elementId->{
+
             MatchingObject currentObject = new MatchingObject();
+            CorlorRecycleViewObject corlor = corlorListIterator.next();
+
             ShapeableImageView button = findViewById(elementId);
-            button.setOnDragListener( new BoardDragListener(this));
+            button.setImageResource(corlor.getCorlorId());
+            button.setStrokeColorResource(corlor.getCorlorId());
+
+            currentObject.setCorlor(corlor);
+            currentObject.setInitCorlor(corlor);
             currentObject.setViewId(button.getId());
             currentObject.setColumn(currentColumn.get());
             currentObject.setRow(currentRow.get());
+
             if (currentColumn.get() ==NumberPerrow-1){
                 currentRow.getAndSet(currentRow.get() + 1);
                 currentColumn.set(0);
@@ -112,16 +128,18 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
         }).collect(Collectors.toList());
     }
     @Override
-    public void handleReplayButton(View view) {this.startActivity(new Intent(this,PredictActivity1.class));}
+    public void handleReplayButton(View view) {
+        this.startActivity(new Intent(this,PredictActivity3.class));
+    }
     @Override
     public void handleEscButton(View view) {
         this.startActivity(new Intent(this,LoginActivity.class));
     }
     @Override
     public void handleNextButton(View view) {
-        if(this.selectedButtonList.stream().anyMatch(element -> !Objects.equals(element.getInitCorlor(), element.getColor()))){
+        if(this.selectedButtonList.stream().anyMatch(element -> !Objects.equals(element.getInitCorlor(), element.getCorlor()))){
+            this.globalObject.getResult().setSelected3(this.selectedButtonList);
             this.startActivity(new Intent(this,ResultActivity.class));
-            this.globalObject.getResult().setSelected3(this.objectList);
         }else{
             Toast.makeText(getApplicationContext(),"尚未配對顏色", Toast.LENGTH_SHORT).show();
         }
@@ -136,8 +154,9 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
 
     @Override
     public void HandleSelected(@NonNull CorlorRecycleViewObject target) {
+
         int filterIndex = IntStream.range(0,this.corlorList.size())
-                .filter(i->this.corlorList.get(i).getCorlorId()==target.getCorlorId())
+                .filter(i->this.corlorList.get(i).equals(target))
                 .findFirst()
                 .orElseGet(null);
 
@@ -145,16 +164,29 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
         this.corlorList.set(filterIndex,target);
         this.corlorListAdapter.notifyItemChanged(filterIndex);
     }
-
     @Override
     public void HandleUnSelected(@NonNull CorlorRecycleViewObject target) {
         int filterIndex = IntStream.range(0,this.corlorList.size())
-                .filter(i->this.corlorList.get(i).getCorlorId()==target.getCorlorId())
-                .findFirst()
+                .filter(i->this.corlorList.get(i).equals(target))
+                .findAny()
                 .orElseGet(null);
 
         target.setSelected(false);
-        this.corlorList.set(filterIndex,target);
         this.corlorListAdapter.notifyItemChanged(filterIndex);
+    }
+    @Override
+    public void HandleSelected(Integer viewId, @NonNull CorlorRecycleViewObject corlor, @NonNull MatchingObject matchingObject) {
+        ShapeableImageView targetView = findViewById(viewId);
+        targetView.setStrokeColorResource(corlor.getCorlorId());
+        matchingObject.setCorlor(corlor);
+        HandleSelected(corlor);
+    }
+    @Override
+    public void HandleUnSelected(Integer viewId, CorlorRecycleViewObject corlor, @NonNull MatchingObject matchingObject) {
+        ShapeableImageView targetView = findViewById(viewId);
+        HandleUnSelected(matchingObject.getCorlor());
+        matchingObject.setCorlor(matchingObject.getInitCorlor());
+        targetView.setStrokeColorResource(matchingObject.getInitCorlor().getCorlorId());
+        HandleSelected(matchingObject.getInitCorlor());
     }
 }

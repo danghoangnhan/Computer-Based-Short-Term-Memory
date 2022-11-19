@@ -1,6 +1,5 @@
 package com.example.memorygame.Listener.ClickListener;
 
-import android.media.projection.MediaProjection;
 import android.view.View;
 
 import com.example.memorygame.CallBack.ButtonImageCall;
@@ -22,9 +21,6 @@ public class BoardClickListener implements View.OnClickListener{
     private ImageRecycleViewObject targetObject;
     private MatchingObject object;
 
-    public BoardClickListener(ImageRecycleVIewCallBack imageListener) {
-        this.ImageListener = imageListener;
-    }
     public BoardClickListener(CorlorRecycleViewCallBack imageListener) {
         this.corlorRecycleViewCallBack = imageListener;
     }

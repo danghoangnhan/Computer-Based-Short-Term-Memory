@@ -17,7 +17,8 @@ public class GlobalObject {
     private Result result;
     private int gameState;
     private List<Integer> ranImg;
-    // Getter-Setters
+    private List<ImageRecycleViewObject> selectedImage;
+
     public static GlobalObject getInstance() {
         if(instance == null){
             instance = new GlobalObject();
@@ -28,6 +29,14 @@ public class GlobalObject {
         this.selectedButtonList = new ArrayList<>();
         this.result = new Result();
         this.gameState = 1;
+    }
+
+    public List<ImageRecycleViewObject> getSelectedImage() {
+        return selectedImage;
+    }
+
+    public void setSelectedImage(List<ImageRecycleViewObject> selectedImage) {
+        this.selectedImage = selectedImage;
     }
 
     public List<Integer> getRanImg() {

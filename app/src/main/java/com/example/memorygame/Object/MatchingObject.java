@@ -1,41 +1,29 @@
 package com.example.memorygame.Object;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import androidx.annotation.NonNull;
 
 public class MatchingObject  {
-    private Integer initCorlor,color,row,column,viewId,width,height;
+    private Integer row,column,viewId,width,height;
     ImageRecycleViewObject image;
+    CorlorRecycleViewObject corlor,initCorlor;
 
     public boolean sameColum(@NonNull MatchingObject anotherObject){return this.column.compareTo(anotherObject.getColumn())==0;}
 
     public  boolean sameRow(@NonNull MatchingObject anotherObject){return this.row.compareTo(anotherObject.getRow())==0;}
 
-    public  boolean sameObject(MatchingObject anotherObject){
-        if (this.image==null||anotherObject.getImage()==null)return false;
-        int RESULT = this.image.compareTo(anotherObject.getImage());
-        return RESULT == 0;
+    public  boolean sameObject(@NonNull MatchingObject anotherObject){
+        return this.image.compareTo(anotherObject.getImage()) == 0;
     }
-    public  boolean sameCorlor(MatchingObject element) {
-        if (element==null)return false;
-        if (element.getColor()==null) return false;
-        return this.color.compareTo(element.getColor())==0;
+    public  boolean sameCorlor(@NonNull MatchingObject anotherObject) {
+        return this.corlor.compareTo(anotherObject.getCorlor());
     }
 
-    public MatchingObject() {}
+    public MatchingObject() {
+
+    }
 
     public MatchingObject(@NonNull ImageRecycleViewObject another){this.setImage(another);}
 
-
-    public Integer getColor() {
-        return color;
-    }
-
-    public void setColor(Integer color) {
-        this.color = color;
-    }
 
     public Integer getRow() {
         return row;
@@ -79,11 +67,17 @@ public class MatchingObject  {
         this.viewId = viewId;
     }
 
-    public Integer getInitCorlor() {
+    public CorlorRecycleViewObject getInitCorlor() {
         return initCorlor;
     }
 
-    public void setInitCorlor(Integer initCorlor) {
+    public void setInitCorlor(CorlorRecycleViewObject initCorlor) {
         this.initCorlor = initCorlor;
+    }
+    public CorlorRecycleViewObject getCorlor() {
+        return corlor;
+    }
+    public void setCorlor(CorlorRecycleViewObject corlor) {
+        this.corlor = corlor;
     }
 }

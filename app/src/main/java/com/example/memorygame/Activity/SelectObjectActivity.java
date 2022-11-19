@@ -100,7 +100,7 @@ public class SelectObjectActivity extends AppCompatActivity implements
         if(this.selectedImage.size()>0){
             GlobalObject.getInstance().setRanImg(this.images);
             Intent intent = new Intent(this,MatchColorActivity.class);
-            intent.putParcelableArrayListExtra("selectedImages", (ArrayList<ImageRecycleViewObject>) this.selectedImage);
+            GlobalObject.getInstance().setSelectedImage(this.selectedImage);
             startActivity(intent);
         }else{
             Toast.makeText(getApplicationContext(),Language.Chinese.get(Key.Objectionable), Toast.LENGTH_SHORT).show();

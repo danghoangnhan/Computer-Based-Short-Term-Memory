@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 public class Result   {
     private List<MatchingObject>selected1,selected2,selected3, correct;
-    private Integer result1,result2,result3;
+    private Integer result1,result2,result3,result4,result5;
 
     public Result() {
 
@@ -21,9 +21,7 @@ public class Result   {
     public long ObjectValidation(@NonNull List<MatchingObject> selected){return selected.stream().filter(containObject).count();}
     public long SpatialValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containColumn.and(containRow)).count();}
     public long ObjectSpatialValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containObject.and(containColumn).and(containRow)).count();}
-    public long CorlorValidation(@NonNull List<MatchingObject> selected){
-        return  selected.stream().filter(containColor).count();
-    }
+    public long CorlorValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containColor).count();}
     public long ObjectCorlorLocationValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containObject.and(containColor).and(containColumn).and(containRow)).count();}
 
     public List<MatchingObject> getCorrect() {
@@ -70,5 +68,21 @@ public class Result   {
 
     public void setResult3(Integer result3) {
         this.result3 = result3;
+    }
+
+    public Integer getResult4() {
+        return result4;
+    }
+
+    public void setResult4(Integer result4) {
+        this.result4 = result4;
+    }
+
+    public Integer getResult5() {
+        return result5;
+    }
+
+    public void setResult5(Integer result5) {
+        this.result5 = result5;
     }
 }

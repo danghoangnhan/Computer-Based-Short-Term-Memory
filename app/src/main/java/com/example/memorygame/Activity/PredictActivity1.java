@@ -1,16 +1,15 @@
 package com.example.memorygame.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.memorygame.ButtonList;
 import com.example.memorygame.GlobalObject;
@@ -18,12 +17,10 @@ import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Language;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
-import com.example.memorygame.Object.Result;
 import com.example.memorygame.R;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -105,7 +102,7 @@ public class PredictActivity1 extends AppCompatActivity
     public void handleNextButton(View view) {
         if(this.selectedImage.size()>0){
             Intent intent = new Intent(this,PredictActivity2.class);
-            intent.putParcelableArrayListExtra("selectedImages", (ArrayList<ImageRecycleViewObject>) this.selectedImage);
+            GlobalObject.getInstance().setSelectedImage(this.selectedImage);
             GlobalObject.getInstance().getResult().setSelected1(this.selectedImage.stream().map(MatchingObject::new).collect(Collectors.toList()));
             this.startActivity(intent);
             startActivity(intent);

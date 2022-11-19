@@ -38,17 +38,14 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             setContentView(R.layout.activity_result_2);
 
             this.result4 = findViewById(R.id.result4);
-            this.result4 = findViewById(R.id.result4);
+            result.setResult4((int) result.CorlorValidation(result.getSelected3()));
             this.result4.setText(result.CorlorValidation(result.getSelected3())+"/"+result.getCorrect().size());
 
-            this.result5 = findViewById(R.id.result5);
             this.result5 = findViewById(R.id.result5);
             this.result5.setText(result.ObjectCorlorLocationValidation(result.getSelected3())+"/"+result.getCorrect().size());
 
             this.replayButton = findViewById(R.id.replayButton);
             this.replayButton.setOnClickListener(this::handleReplayButton);
-
-            this.result5.setText(result.ObjectCorlorLocationValidation(result.getSelected3())+"/"+result.getCorrect().size());
 
             this.total_result  = findViewById(R.id.result_total);
             this.result_1  = findViewById(R.id.result_1);
@@ -71,7 +68,6 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
         }
         this.escButton = findViewById(R.id.escButton);
         this.escButton.setOnClickListener(this::handleEscButton);
-
 
         this.result1 = findViewById(R.id.result1);
         this.result1.setText(result.ObjectValidation(result.getSelected1())+"/"+result.getCorrect().size());
