@@ -5,17 +5,17 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-public class MatchingObject implements Parcelable {
-    private Integer initCorlor,color,row,column,image,viewId,width,height;
+public class MatchingObject  {
+    private Integer initCorlor,color,row,column,viewId,width,height;
+    ImageRecycleViewObject image;
 
+    public boolean sameColum(@NonNull MatchingObject anotherObject){return this.column.compareTo(anotherObject.getColumn())==0;}
 
-
-    public boolean sameColum(@NonNull MatchingObject anotherObject){return this.column.compareTo(anotherObject.getColumn())==0;};
     public  boolean sameRow(@NonNull MatchingObject anotherObject){return this.row.compareTo(anotherObject.getRow())==0;}
+
     public  boolean sameObject(MatchingObject anotherObject){
         if (this.image==null||anotherObject.getImage()==null)return false;
         int RESULT = this.image.compareTo(anotherObject.getImage());
-        boolean test = RESULT==0;
         return RESULT == 0;
     }
     public  boolean sameCorlor(MatchingObject element) {
@@ -24,47 +24,9 @@ public class MatchingObject implements Parcelable {
         return this.color.compareTo(element.getColor())==0;
     }
 
+    public MatchingObject() {}
 
-    public MatchingObject(Parcel in) {
-        if (in.readByte() == 0) {
-            initCorlor = null;
-        }
-        else {
-            initCorlor = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            color = null;
-        } else {
-            color = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            row = null;
-        } else {
-            row = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            column = null;
-        } else {
-            column = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            image = null;
-        } else {
-            image = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            viewId = null;
-        } else {
-            viewId = in.readInt();
-        }
-    }
-
-    public MatchingObject() {
-
-    }
-    public MatchingObject(@NonNull ImageRecycleViewObject another){
-        this.setImage(another.getImageId());
-    }
+    public MatchingObject(@NonNull ImageRecycleViewObject another){this.setImage(another);}
 
 
     public Integer getColor() {
@@ -91,11 +53,14 @@ public class MatchingObject implements Parcelable {
         this.column = column;
     }
 
-    public Integer getImage() {
+    public ImageRecycleViewObject getImage() {
         return image;
     }
+    public int getImageId() {
+        return image.getImageId();
+    }
 
-    public void setImage(Integer image) {
+    public void setImage(@NonNull ImageRecycleViewObject image) {
         this.image = image;
     }
     public Integer getWidth() {return width;}
@@ -105,69 +70,6 @@ public class MatchingObject implements Parcelable {
     public Integer getHeight() {return height;}
 
     public void setHeight(Integer height) {this.height = height;}
-
-    public void clone(@NonNull MatchingObject another){
-        this.setColor(another.getColor());
-        this.setImage(another.getImage());
-        this.setViewId(another.getViewId());
-        this.setColumn(another.getColumn());
-        this.setRow(another.getRow());
-    }
-
-
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        if (initCorlor == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(initCorlor);
-        }
-        if (color == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(color);
-        }
-        if (row == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(row);
-        }
-        if (column == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(column);
-        }
-        if (image == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(image);
-        }
-        if (viewId == null) {
-            parcel.writeByte((byte) 0);
-        } else {
-            parcel.writeByte((byte) 1);
-            parcel.writeInt(viewId);
-        }
-    }
-    public static final Parcelable.Creator<MatchingObject> CREATOR = new Parcelable.Creator<MatchingObject>() {
-        public MatchingObject createFromParcel(Parcel in) {
-            return new MatchingObject(in);
-        }
-        public MatchingObject[] newArray(int size) {
-            return new MatchingObject[size];
-        }
-    };
 
     public Integer getViewId() {
         return viewId;

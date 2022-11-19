@@ -17,7 +17,6 @@ import com.example.memorygame.ButtonList;
 import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
-import com.example.memorygame.Language;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
@@ -45,6 +44,7 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     private TextView userGuildText;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
 
             assert filter != null;
             ShapeableImageView filterImage = findViewById(filter.getViewId());
-            filterImage.setImageResource(element.getImage());
+            filterImage.setImageResource(element.getImage().getImageId());
             filter.setInitCorlor(R.color.white);
             filterImage.setStrokeColorResource(R.color.white);
 
@@ -114,7 +114,9 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     @Override
     public void handleReplayButton(View view) {this.startActivity(new Intent(this,PredictActivity1.class));}
     @Override
-    public void handleEscButton(View view) {this.startActivity(new Intent(this,LoginActivity.class));}
+    public void handleEscButton(View view) {
+        this.startActivity(new Intent(this,LoginActivity.class));
+    }
     @Override
     public void handleNextButton(View view) {
         if(this.selectedButtonList.stream().anyMatch(element -> !Objects.equals(element.getInitCorlor(), element.getColor()))){

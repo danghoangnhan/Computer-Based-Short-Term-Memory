@@ -44,11 +44,8 @@ public class WaitingActivity extends AppCompatActivity
         this.replayButton = findViewById(R.id.replayButton);
         this.nextButton.setOnClickListener(this::handleNextButton);
         escButton.setOnClickListener(this::handleEscButton);
-
-
         this.replayButton.setOnClickListener(this::handleReplayButton);
-        Bundle args = getIntent().getExtras();
-        this.objectList = args.getParcelableArrayList("ARRAYLIST");
+        this.objectList = (ArrayList<MatchingObject>) GlobalObject.getInstance().getResult().getCorrect();
         timerStart(60000,1000);
     }
 
@@ -79,10 +76,6 @@ public class WaitingActivity extends AppCompatActivity
     @Override
     public void HandleConfirmButton() {
         Intent intent = new Intent(WaitingActivity.this, PredictActivity1.class);
-        Bundle args = new Bundle();
-        args.putParcelableArrayList("ARRAYLIST", objectList);
-        intent.putExtra("BUNDLE", args);
-        startActivity(intent);
         startActivity(intent);
     }
 

@@ -36,13 +36,12 @@ public class PredictActivity1 extends AppCompatActivity
     private List<ImageRecycleViewObject> selectedImage;
     private List<Integer> images;
     private List<ShapeableImageView>buttons;
-    private TextView UserGuild;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_predict1);
         this.images = ButtonList.suffledImage(GlobalObject.getInstance().getRanImg());
-        this.buttons = ButtonList.getInstance().getBoardButtonList().stream().map(element->{ShapeableImageView view = findViewById(element);return view;}).collect(Collectors.toList());
+        this.buttons = ButtonList.getInstance().getBoardButtonList().stream().map(element-> this.<ShapeableImageView>findViewById(element)).collect(Collectors.toList());
         this.nextButton = findViewById(R.id.nextButton);
         this.escButton = findViewById(R.id.escButton);
         this.replayButton = findViewById(R.id.replayButton);
@@ -71,7 +70,7 @@ public class PredictActivity1 extends AppCompatActivity
             }
         });
     }
-    public static <K, V> Map<ShapeableImageView, Integer> zipToMap(@NonNull List<ShapeableImageView> keys, @NonNull List<Integer> values) {
+    public static <V> Map<ShapeableImageView, Integer> zipToMap(@NonNull List<ShapeableImageView> keys, @NonNull List<Integer> values) {
         return IntStream.range(0, keys.size())
                 .boxed()
                 .collect(Collectors.toMap(keys::get, values::get));

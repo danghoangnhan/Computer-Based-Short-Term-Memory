@@ -4,14 +4,17 @@ import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+
+import org.jetbrains.annotations.Contract;
 
 public class ImageRecycleViewObject implements Parcelable {
     private Integer imageId;
     private Boolean isSelected;
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    public ImageRecycleViewObject(Parcel in) {
+    public ImageRecycleViewObject(@NonNull Parcel in) {
         if (in.readByte() == 0) {
             imageId = null;
         } else {
@@ -24,13 +27,17 @@ public class ImageRecycleViewObject implements Parcelable {
         }
     }
 
-    public static final Creator<ImageRecycleViewObject> CREATOR = new Creator<ImageRecycleViewObject>() {
+    public static final Creator<ImageRecycleViewObject> CREATOR = new Creator<>() {
+        @NonNull
+        @Contract("_ -> new")
         @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
         public ImageRecycleViewObject createFromParcel(Parcel in) {
             return new ImageRecycleViewObject(in);
         }
 
+        @NonNull
+        @Contract(value = "_ -> new", pure = true)
         @Override
         public ImageRecycleViewObject[] newArray(int size) {
             return new ImageRecycleViewObject[size];
@@ -50,7 +57,7 @@ public class ImageRecycleViewObject implements Parcelable {
     }
 
     public boolean isSelected() {
-        return isSelected;
+        return isSelected.booleanValue();
     }
 
     public void setSelected(boolean selected) {
@@ -77,5 +84,9 @@ public class ImageRecycleViewObject implements Parcelable {
             parcel.writeByte((byte) 1);
             parcel.writeBoolean(isSelected);
         }
+    }
+
+    public int compareTo(@NonNull ImageRecycleViewObject image) {
+        return this.imageId.compareTo(image.imageId);
     }
 }

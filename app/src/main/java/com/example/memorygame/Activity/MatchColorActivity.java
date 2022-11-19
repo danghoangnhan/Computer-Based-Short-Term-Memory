@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,7 +19,6 @@ import com.example.memorygame.CallBack.ButtonImageCall;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
-import com.example.memorygame.Language;
 import com.example.memorygame.Listener.DragListener.BoardDragListener;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
@@ -31,7 +27,9 @@ import com.example.memorygame.RecycleView.RecycleViewInterface;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -51,7 +49,6 @@ public class MatchColorActivity extends AppCompatActivity implements
     private ImageRecycleViewObject tmpClickedImage;
     private GlobalObject globalObject;
     private ArrayList<MatchingObject> selectedButtonList;
-    private TextView userGuildText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +61,6 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.selectedButtonList = new ArrayList<>();
         this.objectList = this.generatingMatchingObject(3);
         this.globalObject.setObjectList(this.objectList);
-        this.userGuildText = findViewById(R.id.userGuideText2);
     }
 
     public  void initialRecyleView(){
@@ -111,11 +107,9 @@ public class MatchColorActivity extends AppCompatActivity implements
     @Override
     public void handleNextButton(View view){
         if(this.selectedImage.stream().filter(ImageRecycleViewObject::isSelected).count()>0){
-            Intent intent = new Intent(this,WaitingActivity.class);
-            Bundle args = new Bundle();
             this.globalObject.getResult().setCorrect(this.selectedButtonList);
-            args.putParcelableArrayList("ARRAYLIST", this.selectedButtonList);
-            intent.putExtras(args);
+
+            Intent intent = new Intent(this,WaitingActivity.class);
             this.startActivity(intent);
         }else{
             Toast.makeText(getApplicationContext(),"尚未配對顏色", Toast.LENGTH_SHORT).show();
@@ -133,7 +127,6 @@ public class MatchColorActivity extends AppCompatActivity implements
         this.globalObject.setTmpClickedImage(this.tmpClickedImage);
     }
 
-    @Override
     public void handleImageRecycleView(Integer ViewID) {
         ImageView view = findViewById(ViewID);
         view.setImageResource(R.drawable.delete);
@@ -143,42 +136,49 @@ public class MatchColorActivity extends AppCompatActivity implements
 
     @Override
     public void HandleSelected(ImageRecycleViewObject target) {
-
-        Integer filterIndex = IntStream.range(0,this.selectedImage.size())
-                .filter(i->this.selectedImage.get(i).getImageId()==target.getImageId())
-                .filter(i->this.selectedImage.get(i).isSelected()==false)
-                .findFirst()
-                .orElseGet(null);
-
+        Integer filterIndex = getFilterIndex(target);
         if (filterIndex!=null){
             target.setSelected(true);
-            this.selectedImage.set(filterIndex,target);
             this.recyclerViewAdapter.notifyItemChanged(filterIndex);
         }
     }
-
+public Integer getFilterIndex(ImageRecycleViewObject target){
+    return IntStream.range(0,this.selectedImage.size())
+            .filter(i->this.selectedImage.get(i).equals(target))
+            .findAny().orElse(-1);
+}
     @Override
     public void HandleUnSelected(ImageRecycleViewObject target) {
-        Integer filterIndex = IntStream.range(0,this.selectedImage
-                        .size())
-                .filter(i->this.selectedImage.get(i).getImageId()==target.getImageId())
-                .filter(i->this.selectedImage.get(i).isSelected()==true)
-                .findFirst()
-                .orElseGet(null);
-
+        Integer filterIndex = getFilterIndex(target);
         if (filterIndex!=null){
             target.setSelected(false);
-            this.selectedImage.set(filterIndex,target);
             this.recyclerViewAdapter.notifyItemChanged(filterIndex);
         }
     }
 
     @Override
     public void HandleSelected(Integer viewId,ImageRecycleViewObject image, MatchingObject matchingObject) {
-        HandleSelected(image);
-        this.selectedButtonList.add(matchingObject);
-    }
+        ShapeableImageView targetView = findViewById(viewId);
 
+        MatchingObject selectedObject = this.selectedButtonList.size() <= 0 ? null : this.selectedButtonList
+                .stream()
+                .filter(element -> element.getViewId().equals(viewId))
+                .findAny()
+                .orElse(null);
+
+        if (selectedObject==null){
+            selectedObject = objectList.stream().filter(element->element.getViewId().equals(viewId)).findFirst().get();
+            HandleSelected(image);
+            selectedObject.setImage(image);
+            this.selectedButtonList.add(selectedObject);
+        }
+        else{
+            HandleUnSelected(matchingObject.getImage());
+            HandleSelected(image);
+        }
+        targetView.setImageResource(image.getImageId());
+
+    }
     @Override
     public void HandleUnSelected(Integer viewId, ImageRecycleViewObject image, @NonNull MatchingObject matchingObject) {
         HandleUnSelected(image);
@@ -186,4 +186,10 @@ public class MatchColorActivity extends AppCompatActivity implements
         shapeableImageView.setImageResource(matchingObject.getColor());
         this.selectedButtonList.remove(matchingObject);
     }
+
+    @Override
+    public void HandleUpdated(Integer viewId, ImageRecycleViewObject image, MatchingObject matchingObject) {
+
+    }
+
 }

@@ -82,21 +82,9 @@ public class PredictActivity2 extends AppCompatActivity implements
     @Override
     public void handleNextButton(View view) {
         if(this.selectedObject.size()>0){
-            Intent intent;
-            switch (GlobalObject.getInstance().getGameState()){
-                case 1:
-                    intent = new Intent(this,ResultActivity.class);
-                    this.globalObject.getResult().setSelected2(this.selectedObject);
-                    startActivity(intent);
-                    break;
-                default:
-                    intent = new Intent(this,PredictActivity3.class);
-                    intent.putParcelableArrayListExtra("selectedImages", (ArrayList<MatchingObject>) this.selectedObject);
-                    this.globalObject.getResult().setSelected2(this.selectedObject);
-                    startActivity(intent);
-                    break;
-            }
-
+            this.globalObject.getResult().setSelected2(this.selectedObject);
+            Intent intent = new Intent(this,GlobalObject.getInstance().getGameState()==1?ResultActivity.class:PredictActivity3.class);
+            startActivity(intent);
         }else{
             Toast.makeText(getApplicationContext(), Language.Chinese.get(Language.Key.Objectionable), Toast.LENGTH_SHORT).show();
         }
@@ -170,5 +158,15 @@ public class PredictActivity2 extends AppCompatActivity implements
         this.selectedObject.remove(matchingObject);
         ShapeableImageView shapeableImageView = findViewById(viewId);
         shapeableImageView.setImageResource(R.color.white);
+    }
+
+    @Override
+    public void HandleUpdated(Integer viewId, ImageRecycleViewObject image, MatchingObject matchingObject) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }
