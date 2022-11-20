@@ -63,20 +63,20 @@
             android:layout_marginLeft="800dp"
             >
             <TextView
-                android:layout_width="183dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="75dp"
-                android:layout_marginTop="50dp"
-                android:text="請把物件"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="45dp"
+                android:text="請把三個物件"
                 android:textSize="35dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="0dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="90dp"
-                android:text="放到剛才選的位置"
-                android:textSize="32dp"
+                android:text="放回原本的位置"
+                android:textSize="35dp"
                 />
         </androidx.cardview.widget.CardView>
 

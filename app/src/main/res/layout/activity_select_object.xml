@@ -36,9 +36,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="請選出三個物件"
-                android:layout_marginLeft="10dp"
+                android:text="請任意選擇"
+                android:layout_marginLeft="45dp"
                 android:layout_marginTop="50dp"
+                android:textSize="35dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="三個物件"
+                android:layout_marginLeft="55dp"
+                android:layout_marginTop="95dp"
                 android:textSize="35dp"
                 />
         </androidx.cardview.widget.CardView>

@@ -13,16 +13,20 @@ public class Result   {
     public Result() {
 
     }
-    Predicate<MatchingObject>   containObject       =       element-> this.correct.stream().anyMatch(pattern->pattern.sameObject(element));
-    Predicate<MatchingObject>   containRow          =       element-> this.correct.stream().anyMatch(pattern->pattern.sameRow(element));
-    Predicate<MatchingObject>   containColumn       =       element-> this.correct.stream().anyMatch(pattern->pattern.sameColum(element));
-    Predicate<MatchingObject>   containColor        =       element-> this.correct.stream().anyMatch(pattern->pattern.sameCorlor(element));
+    Predicate<MatchingObject>   containObject                       =       element-> this.correct.stream().anyMatch(pattern->pattern.sameObject(element));
+    Predicate<MatchingObject>   containRow                          =       element-> this.correct.stream().anyMatch(pattern->pattern.sameRow(element));
+    Predicate<MatchingObject>   containColumn                       =       element-> this.correct.stream().anyMatch(pattern->pattern.sameColum(element));
+    Predicate<MatchingObject>   containColor                        =       element-> this.correct.stream().anyMatch(pattern->pattern.sameCorlor(element));
+    Predicate<MatchingObject>   containObjectSpartitial             =       element-> this.correct.stream().anyMatch(pattern-> pattern.sameColum(element)&& pattern.sameRow(element)&& pattern.sameObject(element));
+    Predicate<MatchingObject>   containObjectCorlorLocation         =       element-> this.correct.stream().anyMatch(pattern-> pattern.sameColum(element)&& pattern.sameRow(element)&& pattern.sameObject(element)&& pattern.sameCorlor(element));
+
+
 
     public long ObjectValidation(@NonNull List<MatchingObject> selected){return selected.stream().filter(containObject).count();}
     public long SpatialValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containColumn.and(containRow)).count();}
-    public long ObjectSpatialValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containObject.and(containColumn).and(containRow)).count();}
+    public long ObjectSpatialValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containObjectSpartitial).count();}
     public long CorlorValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containColor).count();}
-    public long ObjectCorlorLocationValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containObject.and(containColor).and(containColumn).and(containRow)).count();}
+    public long ObjectCorlorLocationValidation(@NonNull List<MatchingObject> selected){return  selected.stream().filter(containObjectCorlorLocation).count();}
 
     public List<MatchingObject> getCorrect() {
         return correct;

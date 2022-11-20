@@ -77,7 +77,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="90dp"
                     android:textSize="35dp"
-                    android:text="放在有顏色的圓圈內"
+                    android:text="放在喜歡的三個顏色內"
                     android:layout_marginLeft="0dp"
                     />
             </androidx.cardview.widget.CardView>
