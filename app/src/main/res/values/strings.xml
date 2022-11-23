@@ -11,8 +11,226 @@
     <string name="developName">杜弘仁,徐嘉連</string>
     <string name="researcher">臨床研究 :</string>
     <string name="researcherDepartment">耕莘醫院神經內科：</string>
-    <string name="researcherName" >陳志豪</string>
+    <string name="researcherName">陳志豪</string>
     <string name="deanOfColleage">輔仁大學醫學院院長 :</string>
     <string name="deanOfColleageName">葉炳強</string>
     <string name="fjuhospitaldean">葉炳強</string>
+    <string name="hello_world">Hello world! You are in HomePage activity</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_home_page">HomePageActivity</string>
+    <string name="title_activity_work_map_register">Where You work?</string>
+    <string name="title_activity_main">Main</string>
+    <string name="marker_title_where_is_your_work_place">Where You work?</string>
+    <string name="tap_on_map_to_indicate_work_place">Tap on map, to indicate work place</string>
+
+    <string name="marker_title_where_is_your_home_place">Where is Your home?</string>
+    <string name="tap_on_map_to_indicate_home_place">Tap on map, to indicate home place</string>
+
+    <string name="flexible_type_work">Flexible</string>
+    <string name="standard_type_work">Standard</string>
+
+    <string name="name_register_text">Name</string>
+    <string name="email_register_text">Email</string>
+    <string name="password_register_text">Password</string>
+    <string name="work_type_register_text">Work type</string>
+    <string name="length_work_hours_register_text">Set work length</string>
+    <string name="set_work_days">Set work days</string>
+
+    <string name="start_work_time_register_text">Set start work hour</string>
+    <string name="start_work_time">Set start work time</string>
+    <string name="work_type_save_button_text">Save</string>
+
+    <!-- Buttons names in start activity-->
+    <string name="login_activity">Login</string>
+    <string name="register_activity">Sign up</string>
+
+    <!--<string name="length_work_hours_text">Please choose work time</string>-->
+
+    <string name="when_you_start_standard_work_time">When You start? </string>
+    <string name="how_long_is_your_day">How long is Your day?</string>
+    <string name="your_start_work_time">You start your work at: </string>
+    <string name="work_length">Work length: </string>
+    <string name="title_activity_start">StartActivity</string>
+    <string name="title_activity_activity_login">activity_login</string>
+    <string name="title_activity_activity_home_place_form_registration">
+        activity_home_place_form_registration
+    </string>
+    <string name="title_activity_mytway">MytwayActivity</string>
+
+
+    <!--Registration Validation error messages-->
+    <string name="field_required">Required</string>
+    <string name="length_of_registration_password_is_not_enought">Password length not enought</string>
+    <string name="work_length_empty">Work length is empty</string>
+    <string name="start_work_time_empty">Start work time is empty</string>
+    <string name="work_type_not_selected">Work type not selected</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="home_place_equals_work_place">Home and work can\'t be in the same localization</string>
+    <string name="select_work_week">Select work week</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="ok_button">OK</string>
+    <string name="work_days_not_selected">Work days not selected</string>
+
+
+    <string-array name="work_days_in_week">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+    <string name="title_activity_testact">Map</string>
+    <string name="title_activity_testowa_mapa">Map</string>
+    <string name="title_activity_test_map">TestMapActivity</string>
+    <string name="title_activity_using_fragment">UsingFragment</string>
+
+
+    //Morning Screen small titles
+    <string name="time_to_departure_small_titles">to departure</string>
+    <string name="time_in_road_small_titles">in road</string>
+    <string name="time_arrive_to_home_small_titles">arrive to home</string>
+
+    //Work Screen small titles
+    <string name="time_to_end_work">to end work</string>
+
+    //TravelToHomeScreen small titles
+    <string name="time_spent_from_leave_home">spent from leave home</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="localization_will_help_with_choose_your_work_place">Localization will help with choose your work place</string>
+    <string name="localization_will_help_with_choose_your_home_place">Localization will help with choose your home place</string>
+    <string name="application_basing_on_your_localization">Localization basing on your localization</string>
+
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+
+    <string name="large_text">
+        "Material is the metaphor.\n\n"
+
+        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
+        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
+        "technologically advanced and open to imagination and magic.\n"
+        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
+        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
+        "flexibility of the material creates new affordances that supercede those in the physical "
+        "world, without breaking the rules of physics.\n"
+        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
+        "interact, and exist in space and in relation to each other. Realistic lighting shows "
+        "seams, divides space, and indicates moving parts.\n\n"
+
+        "Bold, graphic, intentional.\n\n"
+
+        "The foundational elements of print based design typography, grids, space, scale, color, "
+        "and use of imagery guide visual treatments. These elements do far more than please the "
+        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
+        "imagery, large scale typography, and intentional white space create a bold and graphic "
+        "interface that immerse the user in the experience.\n"
+        "An emphasis on user actions makes core functionality immediately apparent and provides "
+        "waypoints for the user.\n\n"
+
+        "Motion provides meaning.\n\n"
+
+        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
+        "inflection points that initiate motion, transforming the whole design.\n"
+        "All action takes place in a single environment. Objects are presented to the user without "
+        "breaking the continuity of experience even as they transform and reorganize.\n"
+        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
+        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
+
+        "3D world.\n\n"
+
+        "The material environment is a 3D space, which means all objects have x, y, and z "
+        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
+        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
+        "position along the z-axis and has a standard 1dp thickness.\n"
+        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
+        "emulated by manipulating the y-axis.\n\n"
+
+        "Light and shadow.\n\n"
+
+        "Within the material environment, virtual lights illuminate the scene. Key lights create "
+        "directional shadows, while ambient light creates soft shadows from all angles.\n"
+        "Shadows in the material environment are cast by these two light sources. In Android "
+        "development, shadows occur when light sources are blocked by sheets of material at "
+        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
+        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
+
+        "Resting elevation.\n\n"
+
+        "All material objects, regardless of size, have a resting elevation, or default elevation "
+        "that does not change. If an object changes elevation, it should return to its resting "
+        "elevation as soon as possible.\n\n"
+    </string>
+    <string name="title_activity_tabbed">TabbedActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_pagger">PaggerActivity</string>
+    <string name="title_activity_slide_pagger">slidePaggerActivity</string>
+
+
+    <!-- Titles -->
+    <string name="title_crossfade">Simple Crossfade</string>
+    <string name="title_card_flip">Card Flip</string>
+    <string name="title_screen_slide">Screen Slide</string>
+    <string name="title_zoom">Zoom</string>
+    <string name="title_layout_changes">Layout Changes</string>
+    <string name="title_template_step">Step Lorem Ipsum</string>
+
+    <!-- Actions -->
+    <string name="action_toggle">Toggle indicator</string>
+    <string name="action_add_item">Add item</string>
+    <string name="action_remove_item">Remove item</string>
+    <string name="action_previous">Previous</string>
+    <string name="action_next">Next</string>
+    <string name="action_finish">Finish</string>
+    <string name="action_info">Photo info</string>
+    <string name="action_photo">View photo</string>
+
+    <!-- Messages -->
+    <string name="message_empty_layout_changes">Add an item above to get started.</string>
+    <string name="message_zoom_touch_expand">Touch a photo to expand it.</string>
+
+    <!-- Accessibility-only descriptions -->
+    <string name="description_image_1">Image 1</string>
+    <string name="description_image_2">Image 2</string>
+    <string name="description_zoom_touch_close">Expanded image (touch to close)</string>
+
+    <!-- Other strings -->
+    <string name="card_back_title">Angry Red Android</string>
+    <string name="card_back_description"><![CDATA[Lorem ipsum dolor sit]]></string>
+    <string name="lorem_ipsum"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et magna ut erat elementum cursus in quis ipsum. Nam faucibus ultrices eros, vel tempor leo semper sit amet. Duis magna quam, congue vitae interdum nec, condimentum ut lectus. Sed commodo venenatis eros a dignissim. Nunc adipiscing turpis nec magna venenatis at ultricies ipsum bibendum. Sed volutpat urna quis nisi vulputate egestas. Etiam eu dui a enim lacinia dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n\nPhasellus orci mi, eleifend nec congue id, volutpat at neque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer semper velit vel leo rutrum sed fermentum elit porta.]]></string>
+    <string name="no_internet_connection">No internet connection, maybe turn on?</string>
+    <string name="user_name_occupied">Sorry, user name occupied</string>
+    <string name="password_is_not_correct">Sorry, password is not correct</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+    <string-array name="news_headlines">
+        <item>Two brooms are getting married. Before the ceremony, the bride broom says to the groom broom, "I think I'm going to have a whisk."
+                The groom broom says, How can that be possible? We havent even swept together!"</item>
+        <item>A man cheats on his girlfriend named Lorraine with a girl named Clearly.
+                Suddenly, Lorraine died.
+                At the funeral, the man stands up and sings, I can see Clearly now, Lorraine is gone.</item>
+        <item>Q: What is the difference between a girlfriend and a wife?
+
+        A: 45 lbs.
+
+        Q: What is the difference between a boyfriend and a husband?
+
+        A: 45 minutes.</item>
+        <item>            Q: What is the difference between a divorce and a circumcision?
+
+        A: In a divorce, you get rid of the whole schmuck.
+    </item>
+    </string-array>
+    <string name="title_activity_no_permissions">NoPermissionsActivity</string>
+    <string name="title_activity_tested_localization">TestedLocalizationActivity</string>
+    <string name="time_arrive_to_work_small_titles">time arrive to work</string>
+
+    <!--Main menu-->
+    <string name="title_activity_update_user">UpdateUserActivity</string>
+
+    <string name="inserted_user_not_exist">Inserted user not exist</string>
 </resources>
