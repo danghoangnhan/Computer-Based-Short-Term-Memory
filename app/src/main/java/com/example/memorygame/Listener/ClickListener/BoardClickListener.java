@@ -2,6 +2,7 @@ package com.example.memorygame.Listener.ClickListener;
 
 import android.view.View;
 
+import com.example.memorygame.CallBack.ButtonCorlorCall;
 import com.example.memorygame.CallBack.ButtonImageCall;
 import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
 import com.example.memorygame.CallBack.ImageRecycleVIewCallBack;
@@ -18,6 +19,7 @@ public class BoardClickListener implements View.OnClickListener{
     private ImageRecycleVIewCallBack ImageListener;
     private CorlorRecycleViewCallBack corlorRecycleViewCallBack;
     private ButtonImageCall buttonImageCall;
+    private ButtonCorlorCall buttonCorlorCall;
     private ImageRecycleViewObject targetObject;
     private MatchingObject object;
 
@@ -26,6 +28,9 @@ public class BoardClickListener implements View.OnClickListener{
     }
     public BoardClickListener(ButtonImageCall buttonImageCall){
         this.buttonImageCall = buttonImageCall;
+    }
+    public BoardClickListener(ButtonCorlorCall buttonCorlorCall){
+        this.buttonCorlorCall = buttonCorlorCall;
     }
 
     @Override
@@ -50,6 +55,9 @@ public class BoardClickListener implements View.OnClickListener{
         }
         if (this.buttonImageCall!=null){
             this.buttonImageCall.HandleUnSelected(v.getId(),targetObject,object);
+        }
+        if (this.buttonCorlorCall!=null){
+            this.buttonCorlorCall.HandleUnSelected(v.getId(),corlorRecycleViewObject,object);
         }
     }
 

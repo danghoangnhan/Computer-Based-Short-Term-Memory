@@ -35,7 +35,7 @@ public class BoardDragListener implements View.OnDragListener {
     }
     public BoardDragListener(ButtonCorlorCall buttonCorlorCall,MatchingObject init) {
         this.buttonCorlorCall = buttonCorlorCall;
-        boardClickListener =  new BoardClickListener(this.buttonImageCall);
+        boardClickListener =  new BoardClickListener(this.buttonCorlorCall);
         this.currentObject = init;
     }
     @RequiresApi(api = Build.VERSION_CODES.Q)
@@ -50,9 +50,9 @@ public class BoardDragListener implements View.OnDragListener {
                     ShapeableImageView destination = parent.findViewById(v.getId());
                     if (globalObject.getTmpClickedImage()!=null&&this.buttonImageCall!=null){
                             ImageRecycleViewObject targetObject = globalObject.getTmpClickedImage();
-                            boardClickListener.setImageRecycleViewObject(targetObject);
                             this.buttonImageCall.HandleSelected(v.getId(),targetObject,currentObject);
                             currentObject.setImage(targetObject);
+                            this.boardClickListener.setImageRecycleViewObject(targetObject);
                             this.boardClickListener.setObject(currentObject);
                             this.boardClickListener.setTargetObject(targetObject);
                             globalObject.setTmpClickedImage(null);

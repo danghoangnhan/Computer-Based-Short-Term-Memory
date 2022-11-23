@@ -137,13 +137,13 @@
                     android:paddingRight="5dp"
                     android:background="@drawable/custome_button1"
                     android:drawableRight="@drawable/exit"
-                    android:text="ESC"
+                    android:text="離開"
 
                     />
 
                 <Button
                     android:id="@+id/nextButton"
-                    android:text="Next"
+                    android:text="下一步"
                     android:layout_width="100dp"
                     android:layout_height="50dp"
                     android:layout_alignParentRight="true"

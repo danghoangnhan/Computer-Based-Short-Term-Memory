@@ -173,6 +173,12 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
     }
     @Override
     public void HandleSelected(Integer viewId, @NonNull CorlorRecycleViewObject corlor, @NonNull MatchingObject matchingObject) {
+        if (matchingObject.getCorlor()!=null){
+            if (matchingObject.getCorlor().getCorlorId()!=matchingObject.getInitCorlor().getCorlorId()){
+                HandleUnSelected(matchingObject.getCorlor());
+
+            }
+        }
         ShapeableImageView targetView = findViewById(viewId);
         targetView.setStrokeColorResource(corlor.getCorlorId());
         matchingObject.setCorlor(corlor);
@@ -184,6 +190,5 @@ public class PredictActivity3 extends AppCompatActivity implements HandleStageBu
         HandleUnSelected(matchingObject.getCorlor());
         matchingObject.setCorlor(matchingObject.getInitCorlor());
         targetView.setStrokeColorResource(matchingObject.getInitCorlor().getCorlorId());
-        HandleSelected(matchingObject.getInitCorlor());
     }
 }

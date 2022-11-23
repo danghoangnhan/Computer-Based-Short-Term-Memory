@@ -68,7 +68,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="65dp"
                     android:layout_marginTop="50dp"
-                    android:textSize="35dp"
+                    android:textSize="30dp"
                     android:text="請把物件"
                     />
                 <TextView
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="90dp"
-                    android:textSize="35dp"
+                    android:textSize="30dp"
                     android:text="放在喜歡的三個顏色內"
                     android:layout_marginLeft="0dp"
                     />

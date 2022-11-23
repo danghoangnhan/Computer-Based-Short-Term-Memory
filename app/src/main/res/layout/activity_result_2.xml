@@ -250,9 +250,8 @@
                     android:drawableEnd="@drawable/replay"
                     android:paddingLeft="15dip"
                     android:paddingRight="5dp"
-                    android:text="Replay"
+                    android:text="重新來過"
                     android:textColor="@color/white"
-
                     />
 
                 <Button
@@ -267,7 +266,7 @@
                     android:drawablePadding="2dip"
                     android:paddingLeft="15dip"
                     android:paddingRight="5dp"
-                    android:text="ESC"
+                    android:text="離開"
                     android:textColor="@color/white" />
             </RelativeLayout>
         </RelativeLayout>
