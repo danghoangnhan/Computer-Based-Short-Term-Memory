@@ -2,7 +2,7 @@ package com.example.memorygame.Object.AD8Object;
 
 public class AD8_Answer {
     private Integer point;
-    public Integer AnswerDisplay;
+    public String AnswerDisplay;
 
     public AD8_Answer(Integer point, String answerDisplay) {
         this.point = point;
@@ -17,11 +17,12 @@ public class AD8_Answer {
         this.point = point;
     }
 
-    public Integer getAnswerDisplay() {
+    public String getAnswerDisplay() {
+
         return AnswerDisplay;
     }
 
-    public void setAnswerDisplay(Integer answerDisplay) {
+    public void setAnswerDisplay(String answerDisplay) {
         AnswerDisplay = answerDisplay;
     }
 }
