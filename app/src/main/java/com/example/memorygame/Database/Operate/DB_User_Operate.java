@@ -42,9 +42,9 @@ public class DB_User_Operate extends SQLiteOpenHelper {
             return false;
     }
 
-    public Boolean checkusernamepassword(String username, String password){
+    public Boolean checkUsernameExist(String username){
         SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where username = ? and password = ?", new String[] {username,password});
+        Cursor cursor = MyDB.rawQuery("Select * from users where username = ? ", new String[] {username});
         if(cursor.getCount()>0)
             return true;
         else

@@ -132,4 +132,10 @@ public class ButtonList {
     public List<Integer> getBoardButtonList() {
         return BoardButtonList;
     }
+
+    public List<?> suffer(){
+        List<Integer>randomColorList = new ArrayList<>(this.CorlorList);
+        Collections.shuffle(randomColorList);
+        return this.CorlorList;
+    }
 }
