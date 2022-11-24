@@ -1,11 +1,26 @@
 package com.example.memorygame.Database.Model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     String Name; //姓氏
     String sex;// 、性別、
     Integer age; // 年齡、
     Integer educationLevel;// 教育程度、
     Boolean isWorking;// 是否工作中
+
+    public User(String Name, int age, String sex, int educationLevel, int isWorking) {
+        this.Name = Name;
+        this.age = age;
+        this.sex = sex;
+        this.educationLevel = educationLevel;
+        this.isWorking = isWorking==1;
+
+    }
+
+    public User() {
+
+    }
 
     public String getName() {
         return Name;
@@ -27,10 +42,10 @@ public class User {
         return age;
     }
 
+
     public void setAge(Integer age) {
         this.age = age;
     }
-
     public Integer getEducationLevel() {
         return educationLevel;
     }

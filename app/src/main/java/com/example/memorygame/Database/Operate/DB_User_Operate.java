@@ -1,5 +1,6 @@
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 package com.example.memorygame.Database.Operate;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,7 +11,10 @@ import androidx.annotation.NonNull;
 
 import com.example.memorygame.Database.Model.User;
 
-public class DB_User_Operate extends SQLiteOpenHelper {
+import java.util.ArrayList;
+import java.util.List;
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                public class DB_User_Operate extends SQLiteOpenHelper {
     public static final String DBNAME = "Login.db";
 
     public DB_User_Operate(Context context) {
@@ -43,12 +47,42 @@ public class DB_User_Operate extends SQLiteOpenHelper {
         else
             return true;
     }
-    public Boolean checkNameExist(User user) {
+    public Boolean checkNameExist(@NonNull User user) {
         SQLiteDatabase MyDB = this.getWritableDatabase();
         Cursor cursor = MyDB.rawQuery("Select * from users where name = ?", new String[]{user.getName()});
         if (cursor.getCount() > 0)
             return true;
         else
             return false;
+    }
+    public List<User> getdata()
+    {
+        List<User> result = new ArrayList<>();
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor  = DB.rawQuery("Select * from users", null);
+        while(cursor.moveToNext())
+        {
+            result.add(new User(cursor.getString(0),
+                    cursor.getInt(1),
+                    cursor.getString(2),
+                    cursor.getInt(3),
+                    cursor.getInt(4)));
+
+        }
+        return result;
+    }
+    public Boolean deleteuserdata(String name)
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        @SuppressLint("Recycle") Cursor cursor = DB.rawQuery("Select * from users where name = ?", new String[]{name});
+        if(cursor.getCount()>0)
+        {
+            return DB.delete("users", "name=?", new String[]{name}) !=-1 ;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 }

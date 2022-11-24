@@ -39,7 +39,7 @@ public class AD8Activity extends AppCompatActivity {
         });
     }
     public void controlVisual(@NonNull AD8_Question question){
-        if (question.getQuestionNumber()==0){
+        if (question.getQuestionNumber().equals(0)){
             previousQuestion.setVisibility(View.INVISIBLE);
             nextQuestion.setVisibility(View.VISIBLE);
             completed.setVisibility(View.INVISIBLE);

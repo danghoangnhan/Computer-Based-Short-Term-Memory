@@ -21,7 +21,6 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton genderRadioButton,workingStatusRadioButton;
     Button RegiterButton;
     DB_User_Operate DB_User_Operate;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,19 +34,27 @@ public class RegisterActivity extends AppCompatActivity {
         this.DB_User_Operate = new DB_User_Operate(this);
 
         RegiterButton.setOnClickListener(v -> {
-            User user = new User();
+            String currentEducationValue = educationYear.getText().toString();
+            String userName = mUserName.getText().toString();
             genderRadioButton = findViewById(genderRadioGroup.getCheckedRadioButtonId());
             workingStatusRadioButton = findViewById(workingStatusRadioGroup.getCheckedRadioButtonId());
-            user.setAge(Integer.parseInt(age.getText().toString()));
-            user.setEducationLevel(educationYear.getText().toString());
-            user.setName(mUserName.getText().toString());
-            if (genderRadioButton != null)
+
+
+            if (    genderRadioButton == null  ||
+                    workingStatusRadioButton==null ||
+                    currentEducationValue.isEmpty())
             {
-                user.setSex(genderRadioButton.getText().toString());
+                Toast.makeText(RegisterActivity.this, "Plear fill in the form", Toast.LENGTH_SHORT).show();
+                return;
             }
-            if (workingStatusRadioButton!=null){
-                user.setWorking(workingStatusRadioButton.getText().toString().equals("是"));
-            }
+            String currentGenderValue = genderRadioButton.getText().toString();
+            Boolean currentworkingValue = workingStatusRadioButton.getText().toString().equals("是");
+            User user = new User();
+            user.setEducationLevel(currentEducationValue);
+            user.setName(userName);
+            user.setAge(Integer.parseInt(age.getText().toString()));
+            user.setSex(currentGenderValue);
+            user.setWorking(workingStatusRadioButton.getText().toString().equals("是"));
             if (this.DB_User_Operate.checkNameExist(user)){
                 Toast.makeText(RegisterActivity.this, "User already exists! please sign in", Toast.LENGTH_SHORT).show();
             }
