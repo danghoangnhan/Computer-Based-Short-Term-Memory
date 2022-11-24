@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AD8Activity">
-
+    tools:context=".Activity.WaitingActivity"
+    android:background="@color/royal_blue"
+    >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/main_card"
+        android:layout_width="800dp"
+        android:layout_height="600dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:cardElevation="11dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="240dp"
+        android:background="@color/cornflower_blue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="150dp"
+        app:layout_constraintBaseline_toBottomOf="parent"
+        android:layout_marginBottom="150dp"
+        >
+        <TextView
+            android:id="@+id/question_area"
+            android:layout_width="600dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="120dp"
+            android:layout_marginTop="100dp"
+            android:textSize="40dp"
+            />
+        <RelativeLayout
+            android:id="@+id/button_actionlist"
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="90dp"
+            android:layout_marginBottom="150dp"
+            android:layout_marginTop="300dp"
+            android:layout_marginLeft="400dp"
+            >
+            <include layout="@layout/action_button_group_2" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

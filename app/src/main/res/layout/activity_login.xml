@@ -21,7 +21,6 @@
             android:src="@drawable/logo1"
             android:layout_marginTop="50dp"
             />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="100dp"
@@ -31,8 +30,7 @@
             android:textColor="@color/blue"
             android:textSize="50dp"
             />
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button"
             android:layout_width="255dp"
             android:layout_height="100dp"
@@ -40,18 +38,15 @@
             android:layout_marginBottom="150dp"
             android:layout_marginTop="350dp"
             android:text="開始"
-            android:textColor="@color/crimson"
             android:textSize="40dp"
-            android:background="@drawable/custome_button2"
-            >
-        </Button>
+            style="@style/login_button"
+            />
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="500dp"
             android:layout_marginLeft="15dp"
             >
-
             <TextView
                 android:id="@+id/researcherLabel"
                 android:layout_width="wrap_content"
@@ -60,7 +55,6 @@
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 />
-
             <TextView
                 android:id="@+id/reseacherDepartment"
                 android:layout_width="wrap_content"
@@ -70,7 +64,6 @@
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 />
-
             <TextView
                 android:id="@+id/reseacherName"
                 android:layout_width="wrap_content"

@@ -4,7 +4,7 @@ public class User {
     String Name; //姓氏
     String sex;// 、性別、
     Integer age; // 年齡、
-    String educationLevel;// 教育程度、
+    Integer educationLevel;// 教育程度、
     Boolean isWorking;// 是否工作中
 
     public String getName() {
@@ -31,12 +31,12 @@ public class User {
         this.age = age;
     }
 
-    public String getEducationLevel() {
+    public Integer getEducationLevel() {
         return educationLevel;
     }
 
     public void setEducationLevel(String educationLevel) {
-        this.educationLevel = educationLevel;
+        this.educationLevel = Integer.parseInt(educationLevel);
     }
 
     public Boolean getWorking() {

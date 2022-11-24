@@ -5,143 +5,140 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.WaitingActivity"
+    tools:context=".Activity.RegisterActivity"
     android:background="@color/royal_blue"
     >
-    <androidx.cardview.widget.CardView
-        android:id="@+id/main_card"
-        android:layout_width="800dp"
-        android:layout_height="600dp"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:layout_marginTop="48dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:cardElevation="11dp"
-        app:cardUseCompatPadding="true"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:title="基本資料表"
+        app:titleTextColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="240dp"
-        android:background="@color/cornflower_blue"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="150dp"
-        app:layout_constraintBaseline_toBottomOf="parent"
-        android:layout_marginBottom="150dp"
-        >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Activity.RegisterActivity"
-    android:layout_marginLeft="35dp"
-    android:layout_marginTop="50dp"
-    >
-    <TextView
-        android:id="@+id/regierForm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="基本資料表"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/purple_700"
         android:gravity="center"
-        android:textSize="30dp"
         />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="姓氏"
-        android:ems="10"
-        android:id="@+id/userNameRegisteredEditText"
-        android:layout_alignParentStart="true"
-        android:backgroundTint="@color/white"
-        android:layout_alignParentEnd="true"
-        android:selectAllOnFocus="true"
-        />
-    <TextView
-        android:id="@+id/sex"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="性別："
-        android:textSize="30dp"
-        />
-    <RadioGroup
-        android:id="@+id/gender_radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioButton
-            android:id="@+id/sex_radioButton1"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/nameInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="男"
-            android:textSize="30dp"
-            />
-        <RadioButton
-            android:id="@+id/sex_radioButton2"
+            android:hint="姓氏"
+            android:layout_marginBottom="12dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:helperText="@string/field_required"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:id="@+id/name"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <RadioGroup
+            android:id="@+id/gender_radioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="女"
-            android:textSize="30dp"
-            />
-    </RadioGroup>
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:inputType="number"
-        android:hint="年齡"
-        android:ems="10"
-        android:id="@+id/age"
-        android:layout_alignParentStart="true"
-        android:backgroundTint="@color/white"
-        android:layout_alignParentEnd="true"
-        />
-    <EditText
-        android:layout_width="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/nameInputLayout"
+            >
+            <RadioButton
+                android:id="@+id/sex_radioButton1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="男"
+                android:textSize="30dp"
+                />
+            <RadioButton
+                android:id="@+id/sex_radioButton2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="女"
+                android:textSize="30dp"
+                />
+        </RadioGroup>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="年齡"
+            android:id="@+id/ageInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/gender_radioGroup"
+
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:id="@+id/age"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
         android:hint="教育年數"
-        android:ems="10"
-        android:id="@+id/educationyear"
-        android:layout_alignParentStart="true"
-        android:backgroundTint="@color/white"
-        android:layout_alignParentEnd="true"
-        />
-    <TextView
-        android:id="@+id/workingStatus"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="工作狀態"
-        android:textSize="30dp"
-        />
-    <RadioGroup
-        android:id="@+id/workingStatus_radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <RadioButton
-            android:id="@+id/workingStatus_radioButton1"
+        android:id="@+id/educationyearlayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ageInputLayout"
+
+        >
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="是"
-            android:textSize="30dp"
+            android:inputType="number"
+            android:id="@+id/educationyear"
+            android:backgroundTint="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/ageInputLayout"
             />
-        <RadioButton
-            android:id="@+id/workingStatus_radioButton2"
+    </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/workingStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="否"
+            android:text="工作狀態"
             android:textSize="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/educationyearlayout"
             />
-    </RadioGroup>
-    <Button
-        android:id="@+id/okbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="註冊"
-        android:textSize="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/cornflower_blue"
-        />
-</LinearLayout>
-    </androidx.cardview.widget.CardView>
+        <RadioGroup
+            android:id="@+id/workingStatus_radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/workingStatus"
+            >
+            <RadioButton
+                android:id="@+id/workingStatus_radioButton1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="是"
+                android:textSize="30dp"
+                />
+            <RadioButton
+                android:id="@+id/workingStatus_radioButton2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="否"
+                android:textSize="30dp"
+                />
+        </RadioGroup>
+        <Button
+            android:id="@+id/registerbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="註冊"
+            android:textSize="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/cornflower_blue"
+            app:layout_constraintTop_toBottomOf="@id/workingStatus_radioGroup"
+            />
 </androidx.constraintlayout.widget.ConstraintLayout>

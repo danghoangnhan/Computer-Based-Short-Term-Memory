@@ -32,7 +32,9 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             result.setResult1((int) result.ObjectValidation(result.getSelected1()));
             result.setResult2((int) result.SpatialValidation(result.getSelected2()));
             result.setResult3((int) result.ObjectSpatialValidation(result.getSelected2()));
-
+            GlobalObject.getInstance().getSession().setRound1Score(result.getResult1()+
+                    result.getResult2()+
+                    result.getResult3());
         }
         else {
             setContentView(R.layout.activity_result_2);
@@ -51,16 +53,15 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             this.result_1  = findViewById(R.id.result_1);
             this.result_2  = findViewById(R.id.result_2);
 
-            int score1 =  result.getResult1()+
-                    result.getResult2()+
-                    result.getResult3();
-            int score2 = (int) ((int) result.ObjectValidation (result.getSelected1())
+            GlobalObject.getInstance().getSession().setRound2Score(((int) result.ObjectValidation (result.getSelected1())
                                 +result.SpatialValidation(result.getSelected2())
                                 +result.ObjectSpatialValidation(result.getSelected2())
                                 +result.CorlorValidation(result.getSelected3())
-                                + result.ObjectCorlorLocationValidation(result.getSelected3()));
+                                + result.ObjectCorlorLocationValidation(result.getSelected3())));
 
-            int score = score1+score2 ;
+            int score1  = GlobalObject.getInstance().getSession().getRound1Score();
+            int score2  = GlobalObject.getInstance().getSession().getRound2Score();
+            int score   = score1 + score2;
             this.result_1.setText(score1+"/"+9);
             this.result_2.setText(score2+"/"+15);
             this.total_result.setText(score+"/"+(24));
@@ -86,8 +87,9 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
         }
         else {
             GlobalObject.getInstance().setGameState(1);
+
         }
-        Intent intent = new Intent(this,SelectObjectActivity.class);
+        Intent intent = new Intent(this,AD8Activity.class);
         this.startActivity(intent);
     }
 

@@ -1,5 +1,7 @@
 package com.example.memorygame;
 
+import com.example.memorygame.Database.Model.Session;
+import com.example.memorygame.Database.Model.User;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
@@ -18,6 +20,7 @@ public class GlobalObject {
     private int gameState;
     private List<Integer> ranImg;
     private List<ImageRecycleViewObject> selectedImage;
+    private Session session;
 
     public static GlobalObject getInstance() {
         if(instance == null){
@@ -29,6 +32,14 @@ public class GlobalObject {
         this.selectedButtonList = new ArrayList<>();
         this.result = new Result();
         this.gameState = 1;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(User session) {
+        this.session = new Session(session);
     }
 
     public List<ImageRecycleViewObject> getSelectedImage() {
