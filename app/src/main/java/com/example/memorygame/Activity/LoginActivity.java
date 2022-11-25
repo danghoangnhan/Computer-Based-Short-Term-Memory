@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.memorygame.AuthenticationActivity;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.R;
 
@@ -20,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
         globalObject.setGameState(1);
     }
     private void changeActivity(){
-        Intent intent = new Intent(this,RegisterActivity.class);
+        Intent intent = new Intent(this, AuthenticationActivity.class);
         startActivity(intent);
     }
 }

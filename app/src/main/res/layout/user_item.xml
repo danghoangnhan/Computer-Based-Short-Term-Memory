@@ -19,12 +19,12 @@
             android:layout_gravity="center_vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name: "
-                android:textSize="24dp"
-                android:textColor="@color/black"
                 style="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:text="姓氏: "
+                android:textColor="@color/black"
+                android:textSize="24dp"
                 />
 
             <TextView
@@ -65,7 +65,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Age: "
+                android:text="年齡: "
                 android:textSize="24dp"
                 android:textColor="@color/black"
                 style="bold"/>

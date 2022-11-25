@@ -1,6 +1,7 @@
 package com.example.memorygame.Database.Model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class User implements Serializable {
     String Name; //姓氏
@@ -8,6 +9,7 @@ public class User implements Serializable {
     Integer age; // 年齡、
     Integer educationLevel;// 教育程度、
     Boolean isWorking;// 是否工作中
+    Date lastedLoginTime;
 
     public User(String Name, int age, String sex, int educationLevel, int isWorking) {
         this.Name = Name;
@@ -60,5 +62,9 @@ public class User implements Serializable {
 
     public void setWorking(Boolean working) {
         isWorking = working;
+    }
+
+    public void setEducationLevel(Integer educationLevel) {
+        this.educationLevel = educationLevel;
     }
 }
