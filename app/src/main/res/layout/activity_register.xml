@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.RegisterActivity"
-    android:background="@color/royal_blue"
+    android:background="@color/white"
     >
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -69,6 +69,8 @@
             android:hint="年齡"
             android:id="@+id/ageInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/gender_radioGroup"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_marginRight="16dp"
 
             >
             <com.google.android.material.textfield.TextInputEditText
@@ -88,6 +90,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ageInputLayout"
+        android:layout_marginRight="16dp"
+
 
         >
         <com.google.android.material.textfield.TextInputEditText

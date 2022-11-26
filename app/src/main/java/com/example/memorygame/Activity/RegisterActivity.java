@@ -36,15 +36,29 @@ public class RegisterActivity extends AppCompatActivity {
         RegiterButton.setOnClickListener(v -> {
             String currentEducationValue = educationYear.getText().toString();
             String userName = mUserName.getText().toString();
+            String currentAge = age.getText().toString();
             genderRadioButton = findViewById(genderRadioGroup.getCheckedRadioButtonId());
             workingStatusRadioButton = findViewById(workingStatusRadioGroup.getCheckedRadioButtonId());
 
-
-            if (    genderRadioButton == null  ||
-                    workingStatusRadioButton==null ||
-                    currentEducationValue.isEmpty())
+            if (userName == null || userName.isEmpty()){
+                Toast.makeText(RegisterActivity.this, "姓氏向未填寫", Toast.LENGTH_SHORT).show();
+            return;
+            }
+            if (currentAge == null || currentAge.isEmpty()){
+                Toast.makeText(RegisterActivity.this, "年齡向未填寫", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(genderRadioButton == null){
+                Toast.makeText(RegisterActivity.this, "請選擇性別", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (workingStatusRadioButton==null)
             {
-                Toast.makeText(RegisterActivity.this, "Plear fill in the form", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "請選擇工作狀態", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (currentEducationValue == null || currentEducationValue.isEmpty()){
+                Toast.makeText(RegisterActivity.this, "教育年數向未填寫", Toast.LENGTH_SHORT).show();
                 return;
             }
             String currentGenderValue = genderRadioButton.getText().toString();
@@ -56,11 +70,12 @@ public class RegisterActivity extends AppCompatActivity {
             user.setSex(currentGenderValue);
             user.setWorking(workingStatusRadioButton.getText().toString().equals("是"));
             if (this.DB_User_Operate.checkNameExist(user)){
-                Toast.makeText(RegisterActivity.this, "User already exists! please sign in", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "此姓氏已存在，請用別的姓氏，或者以已的資料的身份來進行遊戲", Toast.LENGTH_SHORT).show();
+                return;
             }
             if(this.DB_User_Operate.insertData(user)){
                 GlobalObject.getInstance().setSession(user);
-                Toast.makeText(RegisterActivity.this, "Registered successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "註冊成功", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(),SelectObjectActivity.class);
                 startActivity(intent);
             }else{

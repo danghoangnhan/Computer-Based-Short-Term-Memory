@@ -1,4 +1,4 @@
-package com.example.memorygame;
+package com.example.memorygame.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,10 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.memorygame.Activity.RegisterActivity;
 import com.example.memorygame.Adapter.UserAdapter;
 import com.example.memorygame.Database.Model.User;
 import com.example.memorygame.Database.Operate.DB_User_Operate;
+import com.example.memorygame.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -30,13 +30,18 @@ public class AuthenticationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_authentication);
         DB = new DB_User_Operate(this);
         displaydata();
-        recyclerView = findViewById(R.id.recyclerview);
         Register = findViewById(R.id.addingBtn);
-        recyclerView.setAdapter(userAdapter);
-        userAdapter = new UserAdapter(this, (ArrayList<User>) userList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Register.setOnClickListener(this::handleRegisterButton);
+        initialRecyleView();
     }
+
+    private void initialRecyleView() {
+        this.recyclerView = findViewById(R.id.authentication_recyclerview);
+        this.userAdapter = new UserAdapter(this, (ArrayList<User>) userList);
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(AuthenticationActivity.this,LinearLayoutManager.VERTICAL,false));
+        this.recyclerView.setAdapter(this.userAdapter);
+    }
+
     public void handleRegisterButton(View view){
         Intent intent = new Intent(this,RegisterActivity.class);
         this.startActivity(intent);

@@ -1,5 +1,6 @@
 package com.example.memorygame.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
@@ -17,7 +19,9 @@ import com.example.memorygame.R;
 
 public class ResultActivity extends AppCompatActivity implements HandleStageButton {
     Button escButton,nextButton,replayButton;
+    CardView finalScore;
     TextView result1,result2,result3,result4,result5,result_1,result_2,total_result;
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,7 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
         }
         else {
             setContentView(R.layout.activity_result_2);
-
+            this.finalScore = findViewById(R.id.final_result_cardview);
             this.result4 = findViewById(R.id.result4);
             result.setResult4((int) result.CorlorValidation(result.getSelected3()));
             this.result4.setText(result.CorlorValidation(result.getSelected3())+"/"+result.getCorrect().size());
@@ -65,6 +69,7 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             this.result_1.setText(score1+"/"+9);
             this.result_2.setText(score2+"/"+15);
             this.total_result.setText(score+"/"+(24));
+            this.finalScore.setBackgroundColor((score<18)?R.color.red:R.color.green);
 
         }
         this.escButton = findViewById(R.id.escButton);

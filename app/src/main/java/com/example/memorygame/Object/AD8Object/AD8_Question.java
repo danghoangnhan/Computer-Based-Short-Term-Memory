@@ -7,7 +7,7 @@ public class AD8_Question {
     private Integer questionNumber;
     private String question;
     private List<AD8_Answer> AnswerList;
-    private AD8Form currentAnswer;
+    private AD8_Answer currentAnswer;
 
     public AD8_Question(Integer questionNumber,String question, List<AD8_Answer> answerList) {
         this.questionNumber = questionNumber;
@@ -31,11 +31,11 @@ public class AD8_Question {
         AnswerList = answerList;
     }
 
-    public AD8Form getCurrentAnswer() {
+    public AD8_Answer getCurrentAnswer() {
         return currentAnswer;
     }
 
-    public void setCurrentAnswer(AD8Form currentAnswer) {
+    public void setCurrentAnswer(AD8_Answer currentAnswer) {
         this.currentAnswer = currentAnswer;
     }
 
@@ -43,7 +43,7 @@ public class AD8_Question {
         return questionNumber;
     }
 
-    public void setQuestionNumber(Integer questionNumber) {
-        this.questionNumber = questionNumber;
+    public  int getScore(){
+        return this.currentAnswer.getPoint();
     }
 }

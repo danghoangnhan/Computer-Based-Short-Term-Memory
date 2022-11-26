@@ -2,6 +2,7 @@ package com.example.memorygame;
 
 import com.example.memorygame.Database.Model.Session;
 import com.example.memorygame.Database.Model.User;
+import com.example.memorygame.Object.AD8Object.AD8Form;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.Object.ImageRecycleViewObject;
 import com.example.memorygame.Object.MatchingObject;
@@ -21,6 +22,7 @@ public class GlobalObject {
     private List<Integer> ranImg;
     private List<ImageRecycleViewObject> selectedImage;
     private Session session;
+    private AD8Form form;
 
     public static GlobalObject getInstance() {
         if(instance == null){
@@ -103,6 +105,14 @@ public class GlobalObject {
 
     public void setGameState(int gameState) {
         this.gameState = gameState;
+    }
+
+    public AD8Form getForm() {
+        return form;
+    }
+
+    public void setForm(AD8Form form) {
+        this.form = form;
     }
 }
 

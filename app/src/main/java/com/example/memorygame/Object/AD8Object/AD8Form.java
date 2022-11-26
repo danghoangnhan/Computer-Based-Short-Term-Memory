@@ -17,15 +17,15 @@ public class AD8Form {
             "有持續的思考和記憶方面的問題");
     public AD8Form() {
         this.questionList = new ArrayList<>();
-        for (int i = 1;i<question.size();i++){
+        for (int i = 0;i<question.size();i++){
             questionList.add(new AD8_Question(i,question.get(i),generateAnswer()));
         }
 
     }
     public List<AD8_Answer> generateAnswer(){
         return Arrays.asList(
-                new AD8_Answer(1, "有改變"),
-                new AD8_Answer(0,"沒有改變"),
+                new AD8_Answer(1, "是"),
+                new AD8_Answer(0,"不是"),
                 new AD8_Answer(0,"不知道"));
     }
     public List<AD8_Question> getQuestionList() {
@@ -34,5 +34,8 @@ public class AD8Form {
 
     public void setQuestionList(List<AD8_Question> questionList) {
         this.questionList = questionList;
+    }
+    public int caculated(){
+        return this.questionList.stream().mapToInt(AD8_Question::getScore).sum();
     }
 }

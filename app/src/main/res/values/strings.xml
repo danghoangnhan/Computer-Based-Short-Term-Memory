@@ -59,7 +59,7 @@
 
 
     <!--Registration Validation error messages-->
-    <string name="field_required">Required</string>
+    <string name="field_required">必填資料</string>
     <string name="length_of_registration_password_is_not_enought">Password length not enought</string>
     <string name="work_length_empty">Work length is empty</string>
     <string name="start_work_time_empty">Start work time is empty</string>
@@ -70,8 +70,7 @@
     <string name="cancel_button">Cancel</string>
     <string name="ok_button">OK</string>
     <string name="work_days_not_selected">Work days not selected</string>
-
-
+    <string name="register_completed">註冊成功</string>
     <string-array name="work_days_in_week">
         <item>Monday</item>
         <item>Tuesday</item>

@@ -66,7 +66,7 @@ public class CorlorListAdapter extends RecyclerView.Adapter<CorlorViewHolder>
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch(View v, @NonNull MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             ClipData data = ClipData.newPlainText("", "");
             View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);

@@ -6,7 +6,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.memorygame.AuthenticationActivity;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.R;
 

@@ -23,7 +23,9 @@
         app:cardElevation="11dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
 
         <RelativeLayout
             android:id="@+id/grid_list"
@@ -179,16 +181,23 @@
                 android:layout_marginLeft="550dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="5dp"
                 app:cardUseCompatPadding="true">
 
-                <TextView
+                <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
-                    android:layout_marginTop="25dp"
-                    android:text="第一輪"
-                    android:textSize="40dp" />
+                    app:cardCornerRadius="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="65dp"
+                        android:layout_marginTop="25dp"
+                        android:text="第一輪"
+                        android:textSize="40dp" />
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/result_1"
@@ -214,61 +223,44 @@
                     android:layout_marginTop="85dp"
                     android:textSize="40dp" />
 
-                <TextView
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/final_result_cardview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
+                    app:cardCornerRadius="8dp"
                     android:layout_marginTop="145dp"
-                    android:text="總分"
-                    android:textSize="40dp" />
+                    android:layout_marginLeft="60dp"
+                    android:backgroundTint="@color/green"
 
-                <TextView
-                    android:id="@+id/result_total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="220dp"
-                    android:layout_marginTop="145dp"
-                    android:textSize="40dp" />
+                    >
+                    <TextView
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="總分"
+                        android:textSize="40dp"
+                        android:textColor="@color/white"
+                        />
+                    <TextView
+                        android:id="@+id/result_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="200dp"
+                        android:textSize="40dp"
+                        android:textColor="@color/white"
+                        />
+                </androidx.cardview.widget.CardView>
             </androidx.cardview.widget.CardView>
-            <RelativeLayout
-                android:id="@+id/button_actionlist"
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="130dp"
+
+            <include
+                layout="@layout/action_button_group_3"
+                android:layout_width="269dp"
+                android:layout_height="208dp"
+                android:layout_marginLeft="600dp"
+                android:layout_marginTop="350dp"
                 android:layout_marginBottom="120dp"
-                >
+                />
 
-                <Button
-                    android:id="@+id/replayButton"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toLeftOf="@+id/escButton"
-                    android:background="@drawable/custome_button1"
-                    android:drawableEnd="@drawable/replay"
-                    android:paddingLeft="15dip"
-                    android:paddingRight="5dp"
-                    android:text="重新來過"
-                    android:textColor="@color/white"
-                    />
-
-                <Button
-                    android:id="@+id/escButton"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="5dp"
-                    android:background="@drawable/custome_button1"
-                    android:drawableRight="@drawable/exit"
-                    android:drawablePadding="2dip"
-                    android:paddingLeft="15dip"
-                    android:paddingRight="5dp"
-                    android:text="離開"
-                    android:textColor="@color/white" />
-            </RelativeLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
