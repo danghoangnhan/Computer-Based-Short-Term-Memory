@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.memorygame.Database.Model.User;
+import com.example.memorygame.Database.Entity.User;
 import com.example.memorygame.Database.Operate.DB_User_Operate;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.R;
@@ -63,12 +63,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
             String currentGenderValue = genderRadioButton.getText().toString();
             Boolean currentworkingValue = workingStatusRadioButton.getText().toString().equals("是");
-            User user = new User();
-            user.setEducationLevel(currentEducationValue);
-            user.setName(userName);
-            user.setAge(Integer.parseInt(age.getText().toString()));
-            user.setSex(currentGenderValue);
-            user.setWorking(workingStatusRadioButton.getText().toString().equals("是"));
+            User user = new User(userName,
+                    Integer.parseInt(age.getText().toString()),
+                    currentGenderValue,
+                    Integer.parseInt(currentEducationValue),
+                    currentworkingValue?1:0
+                    );
             if (this.DB_User_Operate.checkNameExist(user)){
                 Toast.makeText(RegisterActivity.this, "此姓氏已存在，請用別的姓氏，或者以已的資料的身份來進行遊戲", Toast.LENGTH_SHORT).show();
                 return;

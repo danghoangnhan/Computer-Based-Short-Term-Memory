@@ -1,15 +1,12 @@
 package com.example.memorygame.Activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.memorygame.Dialog.SkipWaitingDialog;
@@ -21,7 +18,7 @@ import com.example.memorygame.Object.MatchingObject;
 import com.example.memorygame.R;
 
 import java.util.ArrayList;
-import java.util.Timer;
+
 public class WaitingActivity extends AppCompatActivity
         implements HandleStageButton, SkipWaitingDialogButtonAction {
     TextView textTime, notifyText;

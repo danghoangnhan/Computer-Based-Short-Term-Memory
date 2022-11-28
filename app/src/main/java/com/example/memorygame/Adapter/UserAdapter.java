@@ -1,7 +1,6 @@
 package com.example.memorygame.Adapter;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,8 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.memorygame.Database.Model.User;
-import com.example.memorygame.Object.CorlorRecycleViewObject;
+import com.example.memorygame.Database.Entity.User;
 import com.example.memorygame.R;
 import com.example.memorygame.ViewHolder.UserViewHolder;
 

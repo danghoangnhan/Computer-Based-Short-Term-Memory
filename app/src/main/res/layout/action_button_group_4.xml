@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button_actionlist"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+    <Button
+        android:id="@+id/replayButton"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custome_button1"
+        android:drawableEnd="@drawable/exit"
+        android:paddingRight="5dp"
+        android:text="返回"
+        style="@style/action_button2"
+        android:layout_alignParentLeft="true"
+        />
+    <Button
+        android:id="@+id/escButton"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/custome_button1"
+        android:drawableRight="@drawable/download"
+        android:drawablePadding="2dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="5dp"
+        android:text="會出csv"
+        style="@style/action_button2"
+        android:layout_toRightOf="@id/replayButton"
+        />
+</RelativeLayout>

@@ -232,4 +232,9 @@
     <string name="title_activity_update_user">UpdateUserActivity</string>
 
     <string name="inserted_user_not_exist">Inserted user not exist</string>
+    <string name="name">姓氏</string>
+    <string name="startTime">開始時間</string>
+    <string name="endTime">結束時間</string>
+    <string name="game_score">游戲分數</string>
+    <string name="ad8_score">ad8_分數</string>
 </resources>

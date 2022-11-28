@@ -2,13 +2,11 @@ package com.example.memorygame.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -18,11 +16,10 @@ import com.example.memorygame.Object.Result;
 import com.example.memorygame.R;
 
 public class ResultActivity extends AppCompatActivity implements HandleStageButton {
-    Button escButton,nextButton,replayButton;
+    Button escButton,nextButton,replayButton,AD8Button;
     CardView finalScore;
     TextView result1,result2,result3,result4,result5,result_1,result_2,total_result;
-    @SuppressLint("ResourceAsColor")
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Result result = GlobalObject.getInstance().getResult();
@@ -44,6 +41,7 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             setContentView(R.layout.activity_result_2);
             this.finalScore = findViewById(R.id.final_result_cardview);
             this.result4 = findViewById(R.id.result4);
+            this.AD8Button = findViewById(R.id.ad8_button);
             result.setResult4((int) result.CorlorValidation(result.getSelected3()));
             this.result4.setText(result.CorlorValidation(result.getSelected3())+"/"+result.getCorrect().size());
 
@@ -69,8 +67,7 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             this.result_1.setText(score1+"/"+9);
             this.result_2.setText(score2+"/"+15);
             this.total_result.setText(score+"/"+(24));
-            this.finalScore.setBackgroundColor((score<18)?R.color.red:R.color.green);
-
+            controlAD8(score);
         }
         this.escButton = findViewById(R.id.escButton);
         this.escButton.setOnClickListener(this::handleEscButton);
@@ -83,19 +80,18 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
 
         this.result3 = findViewById(R.id.result3);
         this.result3.setText(result.ObjectSpatialValidation(result.getSelected2())+"/"+result.getCorrect().size());
-
     }
     @Override
     public void handleNextButton(View view) {
         if (GlobalObject.getInstance().getGameState()==1){
             GlobalObject.getInstance().setGameState(2);
+            Intent intent = new Intent(this,SelectObjectActivity.class);
+            this.startActivity(intent);
         }
         else {
             GlobalObject.getInstance().setGameState(1);
-
         }
-        Intent intent = new Intent(this,AD8Activity.class);
-        this.startActivity(intent);
+
     }
 
     @Override
@@ -107,6 +103,21 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
     @Override
     public void handleEscButton(View view) {
         Intent intent = new Intent(this,LoginActivity.class);
+        this.startActivity(intent);
+    }
+        @SuppressLint("ResourceAsColor")
+        public void controlAD8(Integer score){
+            if(score<18){
+                finalScore.setBackgroundResource(R.color.red);
+                this.AD8Button.setVisibility(View.VISIBLE);
+                this.AD8Button.setOnClickListener(view -> handleAD8Button(view));
+            }else{
+                finalScore.setBackgroundResource(R.color.green);
+                this.AD8Button.setVisibility(View.INVISIBLE);
+            }
+        }
+    public void handleAD8Button(View view) {
+        Intent intent = new Intent(this,AD8WelComeActivity.class);
         this.startActivity(intent);
     }
 }

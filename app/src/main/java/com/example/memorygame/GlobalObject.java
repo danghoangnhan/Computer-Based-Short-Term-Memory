@@ -1,7 +1,7 @@
 package com.example.memorygame;
 
-import com.example.memorygame.Database.Model.Session;
-import com.example.memorygame.Database.Model.User;
+import com.example.memorygame.Database.Entity.Session;
+import com.example.memorygame.Database.Entity.User;
 import com.example.memorygame.Object.AD8Object.AD8Form;
 import com.example.memorygame.Object.CorlorRecycleViewObject;
 import com.example.memorygame.Object.ImageRecycleViewObject;

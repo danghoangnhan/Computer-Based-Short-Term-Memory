@@ -25,11 +25,11 @@ public class AD8RresultActivity extends AppCompatActivity {
         this.ScoreView.setText("您的分數是"+result+"分");
         if (result<=1){
             this.RecommendView.setText(text2);
-            this.ScoreView.setTextColor(R.color.green);
+            this.ScoreView.setBackgroundResource(R.color.green);
         }
         else {
             this.RecommendView.setText(text1);
-            this.ScoreView.setTextColor(R.color.red);
+            this.ScoreView.setBackgroundResource(R.color.red);
         }
     }
 }

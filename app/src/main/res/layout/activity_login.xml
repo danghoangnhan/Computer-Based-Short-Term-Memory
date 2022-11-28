@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activity.LoginActivity"
     android:background="@color/royal_blue"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     >
     <androidx.cardview.widget.CardView
         android:layout_height="match_parent"
@@ -154,5 +155,50 @@
                 android:textColor="@color/black"
                 android:textSize="20dp" />
         </RelativeLayout>
+
+
+
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/multiple_actions_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/multiple_actions_down"
+            android:layout_toStartOf="@+id/multiple_actions_down"
+            fab:fab_addButtonColorNormal="@color/white"
+            fab:fab_addButtonColorPressed="@color/white"
+            fab:fab_addButtonSize="mini"
+            fab:fab_addButtonPlusIconColor="@color/black"
+            fab:fab_addButtonStrokeVisible="false"
+            fab:fab_expandDirection="up"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="850dp"
+            android:layout_marginTop="400dp"
+            >
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/user_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_colorPressed="@color/white_smoke"
+                fab:fab_title="Click to remove"
+                fab:fab_addButtonPlusIconColor="@color/black"
+                fab:fab_icon="@drawable/user_data"
+                fab:fab_size="mini"
+                />
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/session_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_colorPressed="@color/white_smoke"
+                fab:fab_addButtonPlusIconColor="@color/black"
+                fab:fab_icon="@drawable/time"
+                fab:fab_size="mini"
+                fab:fab_title="Another one on the right"
+                />
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

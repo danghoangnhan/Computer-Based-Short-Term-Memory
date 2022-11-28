@@ -9,12 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.NonNull;
 
-import com.example.memorygame.Database.Model.User;
+import com.example.memorygame.Database.Entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                public class DB_User_Operate extends SQLiteOpenHelper {
+public class DB_User_Operate extends SQLiteOpenHelper {
     public static final String DBNAME = "Login.db";
 
     public DB_User_Operate(Context context) {
@@ -85,4 +84,5 @@ import java.util.List;
         }
 
     }
+
 }
