@@ -17,7 +17,7 @@ import com.example.memorygame.ViewHolder.SessionViewHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder> implements Filterable {
+public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder>   {
 
     private final Context context;
     private final ArrayList<Session> sessionList;
@@ -47,11 +47,11 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder> impl
     public SessionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_ROW)
         {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_club, viewGroup, false);
+            View view = LayoutInflater.from(this.context).inflate(R.layout.session_item, parent, false);
             return new SessionViewHolder(view);
         } else
         {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_club_colorful, viewGroup, false);
+            View view = LayoutInflater.from(this.context).inflate(R.layout.session_item, parent, false);
             return new SessionViewHolder(view);
         }
     }
@@ -60,59 +60,19 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder> impl
     public void onBindViewHolder(@NonNull SessionViewHolder holder, int position) {
         final Session item = this.filteredSessionList.get(position);
 
-        holder.txtName.setText(item.name);
-        holder.txtLocation.setText(club.location);
-        holder.txtStadiumName.setText(club.stadiumName);
-        holder.txtLeagueName.setText(club.leagueName);
-        holder.txtCoachName.setText(club.coachName);
-        holder.txtStarPlayerName.setText(club.starPlayerName);
+        holder.getUsername().setText(item.getUser().getName());
+        holder.getAd8score().setText(item.getAD8_Score());
+        holder.getAd8starttime().setText(item.getStartAD8Time().toString());
+        holder.getAd8endtime().setText(item.getEndAD8Time().toString());
+        holder.getGamescore().setText(item.getGameScore());
+        holder.getStartgametime().setText(item.getStartRound().toString());
+        holder.getEndgametime().setText(item.getEndRound().toString());
 
-        Glide.with(context).load(club.logoUrl).into(holder.imgLogo);
     }
 
     @Override
     public int getItemCount() {
         return this.filteredSessionList.size();
     }
-    @Override
-    public Filter getFilter() {
-        return new Filter()
-        {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence)
-            {
-                String charString = charSequence.toString();
-                if (charString.isEmpty())
-                {
-                    filteredSessionList = sessionList;
-                } else
-                {
-                    List<Session> filteredList = new ArrayList<>();
-                    for (Session session : sessionList)
-                    {
-                        // name match condition. this might differ depending on your requirement
-                        // here we are looking for name
-                        if (session.name.toLowerCase().contains(charString.toLowerCase()) )
-                        {
-                            filteredList.add(session);
-                        }
-                    }
 
-                    filteredSessionList = filteredList;
-                }
-
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filteredSessionList;
-                return filterResults;
-            }
-
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults)
-            {
-                filteredSessionList = (ArrayList<Session>) filterResults.values;
-                // refresh the list with filtered data
-                notifyDataSetChanged();
-            }
-        };
-    }
 }

@@ -1,25 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/cell_container"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
     android:layout_width="wrap_content"
-    android:layout_height="28dp"
-    android:background="@color/white"
-    android:orientation="vertical">
-
+    android:layout_height="@dimen/row_height">
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/user_name"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/black"
+        android:layout_height="match_parent"
+        android:text="使用者"
+        />
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/finalScore"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/black"
+        android:layout_height="match_parent"
+        android:text="遊戲分數"
+        />
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/startgame_time"
+        android:text="遊戲開始時間"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/black"
+        android:layout_height="match_parent"
+        />
 
     <TextView
-        android:id="@+id/cell_data"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:gravity="center"
-        android:maxLines="1"
-        android:textColor="@color/black"
-        android:textSize="25dp"
-        tools:text="Cell Data"/>
 
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/endgame_time"
+        android:text="遊戲結束時間"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/black"
+        android:layout_height="match_parent"
+        />
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/ad8_score"
+        android:text="ad8分數"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/black"
+        android:layout_height="match_parent"
+        />
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/ad8_starttime"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/black"
+        android:layout_height="match_parent"
+        android:text="ad8開始時間"
+        />
+    <TextView
+        android:layout_width="@dimen/cell_width"
+        android:id="@+id/ad8_endtime"
+        android:layout_marginStart="@dimen/margin"
+        android:gravity="center|start"
+        android:textColor="@color/black"
+        android:layout_height="match_parent"
+        android:text="ad8結束時間"
+        />
 </LinearLayout>

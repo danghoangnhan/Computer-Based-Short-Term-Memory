@@ -15,6 +15,8 @@ import com.example.memorygame.Database.Operate.DB_User_Operate;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.R;
 
+import java.util.Date;
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText mUserName,age,educationYear;
     private RadioGroup genderRadioGroup,workingStatusRadioGroup;
@@ -67,12 +69,15 @@ public class RegisterActivity extends AppCompatActivity {
                     Integer.parseInt(age.getText().toString()),
                     currentGenderValue,
                     Integer.parseInt(currentEducationValue),
-                    currentworkingValue?1:0
+                    currentworkingValue?1:0,
+                    new Date().toString()
                     );
             if (this.DB_User_Operate.checkNameExist(user)){
                 Toast.makeText(RegisterActivity.this, "此姓氏已存在，請用別的姓氏，或者以已的資料的身份來進行遊戲", Toast.LENGTH_SHORT).show();
                 return;
             }
+            user.generateUUID();
+
             if(this.DB_User_Operate.insertData(user)){
                 GlobalObject.getInstance().setSession(user);
                 Toast.makeText(RegisterActivity.this, "註冊成功", Toast.LENGTH_SHORT).show();

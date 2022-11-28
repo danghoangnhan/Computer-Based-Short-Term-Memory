@@ -26,7 +26,6 @@ public class SessionActivity extends AppCompatActivity {
     DB_Session_Operate DB;
     SessionAdapter sessionAdapter;
     HorizontalScrollView headerScroll;
-    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

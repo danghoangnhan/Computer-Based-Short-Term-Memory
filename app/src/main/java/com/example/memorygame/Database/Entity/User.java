@@ -2,8 +2,10 @@ package com.example.memorygame.Database.Entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 public class User implements Serializable {
+    UUID id;
     String Name; //姓氏
     String sex;// 、性別、
     Integer age; // 年齡、
@@ -11,17 +13,21 @@ public class User implements Serializable {
     Boolean isWorking;// 是否工作中
     Date lastedLoginTime;
 
-    public User(String Name, int age, String sex, int educationLevel, int isWorking) {
+    public User(String Name, int age, String sex, int educationLevel, int isWorking,String lasLogin) {
         this.Name = Name;
         this.age = age;
         this.sex = sex;
         this.educationLevel = educationLevel;
         this.isWorking = isWorking==1;
-
+        this.lastedLoginTime = new Date(lasLogin);
     }
 
     public User() {
 
+    }
+
+    public void generateUUID(){
+        this.id = UUID.randomUUID();
     }
 
 
@@ -67,5 +73,21 @@ public class User implements Serializable {
 
     public void setEducationLevel(Integer educationLevel) {
         this.educationLevel = educationLevel;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public Date getLastedLoginTime() {
+        return lastedLoginTime;
+    }
+
+    public void setLastedLoginTime(Date lastedLoginTime) {
+        this.lastedLoginTime = lastedLoginTime;
     }
 }

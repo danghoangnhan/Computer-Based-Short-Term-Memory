@@ -237,4 +237,9 @@
     <string name="endTime">結束時間</string>
     <string name="game_score">游戲分數</string>
     <string name="ad8_score">ad8_分數</string>
+    <string name="gender">性別</string>
+    <string name="age">年齡</string>
+    <string name="educationyear">教育年數</string>
+    <string name="workingstatus">工作狀態</string>
+    <string name="lastimelogin">最後登入時間</string>
 </resources>

@@ -3,22 +3,46 @@ package com.example.memorygame.Database.Entity;
 import java.util.Date;
 
 public class Session {
+    private int sessionId;
     private User user;
     private Date logInTime;
-    private Date startRound1;
-    private Date endRound1;
-    private Date startRound2;
-    private Date getEndRound2;
+    private Date startRound;
+    private Date endRound;
     private Date startAD8Time;
     private Date endAD8Time;
-    private Integer Round1Score;
-    private Integer Round2Score;
-    private Integer FinalScore;
+
+
+    private Integer GameScore;
     private Integer AD8_Score;
+
+    private Integer round1Score;
+    private Integer round2Score;
 
     public Session(User user) {
         this.user = user;
         this.logInTime = new Date();
+    }
+
+    public Session(Integer SessionId,
+                   String user_name,
+                   Integer finalScore,
+                   Integer AD8_Score,
+                   String startRound,
+                   String endRound,
+                   String startAD8Time,
+                   String endAD8Time) {
+        this.sessionId = SessionId;
+
+        this.user = new User();
+        this.user.setName(user_name);
+        this.GameScore = finalScore;
+        this.setAD8_Score(AD8_Score);
+        this.startRound = new Date(startRound);
+        this.endRound = new Date(endRound);
+        this.startAD8Time = new Date(startAD8Time);
+        this.endAD8Time = new Date(endAD8Time);
+
+        this.AD8_Score = AD8_Score;
     }
 
     public User getUser() {
@@ -29,69 +53,6 @@ public class Session {
         this.user = user;
     }
 
-    public Date getLogInTime() {
-        return logInTime;
-    }
-
-    public void setLogInTime(Date logInTime) {
-        this.logInTime = logInTime;
-    }
-
-    public Date getStartRound1() {
-        return startRound1;
-    }
-
-    public void setStartRound1(Date startRound1) {
-        this.startRound1 = startRound1;
-    }
-
-    public Date getEndRound1() {
-        return endRound1;
-    }
-
-    public void setEndRound1(Date endRound1) {
-        this.endRound1 = endRound1;
-    }
-
-    public Date getStartRound2() {
-        return startRound2;
-    }
-
-    public void setStartRound2(Date startRound2) {
-        this.startRound2 = startRound2;
-    }
-
-    public Date getGetEndRound2() {
-        return getEndRound2;
-    }
-
-    public void setGetEndRound2(Date getEndRound2) {
-        this.getEndRound2 = getEndRound2;
-    }
-
-    public Integer getRound1Score() {
-        return Round1Score;
-    }
-
-    public void setRound1Score(Integer round1Score) {
-        Round1Score = round1Score;
-    }
-
-    public Integer getRound2Score() {
-        return Round2Score;
-    }
-
-    public void setRound2Score(long round2Score) {
-        Round2Score = Math.toIntExact(round2Score);
-    }
-
-    public Integer getFinalScore() {
-        return FinalScore;
-    }
-
-    public void setFinalScore(Integer finalScore) {
-        FinalScore = finalScore;
-    }
 
     public Integer getAD8_Score() {
         return AD8_Score;
@@ -115,5 +76,45 @@ public class Session {
 
     public void setEndAD8Time(Date endAD8Time) {
         this.endAD8Time = endAD8Time;
+    }
+
+    public Date getStartRound() {
+        return startRound;
+    }
+
+    public void setStartRound(Date startRound) {
+        this.startRound = startRound;
+    }
+
+    public Date getEndRound() {
+        return endRound;
+    }
+
+    public void setEndRound(Date endRound) {
+        this.endRound = endRound;
+    }
+
+    public Integer getGameScore() {
+        return GameScore;
+    }
+
+    public void setGameScore(Integer gameScore) {
+        GameScore = gameScore;
+    }
+
+    public Integer getRound1Score() {
+        return round1Score;
+    }
+
+    public void setRound1Score(Integer round1Score) {
+        this.round1Score = round1Score;
+    }
+
+    public Integer getRound2Score() {
+        return round2Score;
+    }
+
+    public void setRound2Score(Integer round2Score) {
+        this.round2Score = round2Score;
     }
 }

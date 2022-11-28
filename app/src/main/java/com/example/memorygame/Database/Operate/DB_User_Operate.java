@@ -27,7 +27,8 @@ public class DB_User_Operate extends SQLiteOpenHelper {
                 "age int," +
                 "gender varchar(5)," +
                 "educationYears int(100)," +
-                "isworking boolean)");
+                "isworking boolean," +
+                "lastLoginTime Text)");
     }
     @Override
     public void onUpgrade(@NonNull SQLiteDatabase MyDB, int i, int i1) {
@@ -41,6 +42,7 @@ public class DB_User_Operate extends SQLiteOpenHelper {
         contentValues.put("gender",user.getSex());
         contentValues.put("educationYears",user.getEducationLevel());
         contentValues.put("isWorking",user.getWorking());
+        contentValues.put("lastLoginTime",user.getLastedLoginTime().toString());
         long result = MyDB.insert("users", null, contentValues);
         if(result==-1) return false;
         else
@@ -61,11 +63,13 @@ public class DB_User_Operate extends SQLiteOpenHelper {
         Cursor cursor  = DB.rawQuery("Select * from users", null);
         while(cursor.moveToNext())
         {
-            result.add(new User(cursor.getString(0),
+            result.add(new User(
+                    cursor.getString(0),
                     cursor.getInt(1),
                     cursor.getString(2),
                     cursor.getInt(3),
-                    cursor.getInt(4)));
+                    cursor.getInt(4),
+                    cursor.getString(5)));
 
         }
         return result;

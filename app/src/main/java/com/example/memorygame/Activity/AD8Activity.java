@@ -19,6 +19,7 @@ import com.example.memorygame.Object.AD8Object.AD8_Question;
 import com.example.memorygame.R;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 public class AD8Activity extends AppCompatActivity {
@@ -50,6 +51,7 @@ public class AD8Activity extends AppCompatActivity {
             currentQuestionNumber--;
             controlVisual(questionForm.getQuestionList().get(currentQuestionNumber));
         });
+        GlobalObject.getInstance().getSession().setStartAD8Time(new Date());
     }
     public void controlVisual(@NonNull AD8_Question question){
         if (question.getQuestionNumber().equals(0)){

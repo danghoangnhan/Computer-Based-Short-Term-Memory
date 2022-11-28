@@ -15,6 +15,8 @@ import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Object.Result;
 import com.example.memorygame.R;
 
+import java.util.Date;
+
 public class ResultActivity extends AppCompatActivity implements HandleStageButton {
     Button escButton,nextButton,replayButton,AD8Button;
     CardView finalScore;
@@ -38,6 +40,9 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
                     result.getResult3());
         }
         else {
+            GlobalObject.getInstance().getSession().setEndRound(new Date());
+
+
             setContentView(R.layout.activity_result_2);
             this.finalScore = findViewById(R.id.final_result_cardview);
             this.result4 = findViewById(R.id.result4);
@@ -55,11 +60,11 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             this.result_1  = findViewById(R.id.result_1);
             this.result_2  = findViewById(R.id.result_2);
 
-            GlobalObject.getInstance().getSession().setRound2Score(((int) result.ObjectValidation (result.getSelected1())
-                                +result.SpatialValidation(result.getSelected2())
-                                +result.ObjectSpatialValidation(result.getSelected2())
-                                +result.CorlorValidation(result.getSelected3())
-                                + result.ObjectCorlorLocationValidation(result.getSelected3())));
+            GlobalObject.getInstance().getSession().setRound2Score((int) ((int) result.ObjectValidation (result.getSelected1())
+                                            +result.SpatialValidation(result.getSelected2())
+                                            +result.ObjectSpatialValidation(result.getSelected2())
+                                            +result.CorlorValidation(result.getSelected3())
+                                            + result.ObjectCorlorLocationValidation(result.getSelected3())));
 
             int score1  = GlobalObject.getInstance().getSession().getRound1Score();
             int score2  = GlobalObject.getInstance().getSession().getRound2Score();
@@ -68,6 +73,7 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             this.result_2.setText(score2+"/"+15);
             this.total_result.setText(score+"/"+(24));
             controlAD8(score);
+            GlobalObject.getInstance().getSession().setGameScore(score);
         }
         this.escButton = findViewById(R.id.escButton);
         this.escButton.setOnClickListener(this::handleEscButton);

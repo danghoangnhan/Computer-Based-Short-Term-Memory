@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.R;
 
+import java.util.Date;
+
 public class AD8RresultActivity extends AppCompatActivity {
     TextView ScoreView;
     TextView RecommendView;
@@ -31,5 +33,7 @@ public class AD8RresultActivity extends AppCompatActivity {
             this.RecommendView.setText(text1);
             this.ScoreView.setBackgroundResource(R.color.red);
         }
+        GlobalObject.getInstance().getSession().setEndAD8Time(new Date());
+        GlobalObject.getInstance().getSession().setAD8_Score(result);
     }
 }

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.NonNull;
 
 import com.example.memorygame.Database.Entity.Session;
+import com.example.memorygame.Database.Entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,14 @@ public class DB_Session_Operate extends SQLiteOpenHelper {
     @Override
     public void onCreate(@NonNull SQLiteDatabase db) {
         db.execSQL("create Table sessions(" +
-                "name TEXT primary key," +
-                "age int," +
-                "gender varchar(5)," +
-                "educationYears int(100)," +
-                "isworking boolean)");
+                "id int  primary key," +
+                "user_name  TEXT," +
+                "game_score int(100)," +
+                "ad8_score  int(100)," +
+                "game_startTime  TEXT," +
+                "game_endTime TEXT," +
+                "ad8_startTime TEXT," +
+                "ad8_endTime TEXT)");
     }
 
     @Override
@@ -37,12 +41,14 @@ public class DB_Session_Operate extends SQLiteOpenHelper {
     public Boolean insertData(@NonNull Session session){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues= new ContentValues();
-        contentValues.put("name", user.getName());
-        contentValues.put("age", user.getAge());
-        contentValues.put("gender",user.getSex());
-        contentValues.put("educationYears",user.getEducationLevel());
-        contentValues.put("isWorking",user.getWorking());
-        long result = MyDB.insert("users", null, contentValues);
+        contentValues.put("user_name", session.getUser().getName());
+        contentValues.put("game_score", session.getGameScore());
+        contentValues.put("ad8_score", session.getAD8_Score());
+        contentValues.put("game_startTime", session.getStartRound().toString());
+        contentValues.put("game_endTime", session.getEndRound().toString());
+        contentValues.put("ad8_startTime", session.getStartAD8Time().toString());
+        contentValues.put("ad8_endTime", session.getEndAD8Time().toString());
+        long result = MyDB.insert("session", null, contentValues);
         if(result==-1) return false;
         else
             return true;
@@ -54,12 +60,15 @@ public class DB_Session_Operate extends SQLiteOpenHelper {
         Cursor cursor  = DB.rawQuery("Select * from sessions", null);
         while(cursor.moveToNext())
         {
-            result.add(new Session(cursor.getString(0),
-                    cursor.getInt(1),
-                    cursor.getString(2),
+            result.add(new Session(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getInt(2),
                     cursor.getInt(3),
-                    cursor.getInt(4)));
-
+                    cursor.getString(4),
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    cursor.getString(7)));
         }
         return result;
     }

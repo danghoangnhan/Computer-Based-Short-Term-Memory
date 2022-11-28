@@ -21,6 +21,7 @@ import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -50,6 +51,9 @@ public class SelectObjectActivity extends AppCompatActivity implements
         this.escButton.setOnClickListener(this::handleEscButton);
         this.replayButton.setOnClickListener(this::handleReplayButton);
 
+        if (GlobalObject.getInstance().getGameState()==1){
+            GlobalObject.getInstance().getSession().setStartRound(new Date());
+        }
     }
     public static Map<ShapeableImageView, Integer> zipToMap(@NonNull List<ShapeableImageView> keys, @NonNull List<Integer> values) {
         return IntStream.range(0, keys.size())

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,15 +38,13 @@ public class AuthenticationActivity extends AppCompatActivity {
     List<User> userList;
     DB_User_Operate DB;
     UserAdapter userAdapter;
-    FloatingActionButton Register;
+    Button exit,exportCsv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication);
         DB = new DB_User_Operate(this);
         displaydata();
-        Register = findViewById(R.id.addingBtn);
-        Register.setOnClickListener(this::handleRegisterButton);
         initialRecyleView();
     }
 
@@ -71,9 +70,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     }
     private void exportDB() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
         }
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(System.currentTimeMillis());
@@ -81,11 +78,11 @@ public class AuthenticationActivity extends AppCompatActivity {
         String fileName = "[" + date + "]碼農日常輸出的CSV.csv";
 
         StringBuffer csvText = new StringBuffer();
-        for (int i = 0; i < title.length; i++) {
-            csvText.append(title[i]+",");
+        for (String s : title) {
+            csvText.append(s).append(",");
         }
         for (int i = 0; i < this.userList.size(); i++) {
-            csvText.append("\n" + (i+1));
+            csvText.append("\n").append(i + 1);
             csvText.append(userList.get(i).getName());
             //此處巢狀迴圈為設置每一列的內容
         }
