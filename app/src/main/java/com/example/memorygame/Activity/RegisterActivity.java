@@ -2,10 +2,15 @@ package com.example.memorygame.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,14 +21,20 @@ import com.example.memorygame.Database.Operate.DB_User_Operate;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.R;
 
+import java.util.ArrayList;
 import java.util.Date;
 
-public class RegisterActivity extends AppCompatActivity {
-    private EditText mUserName,age,educationYear;
+public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+    private EditText mUserName,age;
+    private AutoCompleteTextView educationYear;
     private RadioGroup genderRadioGroup,workingStatusRadioGroup;
     private RadioButton genderRadioButton,workingStatusRadioButton;
     Button RegiterButton;
     DB_Instance DB_User_Operate;
+    String[] education = new String[]{"未受教育", "國小", "國中", "高中（職）", "專科", "大學", "碩士", "博士"};
+    ArrayAdapter<String> adapterItem;
+    AutoCompleteTextView autoCompleteTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +46,15 @@ public class RegisterActivity extends AppCompatActivity {
         this.educationYear = findViewById(R.id.educationyear);
         this.RegiterButton = findViewById(R.id.registerbutton);
         this.DB_User_Operate = new DB_Instance(this);
+        this.adapterItem = new ArrayAdapter<>(this, R.layout.session_item);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(
+                        this,
+                        R.layout.dropdown_menu_popup_item,
+                        education);
+
+        educationYear.setAdapter(adapter);
+
 
         RegiterButton.setOnClickListener(v -> {
             String currentEducationValue = educationYear.getText().toString();
@@ -69,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
             User user = new User(userName,
                     Integer.parseInt(age.getText().toString()),
                     currentGenderValue,
-                    Integer.parseInt(currentEducationValue),
+                    currentEducationValue,
                     currentworkingValue?1:0,
                     new Date().toString()
                     );
@@ -88,5 +108,14 @@ public class RegisterActivity extends AppCompatActivity {
                 Toast.makeText(RegisterActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

@@ -10,7 +10,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +42,6 @@ public class AuthenticationActivity extends AppCompatActivity {
     DB_Instance DB;
     UserAdapter userAdapter;
     Button exit,exportCsv;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,8 @@ public class AuthenticationActivity extends AppCompatActivity {
         initialRecyleView();
         exportDB();
         handleRegisterButton();
+
+
     }
 
     private void initialRecyleView() {

@@ -58,12 +58,11 @@
             <RadioGroup
                 android:id="@+id/radiogroup"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:layout_marginTop="350dp"
                 android:layout_marginLeft="150dp"
 
                 />
-
 
             <include
                 android:layout_marginLeft="450dp"

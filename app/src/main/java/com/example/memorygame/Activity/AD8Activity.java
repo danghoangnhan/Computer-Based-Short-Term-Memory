@@ -129,6 +129,9 @@ public class AD8Activity extends AppCompatActivity {
             radioButton.setChecked(answer.equals(question.getCurrentAnswer()));
             radioButton.setOnClickListener(v -> onClickRadioOption(answer));
             radioButton.setTextSize(25);
+            radioButton.setScaleX((float) 1.0);
+            radioButton.setScaleY((float) 1.0);
+
             mRadioGroup.addView(radioButton);
         }
     }

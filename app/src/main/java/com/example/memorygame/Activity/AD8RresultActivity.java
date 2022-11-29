@@ -20,8 +20,8 @@ import java.util.Date;
 public class AD8RresultActivity extends AppCompatActivity {
     TextView ScoreView;
     TextView RecommendView;
-    String text1 = "您可能有認知功能障礙，建議您進一步到醫院諮詢醫生以及追蹤";
-    String text2 = "您目前沒有認知功能障礙，建議您保持良好生活習慣，繼續維持!";
+    String text1 = "您可能有記憶力衰退的狀況，建議您進一步到醫院諮詢醫生以及追蹤。";
+    String text2 = "您目前沒有記憶力衰退的狀況，建議您保持良好生活習慣，繼續維持！";
     Integer result = GlobalObject.getInstance().getForm().caculated();
     DB_Instance DB;
     Button exitButton;

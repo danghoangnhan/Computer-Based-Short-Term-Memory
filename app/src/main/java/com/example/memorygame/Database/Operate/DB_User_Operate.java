@@ -22,7 +22,7 @@ public class DB_User_Operate   {
                 "name TEXT primary key," +
                 "age int," +
                 "gender varchar(5)," +
-                "educationYears int(100)," +
+                "educationYears varchar(100)," +
                 "isworking boolean," +
                 "lastLoginTime Text)");
     }
@@ -54,7 +54,7 @@ public class DB_User_Operate   {
                     cursor.getString(0),
                     cursor.getInt(1),
                     cursor.getString(2),
-                    cursor.getInt(3),
+                    cursor.getString(3),
                     cursor.getInt(4),
                     cursor.getString(5)));
 
