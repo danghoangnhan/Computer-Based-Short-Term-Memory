@@ -29,5 +29,6 @@
         android:text="會出csv"
         style="@style/action_button2"
         android:layout_toRightOf="@id/exitButton"
+        android:visibility="invisible"
         />
 </RelativeLayout>

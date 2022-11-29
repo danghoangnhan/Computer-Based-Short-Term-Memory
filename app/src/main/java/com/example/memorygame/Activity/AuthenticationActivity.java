@@ -14,11 +14,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.memorygame.Adapter.UserAdapter;
+import com.example.memorygame.BuildConfig;
 import com.example.memorygame.Database.DB_Instance;
 import com.example.memorygame.Database.Entity.User;
 import com.example.memorygame.R;
@@ -30,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class AuthenticationActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -76,7 +79,6 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     }
     private void exportDB() {
-
         this.exportCsv = findViewById(R.id.exportcsvButton);
         this.exportCsv.setOnClickListener(view -> {
             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);}
@@ -102,7 +104,9 @@ public class AuthenticationActivity extends AppCompatActivity {
                             getExternalStorageDirectory().getAbsolutePath(), fileName);
                     FileOutputStream fos = new FileOutputStream(fileLocation);
                     fos.write(csvText.toString().getBytes());
-                    Uri path = Uri.fromFile(fileLocation);
+                    Uri path = FileProvider.getUriForFile(Objects.requireNonNull(getApplicationContext()),
+                            BuildConfig.APPLICATION_ID + ".provider",
+                            fileLocation);
                     Intent fileIntent = new Intent(Intent.ACTION_SEND);
                     fileIntent.setType("text/csv");
                     fileIntent.putExtra(Intent.EXTRA_SUBJECT, fileName);

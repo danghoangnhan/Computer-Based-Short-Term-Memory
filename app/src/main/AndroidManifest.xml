@@ -16,13 +16,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MemoryGame"
         tools:targetApi="31">
-        <activity
-            android:name=".Activity.SessionActivity"
-            android:exported="false">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
         <activity
             android:name=".Activity.AD8WelComeActivity"
             android:exported="false" />
@@ -31,6 +33,13 @@
             android:exported="false" />
         <activity
             android:name=".Activity.AuthenticationActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Activity.SessionActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
