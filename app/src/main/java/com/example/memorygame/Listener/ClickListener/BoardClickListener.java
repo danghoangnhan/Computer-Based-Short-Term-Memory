@@ -2,6 +2,8 @@ package com.example.memorygame.Listener.ClickListener;
 
 import android.view.View;
 
+import androidx.annotation.NonNull;
+
 import com.example.memorygame.CallBack.ButtonCorlorCall;
 import com.example.memorygame.CallBack.ButtonImageCall;
 import com.example.memorygame.CallBack.CorlorRecycleViewCallBack;
@@ -34,7 +36,7 @@ public class BoardClickListener implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
         View parent = (View) v.getParent();
         ShapeableImageView buttonView =parent.findViewById(v.getId());
 

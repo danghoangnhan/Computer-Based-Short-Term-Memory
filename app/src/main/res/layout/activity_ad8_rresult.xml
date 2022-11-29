@@ -25,5 +25,19 @@
         android:layout_marginTop="20dp"
         android:textSize="30dp"
         />
-
+    <Button
+        android:id="@+id/escButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="750dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/custome_button1"
+        android:drawableRight="@drawable/exit"
+        android:drawablePadding="2dip"
+        android:paddingRight="5dp"
+        android:text="離開"
+        style="@style/action_button2"
+        app:layout_constraintTop_toBottomOf="@id/recommend"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -116,47 +116,13 @@
                     android:id="@+id/result3"
                     />
             </androidx.cardview.widget.CardView>
-            <RelativeLayout
-                android:id="@+id/button_actionlist"
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="81dp"
-                android:layout_marginBottom="11dp"
-                >
-                <Button
-                    android:id="@+id/escButton"
-
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_toLeftOf="@+id/nextButton"
-                    android:textColor="@color/white"
-                    android:paddingLeft="15dip"
-                    android:paddingRight="5dp"
-                    android:background="@drawable/custome_button1"
-                    android:drawableRight="@drawable/exit"
-                    android:text="離開"
-
-                    />
-
-                <Button
-                    android:id="@+id/nextButton"
-                    android:text="下一步"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="5dp"
-                    android:textColor="@color/white"
-                    android:paddingLeft="15dip"
-                    android:paddingRight="5dp"
-                    android:background="@drawable/custome_button1"
-                    android:drawablePadding="2dip"
-
-                    />
-            </RelativeLayout>
+            <include
+                layout="@layout/action_button_group_5"
+                android:layout_marginLeft="400dp"
+                android:layout_marginTop="420dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -142,13 +141,6 @@ public class MatchColorActivity extends AppCompatActivity implements
     public void onItemClick(View view,int Position) {
         this.tmpClickedImage = this.selectedImage.get(Position);
         this.globalObject.setTmpClickedImage(this.tmpClickedImage);
-    }
-
-    public void handleImageRecycleView(Integer ViewID) {
-        ImageView view = findViewById(ViewID);
-        view.setImageResource(R.drawable.delete);
-        view.setOnDragListener(null);
-        view.setOnClickListener(null);
     }
 
     @Override

@@ -242,4 +242,9 @@
     <string name="educationyear">教育年數</string>
     <string name="workingstatus">工作狀態</string>
     <string name="lastimelogin">最後登入時間</string>
+    <string name="user_name">使用者名稱</string>
+    <string name="game_start_time">游戲開始時間</string>
+    <string name="gameend_time">游戲結束時間</string>
+    <string name="ad8_starttime">AD8開始時間</string>
+    <string name="ad8_endtime">AD8結束時間</string>
 </resources>

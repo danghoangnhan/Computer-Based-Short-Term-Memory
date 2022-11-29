@@ -48,6 +48,5 @@
         android:paddingRight="5dp"
         android:text="離開"
         style="@style/action_button2"
-
         />
 </RelativeLayout>

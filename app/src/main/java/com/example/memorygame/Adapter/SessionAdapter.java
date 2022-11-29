@@ -21,14 +21,12 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder>   {
 
     private final Context context;
     private final ArrayList<Session> sessionList;
-    private ArrayList<Session> filteredSessionList;
     private static final int TYPE_ROW = 0;
     private static final int TYPE_ROW_COLORFUL = 1;
 
     public SessionAdapter(Context context, ArrayList<Session> sessionList) {
         this.context = context;
         this.sessionList = sessionList;
-        this.filteredSessionList = sessionList;
     }
     @Override
     public int getItemViewType(int position)
@@ -58,13 +56,13 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder>   {
 
     @Override
     public void onBindViewHolder(@NonNull SessionViewHolder holder, int position) {
-        final Session item = this.filteredSessionList.get(position);
+        final Session item = this.sessionList.get(position);
 
         holder.getUsername().setText(item.getUser().getName());
-        holder.getAd8score().setText(item.getAD8_Score());
+        holder.getAd8score().setText(item.getAD8_Score().toString());
         holder.getAd8starttime().setText(item.getStartAD8Time().toString());
         holder.getAd8endtime().setText(item.getEndAD8Time().toString());
-        holder.getGamescore().setText(item.getGameScore());
+        holder.getGamescore().setText(item.getGameScore().toString());
         holder.getStartgametime().setText(item.getStartRound().toString());
         holder.getEndgametime().setText(item.getEndRound().toString());
 
@@ -72,7 +70,7 @@ public class SessionAdapter extends RecyclerView.Adapter<SessionViewHolder>   {
 
     @Override
     public int getItemCount() {
-        return this.filteredSessionList.size();
+        return this.sessionList.size();
     }
 
 }

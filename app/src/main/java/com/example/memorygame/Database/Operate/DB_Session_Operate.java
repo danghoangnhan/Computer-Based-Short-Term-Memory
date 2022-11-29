@@ -1,29 +1,24 @@
 package com.example.memorygame.Database.Operate;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.NonNull;
 
 import com.example.memorygame.Database.Entity.Session;
-import com.example.memorygame.Database.Entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class DB_Session_Operate extends SQLiteOpenHelper {
-    public static final String DBNAME = "Login.db";
+public class DB_Session_Operate   {
 
-    public DB_Session_Operate(Context context) {
-        super(context, "Login.db", null, 1);
+    public DB_Session_Operate() {
     }
 
-    @Override
-    public void onCreate(@NonNull SQLiteDatabase db) {
-        db.execSQL("create Table sessions(" +
+    public void onCreate(@NonNull SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL("create Table sessions(" +
                 "id int  primary key," +
                 "user_name  TEXT," +
                 "game_score int(100)," +
@@ -34,12 +29,9 @@ public class DB_Session_Operate extends SQLiteOpenHelper {
                 "ad8_endTime TEXT)");
     }
 
-    @Override
-    public void onUpgrade(@NonNull SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop Table if exists sessions");
-    }
-    public Boolean insertData(@NonNull Session session){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
+    public void onUpgrade(@NonNull SQLiteDatabase sqLiteDatabase) {sqLiteDatabase.execSQL("drop Table if exists sessions");}
+
+    public Boolean insertData(@NonNull Session session,@NonNull SQLiteDatabase sqLiteDatabase){
         ContentValues contentValues= new ContentValues();
         contentValues.put("user_name", session.getUser().getName());
         contentValues.put("game_score", session.getGameScore());
@@ -48,16 +40,13 @@ public class DB_Session_Operate extends SQLiteOpenHelper {
         contentValues.put("game_endTime", session.getEndRound().toString());
         contentValues.put("ad8_startTime", session.getStartAD8Time().toString());
         contentValues.put("ad8_endTime", session.getEndAD8Time().toString());
-        long result = MyDB.insert("session", null, contentValues);
-        if(result==-1) return false;
-        else
-            return true;
+        long result = sqLiteDatabase.insert("sessions", null, contentValues);
+        return result != -1;
     }
-    public List<Session> getdata()
+    public List<Session> getdata(@NonNull SQLiteDatabase sqLiteDatabase)
     {
         List<Session> result = new ArrayList<>();
-        SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor  = DB.rawQuery("Select * from sessions", null);
+        @SuppressLint("Recycle") Cursor cursor  = sqLiteDatabase.rawQuery("Select * from sessions", null);
         while(cursor.moveToNext())
         {
             result.add(new Session(

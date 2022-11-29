@@ -2,10 +2,8 @@
 
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.NonNull;
 
@@ -13,16 +11,14 @@ import com.example.memorygame.Database.Entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
-public class DB_User_Operate extends SQLiteOpenHelper {
-    public static final String DBNAME = "Login.db";
+public class DB_User_Operate   {
+    private SQLiteDatabase sqLiteDatabase;
 
-    public DB_User_Operate(Context context) {
-        super(context, "Login.db", null, 1);
+    public DB_User_Operate(){
     }
 
-    @Override
-    public void onCreate(@NonNull SQLiteDatabase MyDB) {
-        MyDB.execSQL("create Table users(" +
+    public void onCreate(@NonNull SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL("create Table users(" +
                 "name TEXT primary key," +
                 "age int," +
                 "gender varchar(5)," +
@@ -30,12 +26,10 @@ public class DB_User_Operate extends SQLiteOpenHelper {
                 "isworking boolean," +
                 "lastLoginTime Text)");
     }
-    @Override
-    public void onUpgrade(@NonNull SQLiteDatabase MyDB, int i, int i1) {
-        MyDB.execSQL("drop Table if exists users");
+    public void onUpgrade(@NonNull SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL("drop Table if exists users");
     }
-    public Boolean insertData(@NonNull User user){
-        SQLiteDatabase MyDB = this.getWritableDatabase();
+    public Boolean insertData(@NonNull User user,@NonNull SQLiteDatabase sqLiteDatabase){
         ContentValues contentValues= new ContentValues();
         contentValues.put("name", user.getName());
         contentValues.put("age", user.getAge());
@@ -43,24 +37,17 @@ public class DB_User_Operate extends SQLiteOpenHelper {
         contentValues.put("educationYears",user.getEducationLevel());
         contentValues.put("isWorking",user.getWorking());
         contentValues.put("lastLoginTime",user.getLastedLoginTime().toString());
-        long result = MyDB.insert("users", null, contentValues);
-        if(result==-1) return false;
-        else
-            return true;
+        long result = sqLiteDatabase.insert("users", null, contentValues);
+        return result != -1;
     }
-    public Boolean checkNameExist(@NonNull User user) {
-        SQLiteDatabase MyDB = this.getWritableDatabase();
-        Cursor cursor = MyDB.rawQuery("Select * from users where name = ?", new String[]{user.getName()});
-        if (cursor.getCount() > 0)
-            return true;
-        else
-            return false;
+    public Boolean checkNameExist(@NonNull User user,@NonNull SQLiteDatabase sqLiteDatabase) {
+        @SuppressLint("Recycle") Cursor cursor = sqLiteDatabase.rawQuery("Select * from users where name = ?", new String[]{user.getName()});
+        return cursor.getCount() > 0;
     }
-    public List<User> getdata()
+    public List<User> getdata(@NonNull SQLiteDatabase sqLiteDatabase)
     {
         List<User> result = new ArrayList<>();
-        SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor  = DB.rawQuery("Select * from users", null);
+        @SuppressLint("Recycle") Cursor cursor  = sqLiteDatabase.rawQuery("Select * from users", null);
         while(cursor.moveToNext())
         {
             result.add(new User(
@@ -73,20 +60,6 @@ public class DB_User_Operate extends SQLiteOpenHelper {
 
         }
         return result;
-    }
-    public Boolean deleteuserdata(String name)
-    {
-        SQLiteDatabase DB = this.getWritableDatabase();
-        @SuppressLint("Recycle") Cursor cursor = DB.rawQuery("Select * from users where name = ?", new String[]{name});
-        if(cursor.getCount()>0)
-        {
-            return DB.delete("users", "name=?", new String[]{name}) !=-1 ;
-        }
-        else
-        {
-            return false;
-        }
-
     }
 
 }

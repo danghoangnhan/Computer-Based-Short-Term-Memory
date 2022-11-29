@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.memorygame.Database.DB_Instance;
 import com.example.memorygame.Database.Entity.User;
 import com.example.memorygame.Database.Operate.DB_User_Operate;
 import com.example.memorygame.GlobalObject;
@@ -22,7 +23,7 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioGroup genderRadioGroup,workingStatusRadioGroup;
     private RadioButton genderRadioButton,workingStatusRadioButton;
     Button RegiterButton;
-    DB_User_Operate DB_User_Operate;
+    DB_Instance DB_User_Operate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         this.age = findViewById(R.id.age);
         this.educationYear = findViewById(R.id.educationyear);
         this.RegiterButton = findViewById(R.id.registerbutton);
-        this.DB_User_Operate = new DB_User_Operate(this);
+        this.DB_User_Operate = new DB_Instance(this);
 
         RegiterButton.setOnClickListener(v -> {
             String currentEducationValue = educationYear.getText().toString();

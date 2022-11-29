@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="@dimen/row_height">
     <TextView
-        android:layout_width="@dimen/cell_width"
+        android:layout_width="@dimen/cell_width_2"
         android:id="@+id/user_name"
         android:layout_marginStart="@dimen/margin"
         android:gravity="center|start"
@@ -14,7 +14,7 @@
         android:text="使用者"
         />
     <TextView
-        android:layout_width="@dimen/cell_width"
+        android:layout_width="@dimen/cell_width_2"
         android:id="@+id/finalScore"
         android:layout_marginStart="@dimen/margin"
         android:gravity="center|start"
@@ -23,7 +23,7 @@
         android:text="遊戲分數"
         />
     <TextView
-        android:layout_width="@dimen/cell_width"
+        android:layout_width="@dimen/cell_width_2"
         android:id="@+id/startgame_time"
         android:text="遊戲開始時間"
         android:layout_marginStart="@dimen/margin"
@@ -34,7 +34,7 @@
 
     <TextView
 
-        android:layout_width="@dimen/cell_width"
+        android:layout_width="@dimen/cell_width_2"
         android:id="@+id/endgame_time"
         android:text="遊戲結束時間"
         android:layout_marginStart="@dimen/margin"
@@ -43,7 +43,7 @@
         android:layout_height="match_parent"
         />
     <TextView
-        android:layout_width="@dimen/cell_width"
+        android:layout_width="@dimen/cell_width_2"
         android:id="@+id/ad8_score"
         android:text="ad8分數"
         android:layout_marginStart="@dimen/margin"
@@ -52,7 +52,7 @@
         android:layout_height="match_parent"
         />
     <TextView
-        android:layout_width="@dimen/cell_width"
+        android:layout_width="@dimen/cell_width_2"
         android:id="@+id/ad8_starttime"
         android:layout_marginStart="@dimen/margin"
         android:gravity="center|start"
@@ -61,7 +61,7 @@
         android:text="ad8開始時間"
         />
     <TextView
-        android:layout_width="@dimen/cell_width"
+        android:layout_width="@dimen/cell_width_2"
         android:id="@+id/ad8_endtime"
         android:layout_marginStart="@dimen/margin"
         android:gravity="center|start"

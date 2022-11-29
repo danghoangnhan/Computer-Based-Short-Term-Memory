@@ -3,5 +3,6 @@
     <dimen name="row_height">80dp</dimen>
     <dimen name="header_height">60dp</dimen>
     <dimen name="cell_width">185dp</dimen>
+    <dimen name="cell_width_2">158dp</dimen>
     <dimen name="margin">5dp</dimen>
 </resources>

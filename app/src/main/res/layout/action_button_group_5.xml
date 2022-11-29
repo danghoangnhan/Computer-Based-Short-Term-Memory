@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button_actionlist"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+    <Button
+        android:id="@+id/escButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:paddingLeft="15dip"
+        android:paddingRight="5dp"
+        android:drawableRight="@drawable/exit"
+        android:text="離開"
+        style="@style/action_button2"
+        />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:text="下一步"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_toRightOf="@id/escButton"
+        android:paddingLeft="15dip"
+        android:paddingRight="5dp"
+        android:drawablePadding="2dip"
+        style="@style/action_button2"
+        />
+</RelativeLayout>
