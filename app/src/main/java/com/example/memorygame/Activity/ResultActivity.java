@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.memorygame.Database.DB_Instance;
 import com.example.memorygame.GlobalObject;
 import com.example.memorygame.HandleStageButton;
 import com.example.memorygame.Object.Result;
@@ -120,6 +121,8 @@ public class ResultActivity extends AppCompatActivity implements HandleStageButt
             }else{
                 finalScore.setBackgroundResource(R.color.green);
                 this.AD8Button.setVisibility(View.INVISIBLE);
+                DB_Instance db_instance = new  DB_Instance(this);
+                db_instance.insertData(GlobalObject.getInstance().getSession());
             }
         }
     public void handleAD8Button(View view) {
