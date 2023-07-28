@@ -9,11 +9,8 @@ This project implements the CB-STM (Computer-Based Short-Term Memory) test, as p
 - [Development](#development)
 - [Device Requirements](#device-requirements)
 - [Getting Started](#getting-started)
-- [Test Structure](#test-structure)
-- [Implementation Details](#implementation-details)
 - [Testing and Validation](#testing-and-validation)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Development
 
@@ -37,17 +34,7 @@ To get started with the CB-STM test, follow these steps:
 3. Build the project and ensure there are no errors.
 4. Connect your Samsung Galaxy S6 or an alternative device meeting the specified requirements for testing.
 
-## Test Structure
 
-The CB-STM test consists of [describe the tasks and stimuli involved in the test here]. The user will be presented with visual stimuli or other relevant tasks and will be required to respond according to the test's instructions. The test may involve time constraints, and the user's responses will be recorded for evaluation.
-
-## Implementation Details
-
-The CB-STM test is implemented in Java. The test logic and user interface are designed to be intuitive and user-friendly. The application should provide clear instructions to the user and record their responses accurately.
-
-The codebase is organized into the following components:
-
-- [List the main components/modules/classes of your implementation here]
 
 ## Testing and Validation
 
@@ -58,8 +45,4 @@ Additionally, data may be collected from users to validate the test's effectiven
 ## Contributing
 
 Contributions to this project are welcome. If you find any issues or have suggestions for improvements, feel free to open a pull request or an issue in the repository.
-
-## License
-
-[Include the appropriate license for your project here. For example, you may choose an open-source license like MIT or Apache 2.0.]
 
