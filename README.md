@@ -17,9 +17,8 @@ This project implements the CB-STM (Computer-Based Short-Term Memory) test, as p
 
 ## Development
 
-- IDE: Android Studio
-- Language: Java
-- Compiler: [![Java JDK](https://img.shields.io/badge/Java%20JDK-11-blue)](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
+- IDE: [![Android Studio](https://img.shields.io/badge/Android%20Studio-Latest-brightgreen)](https://developer.android.com/studio)
+- Language:  [![Java JDK](https://img.shields.io/badge/Java%20JDK-11-blue)](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html)
 
 ## Device Requirements
 
