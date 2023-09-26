@@ -1,5 +1,5 @@
 # CB-STM (Computer-Based Short-Term Memory) Test Implementation
-
+[![Build Status](https://github.com/danghoangnhan/Computer-Based-Short-Term-Memory/actions/workflows/linux-android.yml/badge.svg)](https://github.com/danghoangnhan/Computer-Based-Short-Term-Memory/actions/workflows/android.yml)
 ## Overview
 
 This project implements the CB-STM (Computer-Based Short-Term Memory) test, as proposed in the research paper "[Development of a Rapid Screening Tool for Mild Cognitive Impairment: Validation of a Computer-Based Short-Term Memory Test](https://www.semanticscholar.org/paper/Development-of-a-Rapid-Screening-Tool-for-Mild-of-a-Yip-Chen/179e50de6f610f9669064fbf57832a6f9915bc20)." The CB-STM test is designed to assess short-term memory capabilities in individuals and may serve as a screening tool for mild cognitive impairment.
