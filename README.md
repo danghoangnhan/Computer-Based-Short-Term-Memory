@@ -1,6 +1,6 @@
 # CB-STM (Computer-Based Short-Term Memory) Test Implementation
 
-[![Build Status](https://github.com/danghoangnhan/Computer-Based-Short-Term-Memory/actions/workflows/linux-android.yml/badge.svg)](https://github.com/danghoangnhan/Computer-Based-Short-Term-Memory/actions/workflows/android.yml)
+[![Build Status](https://github.com/danghoangnhan/Computer-Based-Short-Term-Memory/actions/workflows/android.yml/badge.svg)](https://github.com/danghoangnhan/Computer-Based-Short-Term-Memory/actions/workflows/android.yml)
 
 ## Overview
 
